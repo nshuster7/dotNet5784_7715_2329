@@ -7,12 +7,8 @@ internal class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
-        if (Read(item.Id) != null)
-        {
-            throw new Exception();
-        }
         int newNum = DataSource.Config.NextTaskId;
-        Task newTask = new Task(newNum);
+        Task newTask = new();
         DataSource.Tasks.Add(newTask);
         return newNum;
     }
@@ -32,9 +28,11 @@ internal class TaskImplementation : ITask
         return DataSource.Tasks.Find(x => x.Id == id);
     }
 
-    public List<Task> ReadAll()
+    public List<Task> ReadAll()//!!
     {
-        return new List<Task>(DataSource.Tasks);
+        List<Task> newTasks = new List<Task>();
+        ///////
+        return newTasks;
     }
 
     public void Update(Task item)

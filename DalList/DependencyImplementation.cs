@@ -8,10 +8,6 @@ public class DependencyImplementation : IDependency
 {
     public int Create(Dependency dep)
     {
-        if (Read(dep.Id) != null)
-        {
-            throw new Exception();
-        }
         int newNum = DataSource.Config.NextDependencyId;
         Dependency newDep = new Dependency(newNum);
         DataSource.Dependencies.Add(newDep);
@@ -21,8 +17,8 @@ public class DependencyImplementation : IDependency
     public void Delete(int id)
     {
         if (Read(id) == null)
-        {  
-            throw new Exception(); 
+        {
+            throw new Exception();
         }
         else
             DataSource.Dependencies.RemoveAt(id);
@@ -38,14 +34,15 @@ public class DependencyImplementation : IDependency
         return DataSource.Dependencies.Find(dep => dep.Id == IdDependence);
     }
 
-    public List<Dependency> ReadAll()//Check if it's good
+    public List<Dependency> ReadAll()
     {
-        //List<Dependency> dep = new List<Dependency>();
-        return new List<Dependency>(DataSource.Dependencies);
+        List<Dependency> newDependencies = new List<Dependency>();
+        ///////
+        return newDependencies;
     }
 
     public void Update(Dependency dep)
-    {
+    { 
        if (Read(dep.Id) == null) 
         { 
             throw new Exception(); 

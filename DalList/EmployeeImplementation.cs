@@ -5,18 +5,21 @@ using System.Collections.Generic;
 
 public class EmployeeImplementation : IEmployee
 {
-    public int Create(Employee m)
+    public int Create(Employee emp)
     {
-        if (Read(m.Id) != null)
-            throw new Exception();
-        DataSource.Employees.Add(m);
-        return m.Id;
+        if (Read(emp.Id) == null)
+        {
+            DataSource.Employees.Add(emp);
+            return emp.Id;
+        }
+
+        throw new Exception();//!!
     }
 
     public void Delete(int id)
     {
         if (Read(id) == null)
-            throw new Exception();
+            throw new Exception();//!!
         else
             DataSource.Employees.RemoveAt(id);
     }
@@ -26,16 +29,18 @@ public class EmployeeImplementation : IEmployee
         return DataSource.Employees.Find(x => x.Id == id);
     }
 
-    public List<Employee> ReadAll()
+    public List<Employee> ReadAll()//!!
     {
-        return new List<Employee>(DataSource.Employees);
+        List<Employee> newEmployees = new List<Employee>();
+        ///////
+        return newEmployees;
     }
 
-    public void Update(Employee m)
+    public void Update(Employee emp)
     {
-        if (Read (m.Id) == null) 
-            throw new Exception();
-        Delete(m.Id);
-        DataSource.Employees.Add(m);
+        if (Read (emp.Id) == null) 
+            throw new Exception();//!!
+        Delete(emp.Id);
+        DataSource.Employees.Add(emp);
     }
 }
