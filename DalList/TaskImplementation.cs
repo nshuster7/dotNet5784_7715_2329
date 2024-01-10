@@ -1,6 +1,4 @@
-﻿
-
-namespace Dal;
+﻿namespace Dal;
 using DalApi;
 using DO;
 using System.Collections.Generic;
@@ -9,17 +7,29 @@ internal class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
-        throw new NotImplementedException();
+        if (Read(item.Id) != null)
+        {
+            throw new Exception();
+        }
+        int newNum = DataSource.Config.NextTaskId;
+        Task newTask = new Task(newNum);
+        DataSource.Tasks.Add(newTask);
+        return newNum;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        if (Read(id) == null)
+        {
+            throw new Exception();
+        }
+        else
+            DataSource.Tasks.RemoveAt(id);
     }
 
     public Task? Read(int id)
     {
-        throw new NotImplementedException();
+        return DataSource.Tasks.Find()
     }
 
     public List<Task> ReadAll()
