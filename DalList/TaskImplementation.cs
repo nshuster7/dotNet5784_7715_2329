@@ -29,16 +29,21 @@ internal class TaskImplementation : ITask
 
     public Task? Read(int id)
     {
-        return DataSource.Tasks.Find()
+        return DataSource.Tasks.Find(x => x.Id == id);
     }
 
     public List<Task> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Task>(DataSource.Tasks);
     }
 
     public void Update(Task item)
     {
-        throw new NotImplementedException();
+        if (Read(item.Id) == null)
+        {
+            throw new Exception();
+        }
+        Delete(item.Id);
+        DataSource.Tasks.Add(item);
     }
 }
