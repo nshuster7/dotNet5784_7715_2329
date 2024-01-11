@@ -9,7 +9,7 @@ public class DependencyImplementation : IDependency
     public int Create(Dependency dep)
     {
         int newNum = DataSource.Config.NextDependencyId;
-        Dependency newDep = new Dependency(newNum);
+        Dependency newDep = dep with { Id = newNum };
         DataSource.Dependencies.Add(newDep);
         return newNum;
     }
@@ -18,7 +18,7 @@ public class DependencyImplementation : IDependency
     {
         if (Read(id) == null)
         {
-            throw new Exception();
+            throw new Exception($"Dependency with ID={id} doe's NOT exists");
         }
         else
             DataSource.Dependencies.RemoveAt(id);
@@ -36,16 +36,14 @@ public class DependencyImplementation : IDependency
 
     public List<Dependency> ReadAll()
     {
-        List<Dependency> newDependencies = new List<Dependency>();
-        ///////
-        return newDependencies;
+        return new List<Dependency>(DataSource.Dependencies);
     }
 
     public void Update(Dependency dep)
     { 
        if (Read(dep.Id) == null) 
         { 
-            throw new Exception(); 
+            throw new Exception($"Dependency with ID={dep.Id} doe's NOT exists"); 
         }
         Delete(dep.Id);
         DataSource.Dependencies.Add(dep);

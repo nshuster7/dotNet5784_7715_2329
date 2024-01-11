@@ -13,13 +13,13 @@ public class EmployeeImplementation : IEmployee
             return emp.Id;
         }
 
-        throw new Exception();//!!
+        throw new Exception($"Worker with ID={emp.Id} already exists");
     }
 
     public void Delete(int id)
     {
         if (Read(id) == null)
-            throw new Exception();//!!
+            throw new Exception($"Worker with ID={id} doe's NOT exists");
         else
             DataSource.Employees.RemoveAt(id);
     }
@@ -29,17 +29,15 @@ public class EmployeeImplementation : IEmployee
         return DataSource.Employees.Find(x => x.Id == id);
     }
 
-    public List<Employee> ReadAll()//!!
+    public List<Employee> ReadAll()
     {
-        List<Employee> newEmployees = new List<Employee>();
-        ///////
-        return newEmployees;
+        return new List<Employee>(DataSource.Employees);
     }
 
     public void Update(Employee emp)
     {
         if (Read (emp.Id) == null) 
-            throw new Exception();//!!
+            throw new Exception($"Worker with ID={emp.Id} doe's NOT exists");
         Delete(emp.Id);
         DataSource.Employees.Add(emp);
     }

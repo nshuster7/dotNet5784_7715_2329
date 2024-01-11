@@ -21,11 +21,3 @@ public record Employee
 {
     public Employee() : this(0, " ") { } // Empty constructor for stage 3
 }
-public enum WorkStatus
-{
-    Active, Passive, Terminated
-}
-public enum Type
-{
-    Frame, Walls, Roof, WindowsAndDoors, Plumbing, Electricity
-}
