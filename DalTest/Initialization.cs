@@ -1,6 +1,4 @@
-﻿
-
-namespace DalTest;
+﻿namespace DalTest;
 using DalApi;
 using DO;
 
@@ -12,7 +10,8 @@ public static class Initialization
     private static readonly Random s_rand = new();
 
     private static void createDependency()
-    { 
+    {
+        s_dalDependency!.Create(new Dependency(0, 2, 1));
         s_dalDependency!.Create(new Dependency(0, 2, 1));
         s_dalDependency.Create(new Dependency(0, 3, 2));
         s_dalDependency.Create(new Dependency(0, 4, 3));
@@ -40,11 +39,11 @@ public static class Initialization
         s_dalDependency.Create(new Dependency(0, 23, 17));
         s_dalDependency.Create(new Dependency(0, 24, 19));
         s_dalDependency.Create(new Dependency(0, 24, 21));
-        s_dalDependency.Create(new Dependency(0, 25, 14));
+        s_dalDependency.Create(new Dependency(0, 25, 24));
         s_dalDependency.Create(new Dependency(0, 25, 19));
         s_dalDependency.Create(new Dependency(0, 26, 24));
         s_dalDependency.Create(new Dependency(0, 26, 19));
-        s_dalDependency.Create(new Dependency(0, 27, 13));
+        s_dalDependency.Create(new Dependency(0, 27, 23));
         s_dalDependency.Create(new Dependency(0, 27, 26));
         s_dalDependency.Create(new Dependency(0, 28, 11));
         s_dalDependency.Create(new Dependency(0, 29, 28));
@@ -74,7 +73,7 @@ public static class Initialization
 
         // 2. Create an array of random task names
         string[] taskNames = new string[] {
-           "COSAS", "EOAP", "OTNPAP", "DSEP", "PDCE", "FOFI", 
+            "null", "COSAS", "EOAP", "OTNPAP", "DSEP", "PDCE", "FOFI", 
             "POBM", "ETCS", "EAPI", "IOS", "CCF", "BSF", "IWAI",
             "CEWAF","IWAD", "PAEW", "HVACSI", "IOWAC", "IWAIP",
             "CFAT", "AIF", "IOD", "TPEC", "ICAC", "FAID", "IOEA",
@@ -84,6 +83,7 @@ public static class Initialization
 
         //  Create an array of descriptions for the tasks
         string[] taskDescriptions = new string[] {
+        "null",
         "Conduct survey and analysis of sites",
         "Engineering or architectural plans",
         "Obtain necessary permits and permissions",
@@ -127,7 +127,7 @@ public static class Initialization
     };
 
         // 4. Create a loop to populate the data
-        for (int i = 0; i < 40; i++)
+        for (int i = 1; i <= 40; i++)
         {
             // 5. Generate a random ID
            int id = s_rand.Next(MIN_TASK_ID, MAX_TASK_ID);//!!!
@@ -145,16 +145,15 @@ public static class Initialization
             string description = taskDescriptions[i];
 
             // 10. Create a new task object
-            Task task = new Task(   //!!!!
+            Task task = new Task(   //!!!!???
                 id,
-                null,
+                id,//You need to write the name of the EngineerId change here instead of the ID
                 name,
                 description,
                 createdAtDate,
                 null,
                 false,
                 complexity,
-                null,
                 null,
                 null,
                 null,
@@ -169,7 +168,6 @@ public static class Initialization
 
     private static void createEmployee()
     {
-
         // Define variables
         const int MIN_ID = 100000000;
         const int MAX_ID = 999999999;
@@ -205,7 +203,6 @@ public static class Initialization
     "Moshe Baruch",
     "Abraham Cohen",
 };
-
 
         // Create a loop to populate the data
         for (int i = 0; i < 25; i++)
