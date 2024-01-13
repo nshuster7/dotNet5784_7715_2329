@@ -22,22 +22,56 @@ public static class Initialization
 
         // 2. Create an array of random task names
         string[] taskNames = new string[] {
-        "Develop new feature",
-        "Fix bug",
-        "Add documentation",
-        "Test new feature",
-        "Deploy new feature",
-        "Release new version"
-    };
+           "COSAS", "EOAP", "OTNPAP", "DSEP", "PDCE", "FOFI", 
+            "POBM", "ETCS", "EAPI", "IOS", "CCF", "BSF", "IWAI",
+            "CEWAF","IWAD", "PAEW", "HVACSI", "IOWAC", "IWAIP",
+            "CFAT", "AIF", "IOD", "TPEC", "ICAC", "FAID", "IOEA",
+            "PRT", "AEF", "GAOD", "IFAG", "PPAB", "IOEL","DFC", 
+            "OCOO", "CFTAC", "COMM", "STEAS", "MFCPO","KDAO", "EAPCF"
+           };
 
-        // 3. Create an array of descriptions for the tasks
+        //  Create an array of descriptions for the tasks
         string[] taskDescriptions = new string[] {
-        "Develop a new feature for the product.",
-        "Fix a bug in the product.",
-        "Add documentation for the product.",
-        "Test a new feature for the product.",
-        "Deploy a new feature to production.",
-        "Release a new version of the product."
+        "Conduct survey and analysis of sites",
+        "Engineering or architectural plans",
+        "Obtain necessary permits and permissions",
+        "Develop structural engineering plans",
+        "Prepare detailed cost estimates",
+        "Financing or financing insurance",
+        "Purchase building materials",
+        "Evacuation of the construction site",
+        "Excavation and preparation of infrastructure",
+        "Installation of services",
+        "Casting concrete foundation",
+        "Building a structural frame",
+        "Installation of walls and insulation",
+        "Completion of exterior walls and finishes",
+        "Installation of windows and doors",
+        "Plumbing and electrical work",
+        "HVAC system installation",
+        "Insulation of walls and ceilings",
+        "Installation of interior walls and partitions",
+        "Construction of flooring and tiles",
+        "Apply internal finishes",
+        "Installation of devices",
+        "Termination of plumbing and electrical connections",
+        "Installation of cabinets and countertops",
+        "Full decoration and interior design",
+        "Installation of electrical appliances",
+        "Perform required tests",
+        "Apply exterior finishes",
+        "Gardening and outdoor devices",
+        "Installation of fencing and gates",
+        "Paving paths and bridges",
+        "Installation of external lighting",
+        "Do final cleaning",
+        "Obtain certificate of occupancy",
+        "Conduct final training and handover",
+        "Prepare operating and maintenance manuals",
+        "Staff training on equipment and systems",
+        "Make final checks and place an order",
+        "Key delivery and ownership",
+        "Evaluate and analyze post-construction feedback"
     };
 
         // 4. Create a loop to populate the data
@@ -89,7 +123,7 @@ public static class Initialization
         const int MAX_ID = 999999999;
         const int MIN_HOURLY_RATE = 400;
         const int MAX_HOURLY_RATE = 1200;
-
+        bool alreadyExists=false;
         //Create an array of logical employee names
         string[] employeeNames = new string[] {
     "Ali Al-Aziz",
@@ -124,56 +158,56 @@ public static class Initialization
         // Create a loop to populate the data
         for (int i = 0; i < 25; i++)
         {
-            // Generate a random ID
-            int id = s_rand.Next(MIN_ID, MAX_ID);
+            int id;
+            do
+                // Generate a random ID
+                 id = s_rand.Next(MIN_ID, MAX_ID);
+            while (s_dalEmployee!.Read(id) == null);
+                // Generate a random name
+                string name = employeeNames[i];
 
-            // Generate a random name
-            string name = employeeNames[i];
+                // Generate a random email address
+                string? email = null;
+                if (s_rand.Next(0, 2) == 0) //Not every Employee has an email
+                {
+                    email = $"{name}@example.com";
+                }
 
-            // Generate a random email address
-            string? email = null;
-            if (s_rand.Next(0, 2) == 0) //Not every Employee has an email
-            {
-                email = $"{name}@example.com";
-            }
+                // Generate a random hourly rate
+                int hourlyRate = 0;
+                Type type = (Type)s_rand.Next(0, 5);
+                switch (type)
+                {
+                    case Type.Beginner:
+                        hourlyRate = MIN_HOURLY_RATE;
+                        break;
+                    case Type.AdvancedBeginner:
+                        hourlyRate = MIN_HOURLY_RATE + 100;
+                        break;
+                    case Type.Intermediate:
+                        hourlyRate = MIN_HOURLY_RATE + 200;
+                        break;
+                    case Type.Advanced:
+                        hourlyRate = MIN_HOURLY_RATE + 300;
+                        break;
+                    case Type.Expert:
+                        hourlyRate = MAX_HOURLY_RATE;
+                        break;
+                }
 
-            // Generate a random hourly rate
-            int hourlyRate = 0;
-            Type type = (Type)s_rand.Next(0, 5);
-            switch (type)
-            {
-                case Type.Beginner:
-                    hourlyRate = MIN_HOURLY_RATE;
-                    break;
-                case Type.AdvancedBeginner:
-                    hourlyRate = MIN_HOURLY_RATE + 100;
-                    break;
-                case Type.Intermediate:
-                    hourlyRate = MIN_HOURLY_RATE + 200;
-                    break;
-                case Type.Advanced:
-                    hourlyRate = MIN_HOURLY_RATE + 300;
-                    break;
-                case Type.Expert:
-                    hourlyRate = MAX_HOURLY_RATE;
-                    break;
-            }
+                // Generate a random work status
+                WorkStatus workStatus = (WorkStatus)s_rand.Next(0, 3);
 
-            // Generate a random work status
-            WorkStatus workStatus = (WorkStatus)s_rand.Next(0, 3);
-
-            // Create a new object
-            Employee employee = new Employee(
-                id,
-                name,
-                email,
-                hourlyRate,
-                workStatus,
-                type
-            );
-
-            // Add the object to the list
-            if (s_dalEmployee!.Read(employee.Id) == null)
+                // Create a new object
+                Employee employee = new Employee(
+                    id,
+                    name,
+                    email,
+                    hourlyRate,
+                    workStatus,
+                    type
+                );
+                // Add the object to the list
                 s_dalEmployee!.Create(employee);
         }
     }
