@@ -12,7 +12,8 @@ public static class Initialization
     private static readonly Random s_rand = new();
 
     private static void createDependency()
-    { }
+    { s_dalDependency!.Create(new Dependency(0, 2, 1));
+    }
     private static void createTask()
     {
         // 1. Define variables
@@ -75,25 +76,25 @@ public static class Initialization
     };
 
         // 4. Create a loop to populate the data
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 40; i++)
         {
             // 5. Generate a random ID
-            int id = s_rand.Next(MIN_TASK_ID, MAX_TASK_ID);
+           int id = s_rand.Next(MIN_TASK_ID, MAX_TASK_ID);//!!!
 
             // 6. Generate a random name
             string name = taskNames[i];
 
             // 7. Generate a random complexity
-            Type complexity = (Type)s_rand.Next(0,5);
+            Type complexity = (Type)s_rand.Next(0,5);//!!!!
 
             // 8. Generate a random date
-            DateTime createdAtDate = DateTime.Now.AddDays(-s_rand.Next(1, 30));
+            DateTime createdAtDate = DateTime.Now.AddDays(-s_rand.Next(1, 30));//!!!
 
             // 9. Generate a random description
             string description = taskDescriptions[i];
 
             // 10. Create a new task object
-            Task task = new Task(
+            Task task = new Task(   //!!!!
                 id,
                 null,
                 name,
