@@ -66,12 +66,7 @@ public static class Initialization
     }
     private static void createTask()
     {
-        // 1. Define variables
-        const int MIN_TASK_ID = 1;
-        const int MAX_TASK_ID = 1000;
-
-
-        // 2. Create an array of random task names
+        //Create an array of random task names
         string[] taskNames = new string[] {
             "null", "COSAS", "EOAP", "OTNPAP", "DSEP", "PDCE", "FOFI", 
             "POBM", "ETCS", "EAPI", "IOS", "CCF", "BSF", "IWAI",
@@ -126,28 +121,28 @@ public static class Initialization
         "Evaluate and analyze post-construction feedback"
     };
 
-        // 4. Create a loop to populate the data
+        //Create a loop to populate the data
         for (int i = 1; i <= 40; i++)
         {
-            // 5. Generate a random ID
-           int id = s_rand.Next(MIN_TASK_ID, MAX_TASK_ID);//!!!
-
-            // 6. Generate a random name
+            // Generate a random name
             string name = taskNames[i];
-
-            // 7. Generate a random complexity
-            Type complexity = (Type)s_rand.Next(0,5);//!!!!
-
-            // 8. Generate a random date
-            DateTime createdAtDate = DateTime.Now.AddDays(-s_rand.Next(1, 30));//!!!
-
-            // 9. Generate a random description
+            // Generate a random description
             string description = taskDescriptions[i];
+            // Generate a random complexity
+            Type complexity = (Type)s_rand.Next(0,5);
+            // Generate a random date
+ 
+            Random rand = new Random(DateTime.Now.Millisecond);
+            DateTime start = new DateTime(2024, 2, 8, 0, 0, 0);
+            int rangeStart = (start - DateTime.Today).Days;
+            DateTime createdAtDate = start.AddDays(rand.Next(rangeStart));
 
-            // 10. Create a new task object
-            Task task = new Task(   //!!!!???
-                id,
-                id,//You need to write the name of the EngineerId change here instead of the ID
+           
+
+            // Create a new task object
+            Task task = new Task(   
+                0,//the id is gonna to be changed by the function create
+                0,
                 name,
                 description,
                 createdAtDate,
@@ -173,7 +168,6 @@ public static class Initialization
         const int MAX_ID = 999999999;
         const int MIN_HOURLY_RATE = 400;
         const int MAX_HOURLY_RATE = 1200;
-        bool alreadyExists=false;
         //Create an array of logical employee names
         string[] employeeNames = new string[] {
     "Ali Al-Aziz",
@@ -259,5 +253,16 @@ public static class Initialization
                 // Add the object to the list
                 s_dalEmployee!.Create(employee);
         }
+    }
+
+    public static void Do(IEmployee? dalEmployee, ITask? dalTask, IDependency? dalDependency)
+    {
+        s_dalEmployee = dalEmployee ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
+
+        createEmployee();
+        createTask();
+        createDependency();
     }
 }
