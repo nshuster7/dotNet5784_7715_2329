@@ -26,12 +26,26 @@ internal class EmployeeImplementation : IEmployee
 
     public Employee? Read(int id)
     {
-        return DataSource.Employees.Find(x => x.Id == id);
+        return DataSource.Employees.FirstOrDefault(x => x.Id == id);
     }
-
+    public Employee? Read(Func<Employee, bool> filter)  //stage 2
+    {
+        return DataSource.Employees.FirstOrDefault(filter);
+    }
     public List<Employee> ReadAll()
     {
         return new List<Employee>(DataSource.Employees);
+    }
+    public IEnumerable<Employee> ReadAll(Func<Employee, bool>? filter = null) //stage 2
+    {
+        if (filter != null)
+        {
+            return from item in DataSource.Employees
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Employees
+               select item;
     }
 
     public void Update(Employee emp)

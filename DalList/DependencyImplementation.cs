@@ -31,12 +31,28 @@ internal class DependencyImplementation : IDependency
 
     public Dependency? Read(int IdDependence)
     {
-        return DataSource.Dependencies.Find(dep => dep.Id == IdDependence);
+        return DataSource.Dependencies.FirstOrDefault(dep => dep.Id == IdDependence);
+    }
+
+    public Dependency? Read(Func<Dependency,bool>filter )  //stage 2
+    {
+        return DataSource.Dependencies.FirstOrDefault(filter);
     }
 
     public List<Dependency> ReadAll()
     {
         return new List<Dependency>(DataSource.Dependencies);
+    }
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null) //stage 2
+    {
+        if (filter != null)
+        {
+            return from item in DataSource.Dependencies
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Dependencies
+               select item;
     }
 
     public void Update(Dependency dep)
