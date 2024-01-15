@@ -27,15 +27,17 @@ public enum Entity
 }
 internal class Program
 {
-    private static IEmployee? s_dalEmployee = new EmployeeImplementation(); //stage 1
-    private static ITask? s_dalTask = new TaskImplementation(); //stage 1
-    private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
+    //private static IEmployee? s_dalEmployee = new EmployeeImplementation(); //stage 1
+    //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
+    //private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
+    static readonly IDal s_dal = new DalList();
     private static readonly Random s_rand = new();
     static void Main(string[] args)
     {
         try
         {
             //Initialization.Do(s_dalEmployee, s_dalTask, s_dalDependency);
+            Initialization.Do(s_dal); //stage 2
             Entity myChoice;
             do
             {
@@ -110,7 +112,7 @@ internal class Program
                     Type complexity = (Type)int.Parse(Console.ReadLine() ?? $"{s_rand.Next(0, 5)}");
 
                     // Create a new employee with the provided details and add it to the system
-                    s_dalEmployee!.Create(new Employee(id, name, email, hourlyRate, status, complexity));
+                    s_dal.Employee!.Create(new Employee(id, name, email, hourlyRate, status, complexity));
                     break;
 
                 case CRUD.Read:
@@ -120,13 +122,13 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Read and display the specified employee
-                    Employee? readEmployee = s_dalEmployee!.Read(ID);
+                    Employee? readEmployee = s_dal!.Employee.Read(ID);
                     Console.WriteLine(readEmployee);
                     break;
 
                 case CRUD.ReadAll:
                     // Display all employees in the system
-                    foreach (var worker in s_dalEmployee!.ReadAll())
+                    foreach (var worker in s_dal!.Employee.ReadAll())
                     {
                         Console.WriteLine(worker);
                     }
@@ -139,7 +141,7 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Read and display the existing employee to get its details
-                    Employee updatedEmployee = s_dalEmployee!.Read(iD)! ?? throw new Exception($"Can't update, worker does not exist!!");
+                    Employee updatedEmployee = s_dal!.Employee.Read(iD)! ?? throw new Exception($"Can't update, worker does not exist!!");
                     Console.WriteLine(updatedEmployee);
 
                     // Prompt the user to enter updated details for the employee
@@ -163,7 +165,7 @@ internal class Program
 
                     // Create a new Employee object with updated details and update it in the system
                     Employee employee = new Employee(_id, _name, _email, _hourlyRate, _status, _complexity);
-                    s_dalEmployee!.Update(employee);
+                    s_dal!.Employee.Update(employee);
                     break;
 
                 case CRUD.Delete:
@@ -173,7 +175,7 @@ internal class Program
                         throw new Exception("Invalid input");
 
                     // Delete the specified employee
-                    s_dalEmployee!.Delete(Id);
+                    s_dal!.Employee.Delete(Id);
                     break;
 
                 case CRUD.Exit:
@@ -263,7 +265,7 @@ internal class Program
                         throw new Exception("the date is not correct");
 
                     // Create a new task with the provided details and add it to the system
-                    s_dalTask!.Create(new Task(0, IdWorker, name, Description, createAtDate, requiredEffortTime, milestone,
+                    s_dal.Task!.Create(new Task(0, IdWorker, name, Description, createAtDate, requiredEffortTime, milestone,
                         complexity, startDate, scheduledDate, DeadLine, completeDate, ResultProduct, Remarks));
                     break;
 
@@ -274,14 +276,14 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Read and display the specified task
-                    Task? readTask = s_dalTask!.Read(ID);
+                    Task? readTask = s_dal.Task!.Read(ID);
                     Console.WriteLine(readTask);
                     break;
 
                 case CRUD.ReadAll:
                     // Display all tasks in the system
                     Console.WriteLine("List of the Tasks: ");
-                    foreach (var item in s_dalTask!.ReadAll())
+                    foreach (var item in s_dal.Task!.ReadAll())
                         Console.WriteLine(item);
                     break;
 
@@ -292,7 +294,7 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Read and display the existing task to get its details
-                    Console.WriteLine(s_dalTask!.Read(Id));
+                    Console.WriteLine(s_dal.Task!.Read(Id));
 
                     // Prompt the user to enter updated details for the task
                     // Additional error handling is included for incorrect user inputs
@@ -346,7 +348,7 @@ internal class Program
                     // Create a new Task object with updated details and update it in the system
                     Task updatedTask = new Task(Id, _IdWorker, _name, _Description, _createAtDate, _requiredEffortTime, _milestone,
                         _complexity, _startDate, _scheduledDate, _DeadLine, _completeDate, _ResultProduct, _Remarks);
-                    s_dalTask!.Update(updatedTask);
+                    s_dal.Task!.Update(updatedTask);
                     break;
 
                 case CRUD.Delete:
@@ -356,7 +358,7 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Delete the specified task
-                    s_dalTask!.Delete(idDelete);
+                    s_dal.Task!.Delete(idDelete);
                     break;
 
                 case CRUD.Exit:
@@ -409,7 +411,7 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Create a new dependency using the provided task IDs
-                    s_dalDependency!.Create(new Dependency(task1Id, task2Id));
+                    s_dal!.Dependency.Create(new Dependency(task1Id, task2Id));
                     break;
 
                 case CRUD.Read:
@@ -419,14 +421,14 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Read and display the specified dependency
-                    Dependency? readDependency = s_dalDependency!.Read(readId);
+                    Dependency? readDependency = s_dal!.Dependency.Read(readId);
                     Console.WriteLine(readDependency is null ? "Link was not found!\n" : readDependency);
                     break;
 
                 case CRUD.ReadAll:
                     // Display all dependencies in the system
                     Console.WriteLine("The list of the Dependencies: ");
-                    foreach (var item in s_dalDependency!.ReadAll())
+                    foreach (var item in s_dal!.Dependency.ReadAll())
                     {
                         Console.WriteLine(item);
                     }
@@ -439,7 +441,7 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Read the existing dependency to get its details
-                    Dependency? outOfDateDependency = s_dalDependency!.Read(updatedId) ?? throw new Exception("INVALID VALUE");
+                    Dependency? outOfDateDependency = s_dal!.Dependency.Read(updatedId) ?? throw new Exception("INVALID VALUE");
                     Console.WriteLine(outOfDateDependency);
 
                     // Prompt the user to enter updated task codes
@@ -451,7 +453,7 @@ internal class Program
 
                     // Create a new Dependency object with updated details and update it in the system
                     Dependency updatedDependency = new Dependency(updatedId, task1, task2);
-                    s_dalDependency!.Update(updatedDependency);
+                    s_dal!.Dependency.Update(updatedDependency);
                     break;
 
                 case CRUD.Delete:
@@ -461,7 +463,7 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Delete the specified dependency
-                    s_dalDependency!.Delete(idDelete);
+                    s_dal!.Dependency.Delete(idDelete);
                     break;
 
                 case CRUD.ReadDependencyOfTwoTasks:
@@ -474,7 +476,7 @@ internal class Program
                         throw new Exception("INVALID VALUE");
 
                     // Read and display the dependency between the specified two tasks
-                    s_dalDependency!.Read(task1, task2);
+                    s_dal!.Dependency.Read(task1, task2);
                     break;
 
                 case CRUD.Exit:

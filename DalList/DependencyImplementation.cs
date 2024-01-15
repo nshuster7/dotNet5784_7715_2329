@@ -4,7 +4,7 @@ using DO;
 using System.Collections.Generic;
 using System.Runtime.Intrinsics.Arm;
 
-public class DependencyImplementation : IDependency
+internal class DependencyImplementation : IDependency
 {
     public int Create(Dependency dep)
     {
