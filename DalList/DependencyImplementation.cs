@@ -18,13 +18,13 @@ internal class DependencyImplementation : IDependency
     {
         if (Read(id) == null)
         {
-            throw new Exception($"Dependency with ID={id} doe's NOT exists");
+            throw new DalDoesNotExistException($"Dependency with ID={id} doe's NOT exists");
         }
         else
             DataSource.Dependencies.RemoveAt(id);
     }
     //return if task1 Depends On Task2
-    public Dependency? Read(int IdTask1, int IdTask2)
+    public Dependency? Check(int IdTask1, int IdTask2)
     {
         return DataSource.Dependencies.Find(dep => dep.DependentTask == IdTask1 && dep.DependsOnTask == IdTask2);
     }
@@ -59,7 +59,7 @@ internal class DependencyImplementation : IDependency
     { 
        if (Read(dep.Id) == null) 
         { 
-            throw new Exception($"Dependency with ID={dep.Id} doe's NOT exists"); 
+            throw new DalDoesNotExistException($"Dependency with ID={dep.Id} doe's NOT exists"); 
         }
         Delete(dep.Id);
         DataSource.Dependencies.Add(dep);

@@ -13,13 +13,13 @@ internal class EmployeeImplementation : IEmployee
             return emp.Id;
         }
 
-        throw new Exception($"Worker with ID={emp.Id} already exists");
+        throw new DalAlreadyExistsException($"Worker with ID={emp.Id} already exists");
     }
 
     public void Delete(int id)
     {
         if (Read(id) == null)
-            throw new Exception($"Worker with ID={id} doe's NOT exists");
+            throw new DalDoesNotExistException($"Worker with ID={id} doe's NOT exists");
         else
             DataSource.Employees.RemoveAt(id);
     }
@@ -51,8 +51,9 @@ internal class EmployeeImplementation : IEmployee
     public void Update(Employee emp)
     {
         if (Read (emp.Id) == null) 
-            throw new Exception($"Worker with ID={emp.Id} doe's NOT exists");
+            throw new DalDoesNotExistException($"Worker with ID={emp.Id} doe's NOT exists");
         Delete(emp.Id);
         DataSource.Employees.Add(emp);
     }
+    
 }

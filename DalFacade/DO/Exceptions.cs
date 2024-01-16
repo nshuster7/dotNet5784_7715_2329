@@ -17,3 +17,7 @@ public class DalDeletionImpossible : Exception
 {
     public DalDeletionImpossible(string? message) : base(message) { }
 }
+public class DalWrongValueException : Exception
+{
+    public DalWrongValueException(string? message) : base(message) { }
+}
