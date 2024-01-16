@@ -173,7 +173,7 @@ internal class Program
                     // Prompt the user to enter the ID of the employee for deletion
                     Console.WriteLine("Enter worker ID: ");
                     if (!int.TryParse(Console.ReadLine(), out int Id))
-                        throw new DalWrongValueException("WRONG id");
+                        throw new DalWrongValueException("Wrong id");
 
                     // Delete the specified employee
                     s_dal!.Employee.Delete(Id);
