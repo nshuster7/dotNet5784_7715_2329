@@ -26,7 +26,7 @@ internal class DependencyImplementation : IDependency
     //return if task1 Depends On Task2
     public Dependency? Check(int IdTask1, int IdTask2)
     {
-        return DataSource.Dependencies.Find(dep => dep.DependentTask == IdTask1 && dep.DependsOnTask == IdTask2);
+        return DataSource.Dependencies.FirstOrDefault(dep => dep.DependentTask == IdTask1 && dep.DependsOnTask == IdTask2);
     }
 
     public Dependency? Read(int IdDependence)

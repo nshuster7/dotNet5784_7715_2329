@@ -206,7 +206,7 @@ public static class Initialization
             do
                 // Generate a random ID
                  id = s_rand.Next(MIN_ID, MAX_ID);
-            while (s_dal!.Employee.Read(id) == null);
+            while (s_dal!.Employee.Read(id)!= null);
                 // Generate a random name
                 string name = employeeNames[i];
 
