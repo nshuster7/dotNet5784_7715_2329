@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
+
+	<nextTaskId>1</nextTaskId>
+	<nextDependencyId>1</nextDependencyId>
 </config>
