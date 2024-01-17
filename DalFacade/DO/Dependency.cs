@@ -1,6 +1,4 @@
-﻿
-
-namespace DO;
+﻿namespace DO;
 /// <summary>
 /// A dependency entity that connects two tasks
 /// </summary>
