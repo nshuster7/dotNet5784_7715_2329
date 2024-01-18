@@ -1,6 +1,6 @@
 ﻿using DalApi;
 using DO;
-
+using System.Linq;
 namespace Dal;
 
 internal class DependencyImplementation: IDependency
@@ -14,31 +14,52 @@ internal class DependencyImplementation: IDependency
 
     public int Create(Dependency item)
     {
-        throw new NotImplementedException();
+        List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
+        int nextId = XMLTools.GetAndIncreaseNextId("task_config", "nextTaskId");
+        Dependency copy = item with { Id = nextId };
+        dependencies.Add(item);
+        XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
+        return nextId;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
+        if (Read(id) == null)
+        {
+            throw new DalDoesNotExistException($"Task with ID={id} does NOT exist");
+        }
+        else
+            dependencies.RemoveAll(it => it.Id == id);
+        XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
     }
 
     public Dependency? Read(int id)
     {
-        throw new NotImplementedException();
+        List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
+        return dependencies.FirstOrDefault(dependencies => dependencies.Id == id);
     }
 
     public Dependency? Read(Func<Dependency, bool> filter)
     {
-        throw new NotImplementedException();
+        List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
+        return dependencies.FirstOrDefault(filter);
     }
 
     public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
+        return filter != null ? dependencies.Where(filter) : dependencies;
     }
 
     public void Update(Dependency item)
     {
-        throw new NotImplementedException();
+        List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
+        if (dependencies.RemoveAll(it => it.Id == item.Id) == 0)
+        {
+            throw new DalDoesNotExistException($"Course with ID= {item.Id} does Not exist");
+        }
+        dependencies.Add(item);
+        XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
     }
 }

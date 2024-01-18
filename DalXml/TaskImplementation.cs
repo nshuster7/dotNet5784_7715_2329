@@ -1,6 +1,5 @@
-﻿using DalApi;
-
-namespace Dal;
+﻿namespace Dal;
+using DalApi;
 using DO;
 using System.Data.Common;
 
@@ -10,12 +9,9 @@ internal class TaskImplementation: ITask
 
     public int Create(DO.Task item)
     {
-        // Load tasks from XML
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-        // Generate a unique ID
         int nextId = XMLTools.GetAndIncreaseNextId("task_config", "nextTaskId");
         Task copy= item with { Id = nextId };
-        // Add the new task and save to XML
         tasks.Add(item);
         XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
         return nextId;
@@ -23,43 +19,31 @@ internal class TaskImplementation: ITask
 
     public void Delete(int id)
     {
-        // Load tasks from XML
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-        // Generate a unique ID
         if (Read(id) == null)
         {
             throw new DalDoesNotExistException($"Task with ID={id} does NOT exist");
         }
         else
-           // Add the new task and save to XML
            tasks.RemoveAll(it => it.Id ==id);
         XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
     }
 
     public DO.Task? Read(int id)
     {
-        // Load list from XML using XmlSerializer
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-
-        // Find the task with the specified ID
         return tasks.FirstOrDefault(task => task.Id == id);
      }
 
     public DO.Task? Read(Func<DO.Task, bool> filter)
     {
-        //  Load list from XML using XmlSerializer
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-
-        //  Find the first task that matches the filter
         return tasks.FirstOrDefault(filter);
     }
 
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
     {
-        // Load list from XML using XmlSerializer
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-
-        // Apply the filter if provided, otherwise return all tasks
         return filter != null ? tasks.Where(filter) : tasks;
     }
 
