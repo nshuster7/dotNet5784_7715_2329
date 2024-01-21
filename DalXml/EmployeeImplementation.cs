@@ -3,6 +3,8 @@ using DO;
 
 namespace Dal;
 using System.Xml.Linq;
+using Type = DO.Type;
+
 internal class EmployeeImplementation: IEmployee
 {
     readonly string s_employees_xml = "employees";
@@ -46,7 +48,7 @@ internal class EmployeeImplementation: IEmployee
     public Employee? Read(int id)
     {
         XElement employeesRoot = XMLTools.LoadListFromXMLElement(s_employees_xml);
-        XElement? employeeElem = employeesRoot.Elements("Employee").FirstOrDefault(e => (int?)e.Element("Id") == id);
+        XElement? employeeElem = employeesRoot.Elements().FirstOrDefault(e => (int?)e.Element("Id") == id);
         return employeeElem != null ? getEmployee(employeeElem) : null;
     }
 
@@ -54,8 +56,8 @@ internal class EmployeeImplementation: IEmployee
     {
         return new Employee(
             employeeElem.ToIntNullable("Id") ?? throw new FormatException("Can't convert ID"),
-            employeeElem.Element("Name")?.Value ?? "",
-            employeeElem.Element("Email")?.Value,
+            (string?) employeeElem.Element("Name")?? "",
+            (string?) employeeElem.Element("Email")?? null,
             employeeElem.ToIntNullable("HourlyRate") ?? 0,
             (WorkStatus?)employeeElem.ToEnumNullable<WorkStatus>("WorkStatus"),
             (Type?)employeeElem.ToEnumNullable<Type>("Type")
@@ -65,15 +67,14 @@ internal class EmployeeImplementation: IEmployee
 
     public Employee? Read(Func<Employee, bool> filter)
     {
-        IEnumerable<Employee?> employees = ReadAll();
-        return employees.FirstOrDefault(filter);
+        return XMLTools.LoadListFromXMLElement(s_employees_xml).Elements().Select(e => getEmployee(e)).FirstOrDefault(filter);
     }
 
 
     public IEnumerable<Employee?> ReadAll(Func<Employee, bool>? filter = null)
     {
         XElement employeesRoot = XMLTools.LoadListFromXMLElement(s_employees_xml);
-        IEnumerable<XElement> employeeElems = employeesRoot.Elements("Employee");
+        IEnumerable<XElement> employeeElems = employeesRoot.Elements();
 
         if (filter == null)
         {

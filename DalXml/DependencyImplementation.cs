@@ -1,5 +1,6 @@
 ﻿using DalApi;
 using DO;
+using System.Data.Common;
 using System.Linq;
 namespace Dal;
 
@@ -7,15 +8,17 @@ internal class DependencyImplementation: IDependency
 {
     readonly string s_dependency_xml = "dependency";
 
-    public Dependency? Check(int t1, int t2)
+    public Dependency? Check(int IdTask1, int IdTask2)
     {
-        throw new NotImplementedException();
+        List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
+        return dependencies.FirstOrDefault(dep => dep.DependentTask == IdTask1 && dep.DependsOnTask == IdTask2);
+
     }
 
     public int Create(Dependency item)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
-        int nextId = XMLTools.GetAndIncreaseNextId("task_config", "nextTaskId");
+        int nextId = XMLTools.GetAndIncreaseNextId("data-config", "nextDependencyId");
         Dependency copy = item with { Id = nextId };
         dependencies.Add(item);
         XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
@@ -49,7 +52,14 @@ internal class DependencyImplementation: IDependency
     public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
-        return filter != null ? dependencies.Where(filter) : dependencies;
+        if (filter != null)
+        {
+            return from item in dependencies
+                   where filter(item)
+                   select item;
+        }
+        return from item in dependencies
+               select item;
     }
 
     public void Update(Dependency item)

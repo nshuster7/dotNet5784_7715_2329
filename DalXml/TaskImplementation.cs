@@ -10,7 +10,7 @@ internal class TaskImplementation: ITask
     public int Create(DO.Task item)
     {
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-        int nextId = XMLTools.GetAndIncreaseNextId("task_config", "nextTaskId");
+        int nextId = XMLTools.GetAndIncreaseNextId("data-config", "nextTaskId");
         Task copy= item with { Id = nextId };
         tasks.Add(item);
         XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);

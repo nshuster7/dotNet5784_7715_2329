@@ -24,21 +24,23 @@ public enum Entity
     Exit,
     Employee,
     Task,
-    Dependency
+    Dependency,
+    Initialization
 }
 internal class Program
 {
     //private static IEmployee? s_dalEmployee = new EmployeeImplementation(); //stage 1
     //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
     //private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
-    static readonly IDal s_dal = new DalList();
+    //static readonly IDal s_dal = new DalList(); //stage 2
+    static readonly IDal s_dal = new DalXml(); // stage 3
     private static readonly Random s_rand = new();
     static void Main(string[] args)
     {
         try
         {
             //Initialization.Do(s_dalEmployee, s_dalTask, s_dalDependency);
-            Initialization.Do(s_dal); //stage 2
+            //Initialization.Do(s_dal); //stage 2
             Entity myChoice;
             do
             {
@@ -46,6 +48,7 @@ internal class Program
                 Console.WriteLine("choose 1 - Employee");
                 Console.WriteLine("choose 2 - Task");
                 Console.WriteLine("choose 3 - Dependency");
+                Console.WriteLine("choose 4 - Initialization");
                 if (!Enum.TryParse(Console.ReadLine(), out myChoice))
                     throw new DalWrongValueException("WORNG VALUE");
                 switch (myChoice)
@@ -60,6 +63,12 @@ internal class Program
                         break;
                     case Entity.Dependency:
                         dependencyFunc();
+                        break;
+                    case Entity.Initialization:
+                            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                            if (ans == "Y") //stage 3
+                                Initialization.Do(s_dal); //stage 2
                         break;
                     default:
                         Console.WriteLine("ERROR");
