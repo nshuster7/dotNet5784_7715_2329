@@ -60,7 +60,14 @@ internal class TaskImplementation: ITask
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
 
         // Apply the filter if provided, otherwise return all tasks
-        return filter != null ? tasks.Where(filter) : tasks;
+        if (filter != null)
+        {
+            return from item in tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in tasks
+               select item;
     }
 
     public void Update(DO.Task item)
