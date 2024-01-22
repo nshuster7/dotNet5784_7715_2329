@@ -1,6 +1,6 @@
 ﻿namespace Dal;
 using DalApi;
-using DO;
+//using DO;
 sealed public class DalList : IDal
 {
     public IDependency Dependency => new DependencyImplementation();

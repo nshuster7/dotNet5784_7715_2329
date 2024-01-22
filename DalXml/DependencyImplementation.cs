@@ -1,13 +1,18 @@
 ﻿using DalApi;
 using DO;
-using System.Data.Common;
-using System.Linq;
 namespace Dal;
+using System.Linq;
+//using System.Data.Common;
 
-internal class DependencyImplementation: IDependency
+internal class DependencyImplementation : IDependency
 {
     readonly string s_dependency_xml = "dependency";
-
+    /// <summary>
+    /// Checks if a dependency exists between two tasks based on their IDs.
+    /// </summary>
+    /// <param name="IdTask1">The ID of the first task.</param>
+    /// <param name="IdTask2">The ID of the second task.</param>
+    /// <returns>The dependency object if found, null otherwise.</returns>
     public Dependency? Check(int IdTask1, int IdTask2)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
@@ -15,6 +20,11 @@ internal class DependencyImplementation: IDependency
 
     }
 
+    /// <summary>
+    /// Creates a new dependency and adds it to the dependency list.
+    /// </summary>
+    /// <param name="item">The dependency object to be created.</param>
+    /// <returns>The ID of the newly created dependency.</returns>
     public int Create(Dependency item)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
@@ -25,6 +35,11 @@ internal class DependencyImplementation: IDependency
         return nextId;
     }
 
+    /// <summary>
+    /// Removes a dependency from the dependency list based on its ID.
+    /// </summary>
+    /// <param name="id">The ID of the dependency to be deleted.</param>
+    /// <exception cref="DalDoesNotExistException">Thrown if the task with the provided ID does not exist.</exception>
     public void Delete(int id)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
@@ -37,18 +52,33 @@ internal class DependencyImplementation: IDependency
         XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
     }
 
+    /// <summary>
+    /// Reads a dependency from the list based on its ID.
+    /// </summary>
+    /// <param name="id">The ID of the dependency to be read.</param>
+    /// <returns>The dependency object if found, null otherwise.</returns>
     public Dependency? Read(int id)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
         return dependencies.FirstOrDefault(dependencies => dependencies.Id == id);
     }
 
+    /// <summary>
+    /// Reads the first dependency from the list that matches the specified filter.
+    /// </summary>
+    /// <param name="filter">A function that determines if a dependency matches the criteria.</param>
+    /// <returns>The first dependency object that matches the filter, null if none found.</returns>
     public Dependency? Read(Func<Dependency, bool> filter)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
         return dependencies.FirstOrDefault(filter);
     }
 
+    /// <summary>
+    /// Reads all dependencies from the list, optionally applying a filter.
+    /// </summary>
+    /// <param name="filter">An optional function that filters the dependencies.</param>
+    /// <returns>An enumerable collection of dependency objects.</returns>
     public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
@@ -62,6 +92,11 @@ internal class DependencyImplementation: IDependency
                select item;
     }
 
+    /// <summary>
+    /// Updates an existing dependency in the list.
+    /// </summary>
+    /// <param name="item">The updated dependency object.</param>
+    /// <exception cref="DalDoesNotExistException">Thrown if the dependency with the provided ID does not exist.</exception>
     public void Update(Dependency item)
     {
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);

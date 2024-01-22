@@ -13,10 +13,10 @@ public record Employee
 (
     int Id,
     string Name,
-    string? Email=null,
-    int HourlyRate=0,
+    string? Email = null,
+    int HourlyRate = 0,
     WorkStatus? WorkStatus = null,
-    Type? type=null
+    Type? type = null
 )
 {
     public Employee() : this(0, " ") { } // Empty constructor for stage 3

@@ -22,7 +22,6 @@
                 DataSource.Employees.Add(emp);
                 return emp.Id;
             }
-
             throw new DalAlreadyExistsException($"Worker with ID={emp.Id} already exists");
         }
 

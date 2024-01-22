@@ -1,8 +1,6 @@
 ﻿namespace DO;
 
 /// <summary>
-/// 
-/// </summary>
 /// <param name="Id">A unique identifier for the task.</param>
 /// <param name="EngineerId">The engineer assigned to the task.</param>
 /// <param name="Alias">A short name for the task.</param>
@@ -21,19 +19,18 @@ public record Task
 (
     int Id,
     int EngineerId,
-    string? Alias=null,
+    string? Alias = null,
     string? Description = null,
-    DateTime? CreatedAtDate=null,
-    TimeSpan? RequiredEffortTime=null,
-    bool IsMilestone=false,
-    DO.Type? Complexity=null,
+    DateTime? CreatedAtDate = null,
+    TimeSpan? RequiredEffortTime = null,
+    bool IsMilestone = false,
+    DO.Type? Complexity = null,
     DateTime? StartDate = null,
     DateTime? ScheduledDate = null,
-    DateTime? DeadlineDate= null,
+    DateTime? DeadlineDate = null,
     DateTime? CompleteDate = null,
-    string? Deliverables=null,
-    string? Remarks=null
-    
+    string? Deliverables = null,
+    string? Remarks = null
 )
 {
     public Task() : this(0, 0) { } // Empty constructor for stage 3

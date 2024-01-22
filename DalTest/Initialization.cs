@@ -1,7 +1,6 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
-
 public static class Initialization
 {
     //private static IEmployee? s_dalEmployee; //stage 1
@@ -9,7 +8,6 @@ public static class Initialization
     //private static IDependency? s_dalDependency; //stage 1
     private static IDal? s_dal;
     private static readonly Random s_rand = new();
-
     private static void createDependency()
     {
         s_dal!.Dependency.Create(new Dependency(0, 2, 1));
@@ -69,11 +67,11 @@ public static class Initialization
     {
         //Create an array of random task names
         string[] taskNames = new string[] {
-            "null", "COSAS", "EOAP", "OTNPAP", "DSEP", "PDCE", "FOFI", 
+            "null", "COSAS", "EOAP", "OTNPAP", "DSEP", "PDCE", "FOFI",
             "POBM", "ETCS", "EAPI", "IOS", "CCF", "BSF", "IWAI",
             "CEWAF","IWAD", "PAEW", "HVACSI", "IOWAC", "IWAIP",
             "CFAT", "AIF", "IOD", "TPEC", "ICAC", "FAID", "IOEA",
-            "PRT", "AEF", "GAOD", "IFAG", "PPAB", "IOEL","DFC", 
+            "PRT", "AEF", "GAOD", "IFAG", "PPAB", "IOEL","DFC",
             "OCOO", "CFTAC", "COMM", "STEAS", "MFCPO","KDAO", "EAPCF"
            };
 
@@ -130,18 +128,16 @@ public static class Initialization
             // Generate a random description
             string description = taskDescriptions[i];
             // Generate a random complexity
-            Type complexity = (Type)s_rand.Next(0,5);
+            Type complexity = (Type)s_rand.Next(0, 5);
             // Generate a random date
- 
+
             Random rand = new Random(DateTime.Now.Millisecond);
             DateTime start = new DateTime(2024, 2, 8, 0, 0, 0);
             int rangeStart = (start - DateTime.Today).Days;
             DateTime createdAtDate = start.AddDays(rand.Next(rangeStart));
 
-           
-
             // Create a new task object
-            Task task = new Task(   
+            Task task = new Task(
                 0,//the id is gonna to be changed by the function create
                 0,
                 name,
@@ -156,7 +152,6 @@ public static class Initialization
                 null,
                 null
             );
-
             // 11. Add the object to the list
             s_dal!.Task.Create(task);
         }
@@ -205,54 +200,53 @@ public static class Initialization
             int id;
             do
                 // Generate a random ID
-                 id = s_rand.Next(MIN_ID, MAX_ID);
-            while (s_dal!.Employee.Read(id)!= null);
-                // Generate a random name
-                string name = employeeNames[i];
+                id = s_rand.Next(MIN_ID, MAX_ID);
+            while (s_dal!.Employee.Read(id) != null);
+            // Generate a random name
+            string name = employeeNames[i];
 
-                // Generate a random email address
-                string? email = null;
-                if (s_rand.Next(0, 2) == 0) //Not every Employee has an email
-                {
-                    email = $"{name}@example.com";
-                }
+            // Generate a random email address
+            string? email = null;
+            if (s_rand.Next(0, 2) == 0) //Not every Employee has an email
+            {
+                email = $"{name}@example.com";
+            }
+            // Generate a random hourly rate
+            int hourlyRate = 0;
+            Type type = (Type)s_rand.Next(0, 5);
+            switch (type)
+            {
+                case Type.Beginner:
+                    hourlyRate = MIN_HOURLY_RATE;
+                    break;
+                case Type.AdvancedBeginner:
+                    hourlyRate = MIN_HOURLY_RATE + 100;
+                    break;
+                case Type.Intermediate:
+                    hourlyRate = MIN_HOURLY_RATE + 200;
+                    break;
+                case Type.Advanced:
+                    hourlyRate = MIN_HOURLY_RATE + 300;
+                    break;
+                case Type.Expert:
+                    hourlyRate = MAX_HOURLY_RATE;
+                    break;
+            }
 
-                // Generate a random hourly rate
-                int hourlyRate = 0;
-                Type type = (Type)s_rand.Next(0, 5);
-                switch (type)
-                {
-                    case Type.Beginner:
-                        hourlyRate = MIN_HOURLY_RATE;
-                        break;
-                    case Type.AdvancedBeginner:
-                        hourlyRate = MIN_HOURLY_RATE + 100;
-                        break;
-                    case Type.Intermediate:
-                        hourlyRate = MIN_HOURLY_RATE + 200;
-                        break;
-                    case Type.Advanced:
-                        hourlyRate = MIN_HOURLY_RATE + 300;
-                        break;
-                    case Type.Expert:
-                        hourlyRate = MAX_HOURLY_RATE;
-                        break;
-                }
+            // Generate a random work status
+            WorkStatus workStatus = (WorkStatus)s_rand.Next(0, 3);
 
-                // Generate a random work status
-                WorkStatus workStatus = (WorkStatus)s_rand.Next(0, 3);
-
-                // Create a new object
-                Employee employee = new Employee(
-                    id,
-                    name,
-                    email,
-                    hourlyRate,
-                    workStatus,
-                    type
-                );
-                // Add the object to the list
-                s_dal.Employee.Create(employee);
+            // Create a new object
+            Employee employee = new Employee(
+                id,
+                name,
+                email,
+                hourlyRate,
+                workStatus,
+                type
+            );
+            // Add the object to the list
+            s_dal.Employee.Create(employee);
         }
     }
 

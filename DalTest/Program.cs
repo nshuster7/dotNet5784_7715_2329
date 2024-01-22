@@ -1,12 +1,12 @@
 ﻿//Efrat Aharoni & Noa Shuster
 //We used the TryParse
+//using System.Reflection.Emit;
+//using System.Runtime.InteropServices;
 namespace DalTest;
 using Dal;
 using DalApi;
 using DO;
 using System;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
 using Type = DO.Type;
 
 public enum CRUD
@@ -65,10 +65,10 @@ internal class Program
                         dependencyFunc();
                         break;
                     case Entity.Initialization:
-                            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
-                            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
-                            if (ans == "Y") //stage 3
-                                Initialization.Do(s_dal); //stage 2
+                        Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                        if (ans == "Y") //stage 3
+                            Initialization.Do(s_dal); //stage 2
                         break;
                     default:
                         Console.WriteLine("ERROR");
@@ -198,7 +198,6 @@ internal class Program
                     Console.WriteLine("ERROR");
                     break;
             }
-
         } while (myChoice != CRUD.Exit);
     }
 
@@ -208,7 +207,6 @@ internal class Program
     private static void taskFunc()
     {
         CRUD myChoice;
-
         // Continue displaying the menu and processing user choices until the user chooses to exit
         do
         {
@@ -381,8 +379,8 @@ internal class Program
                     Console.WriteLine("Invalid choice! Please enter a valid option");
                     break;
             }
-
-        } while (myChoice != CRUD.Exit); // Continue the loop until the user chooses to exit
+        }
+        while (myChoice != CRUD.Exit); // Continue the loop until the user chooses to exit
     }
 
 
@@ -486,7 +484,7 @@ internal class Program
                         throw new DalWrongValueException("Wrong id");
 
                     // Read and display the dependency between the specified two tasks
-                    Dependency? readDependencies= s_dal!.Dependency.Check(task1, task2);
+                    Dependency? readDependencies = s_dal!.Dependency.Check(task1, task2);
                     Console.WriteLine(readDependencies is null ? "Link was not found!\n" : readDependencies);
                     break;
 
@@ -500,8 +498,8 @@ internal class Program
                     Console.WriteLine("Invalid choice! Please enter a valid option");
                     break;
             }
-
-        } while (myChoice != CRUD.Exit); // Continue the loop until the user chooses to exit
+        }
+        while (myChoice != CRUD.Exit); // Continue the loop until the user chooses to exit
     }
 
 
@@ -519,13 +517,9 @@ internal class Program
             // Display the numeric value and lowercase string representation of each CRUD operation
             Console.WriteLine($"{(int)option} - {option.ToString().ToLower()}");
         }
-
         // Display the option to exit the menu
         Console.WriteLine("0 - Exit");
     }
-
-
-
 }
 
 
