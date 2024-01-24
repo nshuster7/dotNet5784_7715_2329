@@ -7,7 +7,7 @@
 /// <param name="Email">Email address of the worker.</param>
 /// <param name="HourlyRate">Hourly payment rate of the worker.</param>
 /// <param name="WorkStatus">Current work status of the worker (Active, Passive, or Terminated).</param>
-/// <param name="type">Type of construction work the worker specializes in (e.g., ConcreteWorker, Electrician, etc.).</param>
+/// <param name="Type">Type of construction work the worker specializes in (e.g., ConcreteWorker, Electrician, etc.).</param>
 
 public record Employee
 (
@@ -16,7 +16,7 @@ public record Employee
     string? Email = null,
     int HourlyRate = 0,
     WorkStatus? WorkStatus = null,
-    Type? type = null
+    Type? Type = null
 )
 {
     public Employee() : this(0, " ") { } // Empty constructor for stage 3

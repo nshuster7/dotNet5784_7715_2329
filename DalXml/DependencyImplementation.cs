@@ -6,7 +6,7 @@ using System.Linq;
 
 internal class DependencyImplementation : IDependency
 {
-    readonly string s_dependency_xml = "dependency";
+    readonly string s_dependency_xml = "dependencies";
     /// <summary>
     /// Checks if a dependency exists between two tasks based on their IDs.
     /// </summary>
@@ -30,7 +30,7 @@ internal class DependencyImplementation : IDependency
         List<DO.Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<DO.Dependency>(s_dependency_xml);
         int nextId = XMLTools.GetAndIncreaseNextId("data-config", "nextDependencyId");
         Dependency copy = item with { Id = nextId };
-        dependencies.Add(item);
+        dependencies.Add(copy);
         XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
         return nextId;
     }
@@ -105,6 +105,20 @@ internal class DependencyImplementation : IDependency
             throw new DalDoesNotExistException($"Course with ID= {item.Id} does Not exist");
         }
         dependencies.Add(item);
+        XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
+    }
+    /// <summary>
+    /// Empty the dependency file of data
+    /// </summary>
+    public void Clear()
+    {
+        // Load the dependencies from the XML file
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependency_xml);
+
+        // Clear the loaded list
+        dependencies.Clear();
+
+        // Save the empty list back to the XML file
         XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
     }
 }

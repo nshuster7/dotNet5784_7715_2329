@@ -1,11 +1,27 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
+using System.Data.Common;
+
 //using System.Data.Common;
 
 internal class TaskImplementation : ITask
 {
     readonly string s_tasks_xml = "tasks";
+    /// <summary>
+    /// Empties the tasks file of data.
+    /// </summary>
+    public void Clear()
+    {
+        // Load the tasks from the XML file
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+
+        // Clear the loaded list
+        tasks.Clear();
+
+        // Save the empty list back to the XML file
+        XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
+    }
     /// <summary>
     /// Creates a new task and adds it to the tasks XML file.
     /// </summary>
@@ -16,7 +32,7 @@ internal class TaskImplementation : ITask
         List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         int nextId = XMLTools.GetAndIncreaseNextId("data-config", "nextTaskId");
         Task copy = item with { Id = nextId };
-        tasks.Add(item);
+        tasks.Add(copy);
         XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
         return nextId;
     }

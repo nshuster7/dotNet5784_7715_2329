@@ -34,4 +34,15 @@ public record Task
 )
 {
     public Task() : this(0, 0) { } // Empty constructor for stage 3
+
+    //public Task() : this(Id: 0, Alias: "", Description: "", CreatedAtDate: DateTime.Now) { }
+    public bool ShouldSerializeScheduledDate() { return ScheduledDate.HasValue; }
+    public bool ShouldSerializeStartDate() { return StartDate.HasValue; }
+    public bool ShouldSerializeRequiredEffortTime() { return RequiredEffortTime.HasValue; }
+    public bool ShouldSerializeDeadlineDate() { return DeadlineDate.HasValue; }
+    public bool ShouldSerializeCompleteDate() { return CompleteDate.HasValue; }
+    public bool ShouldSerializeDeliverables() { return !string.IsNullOrEmpty(Deliverables); }
+    public bool ShouldSerializeRemarks() { return !string.IsNullOrEmpty(Remarks); }
+    public bool ShouldSerializeComplexity() { return Complexity.HasValue; }
+
 }

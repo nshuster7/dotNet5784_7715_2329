@@ -143,14 +143,8 @@ public static class Initialization
                 name,
                 description,
                 createdAtDate,
-                null,
-                false,
-                complexity,
-                null,
-                null,
-                null,
-                null,
-                null
+                 IsMilestone: false,
+                Complexity: complexity
             );
             // 11. Add the object to the list
             s_dal!.Task.Create(task);

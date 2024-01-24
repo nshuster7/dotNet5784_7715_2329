@@ -109,6 +109,14 @@
             Delete(dep.Id);
             DataSource.Dependencies.Add(dep);
         }
+
+        /// <summary>
+        /// Empty the Dependencies list of data
+        /// </summary>
+        public void Clear()
+        {
+            DataSource.Dependencies.Clear();
+        }
     }
 }
 

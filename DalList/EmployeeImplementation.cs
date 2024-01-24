@@ -10,6 +10,14 @@
     internal class EmployeeImplementation : IEmployee
     {
         /// <summary>
+        /// Empty the employee list of data
+        /// </summary>
+        public void Clear()
+        {
+            DataSource.Employees.Clear();
+        }
+
+        /// <summary>
         /// Creates a new employee and adds it to the data source.
         /// </summary>
         /// <param name="emp">The employee to be created.</param>

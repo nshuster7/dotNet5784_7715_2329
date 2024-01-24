@@ -21,7 +21,7 @@ internal class EmployeeImplementation : IEmployee
             new XElement("Email", item.Email),
             new XElement("HourlyRate", item.HourlyRate),
             new XElement("WorkStatus", item.WorkStatus?.ToString()),
-            new XElement("Type", item.type?.ToString())
+            new XElement("Type", item.Type?.ToString())
         );
         // Add the employee element to the XML file
         XElement employeesRoot = XMLTools.LoadListFromXMLElement(s_employees_xml);
@@ -124,8 +124,19 @@ internal class EmployeeImplementation : IEmployee
             employeeElem.SetElementValue("Email", item.Email);
             employeeElem.SetElementValue("HourlyRate", item.HourlyRate);
             employeeElem.SetElementValue("WorkStatus", item.WorkStatus?.ToString());
-            employeeElem.SetElementValue("Type", item.type?.ToString());
+            employeeElem.SetElementValue("Type", item.Type?.ToString());
             XMLTools.SaveListToXMLElement(employeesRoot, s_employees_xml);
         }
+    }
+    /// <summary>
+    /// Empty the employee file of data
+    /// </summary>
+    public void Clear()
+    {
+        // Create an empty XElement to represent the root of the XML file
+        XElement employeesRoot = new XElement("Employees");
+
+        // Save the empty root element to the XML file, effectively clearing it
+        XMLTools.SaveListToXMLElement(employeesRoot, s_employees_xml);
     }
 }

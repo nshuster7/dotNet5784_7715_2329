@@ -68,7 +68,12 @@ internal class Program
                         Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
                         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
                         if (ans == "Y") //stage 3
+                        {
+                            s_dal.Task.Clear();
+                            s_dal.Dependency.Clear();
+                            s_dal.Employee.Clear();
                             Initialization.Do(s_dal); //stage 2
+                        }
                         break;
                     default:
                         Console.WriteLine("ERROR");
@@ -273,8 +278,9 @@ internal class Program
                         throw new DalWrongValueException("the date is not correct");
 
                     // Create a new task with the provided details and add it to the system
-                    s_dal.Task!.Create(new Task(0, IdWorker, name, Description, createAtDate, requiredEffortTime, milestone,
-                        complexity, startDate, scheduledDate, DeadLine, completeDate, ResultProduct, Remarks));
+                    var x = new Task(0, IdWorker, name, Description, createAtDate, requiredEffortTime, milestone,
+                        complexity, startDate, scheduledDate, DeadLine, completeDate, ResultProduct, Remarks);
+                    s_dal.Task!.Create(x);
                     break;
 
                 case CRUD.Read:

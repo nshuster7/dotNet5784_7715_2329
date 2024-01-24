@@ -10,6 +10,13 @@
     internal class TaskImplementation : ITask
     {
         /// <summary>
+        /// Empty the tasks list of data
+        /// </summary>
+        public void Clear()
+        {
+            DataSource.Tasks.Clear();
+        }
+        /// <summary>
         /// Creates a new task and adds it to the data source.
         /// </summary>
         /// <param name="item">The task to be created.</param>

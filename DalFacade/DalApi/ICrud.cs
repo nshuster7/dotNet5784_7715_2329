@@ -1,4 +1,6 @@
-﻿namespace DalApi
+﻿using System.Xml.Linq;
+
+namespace DalApi
 {
     public interface ICrud<T> where T : class
     {
@@ -8,6 +10,8 @@
         IEnumerable<T?> ReadAll(Func<T, bool>? filter = null); // stage 2
         void Update(T item); //Updates entity object
         void Delete(int id); //Deletes an object by its Id
+        void Clear();
+       
     }
 
 }
