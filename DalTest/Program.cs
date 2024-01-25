@@ -33,7 +33,9 @@ internal class Program
     //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
     //private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
     //static readonly IDal s_dal = new DalList(); //stage 2
-    static readonly IDal s_dal = new DalXml(); // stage 3
+    //static readonly IDal s_dal = new DalXml(); // stage 3
+    static readonly IDal s_dal = Factory.Get;
+
     private static readonly Random s_rand = new();
     static void Main(string[] args)
     {
@@ -72,7 +74,7 @@ internal class Program
                             s_dal.Task.Clear();
                             s_dal.Dependency.Clear();
                             s_dal.Employee.Clear();
-                            Initialization.Do(s_dal); //stage 2
+                            Initialization.Do(); //stage 2
                         }
                         break;
                     default:

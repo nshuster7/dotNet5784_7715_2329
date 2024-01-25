@@ -245,12 +245,14 @@ public static class Initialization
     }
 
     //public static void Do(IEmployee? dalEmployee, ITask? dalTask, IDependency? dalDependency)
-    public static void Do(IDal dal)
+    //public static void Do(IDal dal) //stage 2
+    public static void Do() //stage 4
     {
         //s_dalEmployee = dalEmployee ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
-        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!");
+        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal = Factory.Get; //stage 4
 
         createEmployee();
         createTask();
