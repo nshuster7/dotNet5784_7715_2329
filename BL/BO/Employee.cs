@@ -1,6 +1,4 @@
-﻿
-
-namespace BO;
+﻿namespace BO;
 
 public class Employee
 {
