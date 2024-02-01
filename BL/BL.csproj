@@ -24,8 +24,4 @@
     <ProjectReference Include="..\DalXml\DalXml.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BlImplemention\" />
-  </ItemGroup>
-
 </Project>
