@@ -191,10 +191,10 @@ public static class Tools
     }
 
     public static List<EmployeeInTask> GetSortedEmployees(DalApi.IDal dal)
-    {
+{
         IEnumerable<DO.Employee?> employees = dal.Employee.ReadAll();
         List<EmployeeInTask> employeeList = employees.Select(emp => new EmployeeInTask()
-        {
+    {
             Id = emp.Id,
             Name = emp.Name
         }).OrderBy(emp => emp.Name).ToList();
