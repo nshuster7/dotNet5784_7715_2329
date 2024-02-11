@@ -1,5 +1,7 @@
 ﻿using BO;
+
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 namespace BlTest;
 
@@ -12,36 +14,41 @@ partial class Program
         Console.Write("Would you like to create Initial data? (Y/N)");
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
         if (ans == "Y")
-            DalTest.Initialization.Do();
-
-        while (true)
         {
-            Console.WriteLine("For Worker Entity press: 1");
+            Tools.clear();
+            DalTest.Initialization.Do();
+        }
+        try
+        {
+            BO.Entity choice;
+        do
+        {
+            Console.WriteLine("For Employee Entity press: 1");
             Console.WriteLine("For Task Entity press: 2");
             Console.WriteLine("To create a schedule press: 3");
             Console.WriteLine("For exit press: 0");
 
-            try
-            {
-                if (!int.TryParse(Console.ReadLine(), out int choice))
-                    throw new BlWorngValueException("WORNG VALUE");
+            
+                
+                if (!Enum.TryParse(Console.ReadLine(), out choice))
+                    throw new BlWrongValueException("WORNG VALUE");
                 switch (choice)
                 {
-                    case 1:
-                        SubMenuWorker();
+                    case BO.Entity.Employee:
+                        employeeFunc();
                         break;
-                    case 2:
-                        SubMenuTask();
+                    case Entity.Task:
+                        taskFunc();
                         break;
-                    case 3:
+                    case Entity.Schedule:
                         Console.WriteLine("To create an automatic schedule press: 1");
                         Console.WriteLine("To create a manual schedule press: 2");
                         if (!int.TryParse(Console.ReadLine(), out int scheduleChoice))
-                            throw new BlWorngValueException("WORNG VALUE");
+                            throw new BlWrongValueException("WORNG VALUE");
                         if (scheduleChoice == 1)
-                            s_bl.Task.AutomaticSchedule();
+                            s_bl.AutomaticSchedule();
                         else if (scheduleChoice == 2)
-                            s_bl.Task.ManualSchedule();
+                            s_bl.ManualSchedule();
                         break;
                     case 0:
                         Environment.Exit(0);
@@ -50,100 +57,59 @@ partial class Program
                         Console.WriteLine("Invalid value Please try again");
                         break;
                 }
-
-            }
-            catch (BlDoesNotExistsException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlAlreadyExistsException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlNullPropertyException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlWorngValueException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlWorkerInTaskException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlCantUpdateException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlCantDeleteException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlTaskInWorkerException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlProjectStatusException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (BlScheduledDateException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+        }
+        while(choice != BO.Entity.Exit);
+        }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-            }
+            Console.WriteLine(ex.Message);
         }
-
     }
 
 
-    static void SubMenuWorker()
+    static void employeeFunc()
     {
         Console.WriteLine("For exit press: 0");
-        Console.WriteLine("To add a new worker press: 1");
-        Console.WriteLine("To display worker by ID press: 2");
-        Console.WriteLine("To display a list of the worker press: 3");
-        Console.WriteLine("To update worker press: 4");
-        Console.WriteLine("To delete worker from the list press: 5");
+        Console.WriteLine("To add a new employee press: 1");
+        Console.WriteLine("To display employee by ID press: 2");
+        Console.WriteLine("To display a list of the employee press: 3");
+        Console.WriteLine("To update employee press: 4");
+        Console.WriteLine("To delete employee from the list press: 5");
         Console.WriteLine("To start task press: 6");
         Console.WriteLine("To end task press: 7");
         Console.WriteLine("To sign up for a task press: 8");
 
-
-        if (!int.TryParse(Console.ReadLine(), out int choice))
-            throw new BlWorngValueException("WORNG VALUE");
+        MenuEmployee choice;
+        if (!Enum.TryParse(Console.ReadLine(), out choice))
+            throw new BlWrongValueException("WORNG VALUE");
 
         switch (choice)
         {
-            case 1:
-                CreateW();
+            case MenuEmployee.Add:
+                CreateE();
                 break;
-            case 2:
-                ReadW();
+            case MenuEmployee.Print:
+                ReadE();
                 break;
-            case 3:
-                ReadAllW();
+            case MenuEmployee.PrintListOfEmployees:
+                ReadAllE();
                 break;
-            case 4:
-                UpdateW();
+            case MenuEmployee.Update:
+                UpdateE();
                 break;
-            case 5:
-                DeleteW();
+            case MenuEmployee.Delete:
+                DeleteE();
                 break;
-            case 6:
+            case MenuEmployee.StartTask:
                 StartTask();
                 break;
-            case 7:
+            case MenuEmployee.EndTask:
                 EndTask();
                 break;
-            case 8:
+            case MenuEmployee.SignForTask:
                 SignUpForTask();
                 break;
-            case 0:
+            case MenuEmployee.Exit:
                 return;
             default:
                 Console.WriteLine("Invalid value Please try again");
@@ -151,7 +117,7 @@ partial class Program
         }
     }
 
-    static void SubMenuTask()
+    static void taskFunc()
     {
         Console.WriteLine("For exit press: 0");
         Console.WriteLine("To add a new task press: 1");
@@ -159,32 +125,34 @@ partial class Program
         Console.WriteLine("To display a list of the task press: 3");
         Console.WriteLine("To update task press: 4");
         Console.WriteLine("To delete task from the list press: 5");
-        Console.WriteLine("To display the list of the task the worker can chose press: 6");
+        Console.WriteLine("To display the list of the task the employee can chose press: 6");
 
-        if (!int.TryParse(Console.ReadLine(), out int choice))
-            throw new BlWorngValueException("WORNG VALUE");
+
+        MenuTask choice;
+        if (!Enum.TryParse(Console.ReadLine(), out choice))
+            throw new BlWrongValueException("WORNG VALUE");
 
         switch (choice)
         {
-            case 1:
+            case MenuTask.Add:
                 CreateT();
                 break;
-            case 2:
+            case MenuTask.Print:
                 ReadT();
                 break;
-            case 3:
+            case MenuTask.PrintListOfTasks:
                 ReadAllT();
                 break;
-            case 4:
+            case MenuTask.Update:
                 UpdateT();
                 break;
-            case 5:
+            case MenuTask.Delete:
                 DeleteT();
                 break;
-            case 6:
+            case MenuTask.ListOfTasksThatEmployeeCanDo:
                 ListOfTasksForWorker();
                 break;
-            case 0:
+            case MenuTask.Exit:
                 Environment.Exit(0);
                 break;
             default:
@@ -195,160 +163,164 @@ partial class Program
 
 
 
-    static void CreateW()
+    static void CreateE()
     {
         Console.WriteLine("Enter ID, the worker's level, cost per hour, email and name:");
 
         if (!int.TryParse(Console.ReadLine(), out int id))
-            throw new BlWorngValueException("WORNG ID");
+            throw new BlWrongValueException("WORNG ID");
         if (!int.TryParse(Console.ReadLine(), out int level))
-            throw new BlWorngValueException("WORNG LEVEL");
-        if (!double.TryParse(Console.ReadLine(), out double cost))
-            throw new BlWorngValueException("WORNG COST");
+            throw new BlWrongValueException("WORNG LEVEL");
+        if (!int.TryParse(Console.ReadLine(), out int hourlyRate))
+            throw new BlWrongValueException("WORNG COST");
         string email = Console.ReadLine()!;
         string name = Console.ReadLine()!;
 
-        BO.Worker worker = new BO.Worker { Id = id, Level = (BO.WorkerExperience)level, Email = email, Cost = cost, Name = name, CurrentTask = null };
-        Console.WriteLine(s_bl.Worker.Create(worker));
+        BO.Employee employee = new BO.Employee { Id = id, Name = name ,Email = email, Status= WorkStatus.Active, Type = (BO.Type)level, HourlyRate = hourlyRate, CurrentTaskId = null };
+        Console.WriteLine(s_bl.Employee.Create(employee));
         return;
     }
 
-    static void ReadW()
+    static void ReadE()
     {
         Console.WriteLine("Enter ID:");
         if (!int.TryParse(Console.ReadLine(), out int id))
-            throw new BlWorngValueException("WORNG ID");
-        Console.WriteLine(s_bl.Worker.Read(id));
+            throw new BlWrongValueException("WORNG ID");
+        Console.WriteLine(s_bl.Employee.Read(id));
         return;
     }
 
-    static void ReadAllW()
+    static void ReadAllE()
     {
-        List<BO.WorkerInList> list;
-        list = s_bl.Worker.ReadAll().ToList();
-        foreach (BO.WorkerInList? worker in list)
+        List<BO.EmployeeInTask> list;
+        list = s_bl.Employee.ReadAll().ToList();
+        foreach (BO.EmployeeInTask? worker in list)
             Console.WriteLine(worker);
     }
 
-    static void UpdateW()
+    static void UpdateE()
     {
         Console.WriteLine("Enter ID:");
-        if (!int.TryParse(Console.ReadLine(), out int workeId))
-            throw new BlWorngValueException("WORNG ID");
-        Console.WriteLine(s_bl.Worker.Read(workeId));
-
-        BO.Worker worker = s_bl.Worker.Read(workeId)!;
-        int id = worker.Id;
-        BO.WorkerExperience level = worker.Level;
-        string email = worker.Email;
-        double cost = worker.Cost;
-        string name = worker.Name;
-        BO.TaskInWorker? currentTask = worker.CurrentTask;
+        if (!int.TryParse(Console.ReadLine(), out int employeeId))
+            throw new BlWrongValueException("WRONG ID");
+        BO.Employee employee = s_bl.Employee.Read(employeeId)!;
+        Console.WriteLine(employee);
+        int id = employee.Id;
+        BO.Type ?level = employee.Type;
+        BO.WorkStatus? status=employee.Status;
+        string email = employee.Email?? "0@gmail.com";
+        int cost = employee.HourlyRate;
+        string name = employee.Name??" ";
+        BO.TaskInEmployee? currentTask = employee.CurrentTaskId;
 
         Console.WriteLine("If you want to change the level of the worker enter the new level, else press -1");
         if (!int.TryParse(Console.ReadLine(), out int newLevel))
-            throw new BlWorngValueException("WORNG LEVEL");
+            throw new BlWrongValueException("WORNG LEVEL");
         if (newLevel != -1)
-            level = (BO.WorkerExperience)newLevel;
+            level = (BO.Type)newLevel;
 
         Console.WriteLine("If you want to change the email enter the new email, else enter no");
         string newEmail = Console.ReadLine()!;
         if (newEmail != "no")
             email = newEmail;
+        Console.WriteLine("If you want to change the status of the worker enter the new status, else press -1");
+        if (!int.TryParse(Console.ReadLine(), out int newStatus))
+            throw new BlWrongValueException("WORNG LEVEL");
+        if (newStatus != -1)
+            status = (BO.WorkStatus)newStatus;
 
-        Console.WriteLine("If you want to change the cost enter the new cost, else press -1");
-        if (!double.TryParse(Console.ReadLine(), out double newCost))
-            throw new BlWorngValueException("WORNG COST");
-        if (newCost != -1)
-            cost = newCost;
+        Console.WriteLine("If you want to change the hourly rate enter the new hourly rate, else press -1");
+        if (!int.TryParse(Console.ReadLine(), out int newHourlyRate))
+            throw new BlWrongValueException("WORNG Hourly rate");
+        if (newHourlyRate != -1)
+            cost = newHourlyRate;
 
         Console.WriteLine("If you want to change the name enter the new name, else enter no");
         string newName = Console.ReadLine()!;
         if (newName != "no")
             name = newName;
 
-        BO.Worker workerToUpdate = new BO.Worker { Id = id, Level = level, Email = email, Cost = cost, Name = name, CurrentTask = currentTask };
-        s_bl.Worker.Update(workerToUpdate);
+        BO.Employee workerToUpdate = new BO.Employee { Id = id, Name = name, Email = email,Status= status, Type = level, HourlyRate = cost,  CurrentTaskId = currentTask };
+        s_bl.Employee.Update(workerToUpdate);
     }
 
-    static void DeleteW()
+    static void DeleteE()
     {
         Console.WriteLine("Enter ID:");
         if (!int.TryParse(Console.ReadLine(), out int id))
-            throw new BlWorngValueException("WORNG ID");
-        s_bl.Worker.Delete(id);
+            throw new BlWrongValueException("WORNG ID");
+        s_bl.Employee.Delete(id);
     }
 
     static void StartTask()
     {
-        Console.WriteLine("Enter the ID of the worker:");
-        if (!int.TryParse(Console.ReadLine(), out int workerId))
-            throw new BlWorngValueException("WORNG ID");
+        Console.WriteLine("Enter the ID of the employee:");
+        if (!int.TryParse(Console.ReadLine(), out int employeeId))
+            throw new BlWrongValueException("WORNG ID");
         Console.WriteLine("Enter the ID of the task you want to start:");
         if (!int.TryParse(Console.ReadLine(), out int taskId))
-            throw new BlWorngValueException("WORNG ID");
+            throw new BlWrongValueException("WORNG ID");
         BO.Task? task = s_bl.Task.Read(taskId);
         if (task != null)
-            s_bl.Task.StartTask(task, workerId);
+            s_bl.Task.StartTask(taskId, employeeId);
     }
 
     static void EndTask()
     {
-        Console.WriteLine("Enter the ID of the worker:");
-        if (!int.TryParse(Console.ReadLine(), out int workerId))
-            throw new BlWorngValueException("WORNG ID");
+        Console.WriteLine("Enter the ID of the employee:");
+        if (!int.TryParse(Console.ReadLine(), out int employeeId))
+            throw new BlWrongValueException("WORNG ID");
         Console.WriteLine("Enter the ID of the task you want to finish:");
         if (!int.TryParse(Console.ReadLine(), out int taskId))
-            throw new BlWorngValueException("WORNG ID");
-        s_bl.Task.EndTask(taskId, workerId);
+            throw new BlWrongValueException("WORNG ID");
+        s_bl.Task.EndTask(taskId, employeeId);
     }
 
     static void SignUpForTask()
     {
-        Console.WriteLine("Enter the ID of the worker:");
+        Console.WriteLine("Enter the ID of the employee:");
         if (!int.TryParse(Console.ReadLine(), out int workerId))
-            throw new BlWorngValueException("WORNG ID");
+            throw new BlWrongValueException("WORNG ID");
         Console.WriteLine("Enter the ID of the task you want to sign up to:");
         if (!int.TryParse(Console.ReadLine(), out int taskId))
-            throw new BlWorngValueException("WORNG ID");
+            throw new BlWrongValueException("WORNG ID");
         s_bl.Task.SignUpForTask(taskId, workerId);
     }
-
-
-
 
     static void CreateT()
     {
         Console.WriteLine("Enter alias, description, complexity, deliverables");
 
         string alias = Console.ReadLine()!;
-        string description = Console.ReadLine()!;
+        string description = Console.ReadLine()??" ";
         DateTime createdAtDate = DateTime.Today;
         if (!int.TryParse(Console.ReadLine(), out int complexity))
-            throw new BlWorngValueException("WORNG COMPLEXITY");
-        string deliverables = Console.ReadLine()!;
-        string remarks = Console.ReadLine()!;
-
+            throw new BlWrongValueException("WORNG COMPLEXITY");
+        string deliverables = Console.ReadLine()??" ";
+        string remarks = Console.ReadLine() ?? " ";
+        Console.WriteLine("Enter the time needed to complete the task");
+        if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan requiredEffortTime))
+            throw new BlWrongValueException("the time is not correct");
         List<BO.TaskInList>? list = new();
         Console.WriteLine("If this task depends on other tasks enter 'yes' otherwise enter 'no':");
         string answer = Console.ReadLine()!;
         if (answer == "yes")
         {
-            IEnumerable<BO.TaskInList> tasks = s_bl.Task.ReadAll();
+            IEnumerable<BO.TaskInList> tasks = s_bl.Task.ReadAllTaskInList();
             do
             {
                 Console.WriteLine($"Enter the ID of the task on which the task depends:");
                 try
                 {
                     if (!int.TryParse(Console.ReadLine(), out int id))
-                        throw new BlWorngValueException("WORNG ID");
+                        throw new BlWrongValueException("WORNG ID");
                     BO.TaskInList? taskInList = tasks.FirstOrDefault(task => task.Id == id);
                     if (taskInList != null)
                         list.Add(taskInList);
                     else
-                        throw new BlDoesNotExistsException($"Task with ID={id} doe's NOT exists");
+                        throw new BlDoesNotExistException($"Task with ID={id} doe's NOT exists");
                 }
-                catch (BlDoesNotExistsException ex)
+                catch (BlDoesNotExistException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -365,19 +337,18 @@ partial class Program
             Id = 0,
             Alias = alias,
             Description = description,
-            Status = BO.Status.Unscheduled,
-            WorkOnTask = null,
+            Status = BO.TaskStatus.Unscheduled,
+            Employee = null,
             Dependencies = list,
             CreatedAtDate = DateTime.Now,
             ScheduledDate = null,
             StartDate = null,
             CompleteDate = null,
-            ForeCastDate = null,
-            DeadlineDate = null,
-            RequiredEffortTime = null,
+            ForecastDate = null,
+            RequiredEffortTime = requiredEffortTime,
             Deliverables = deliverables,
             Remarks = remarks,
-            Complexity = (BO.WorkerExperience)complexity
+            Complexity = (BO.Type)complexity
         };
         Console.WriteLine(s_bl.Task.Create(task));
     }
@@ -386,14 +357,14 @@ partial class Program
     {
         Console.WriteLine("Enter ID:");
         if (!int.TryParse(Console.ReadLine(), out int id))
-            throw new BlWorngValueException("WORNG ID");
+            throw new BlWrongValueException("WORNG ID");
         Console.WriteLine(s_bl.Task.Read(id));
     }
 
     static void ReadAllT()
     {
         List<BO.TaskInList> list;
-        list = s_bl.Task.ReadAll().ToList();
+        list = s_bl.Task.ReadAllTaskInList().ToList();
         foreach (TaskInList task in list)
             Console.WriteLine(task);
     }
@@ -402,21 +373,21 @@ partial class Program
     {
         Console.WriteLine("Enter ID:");
         if (!int.TryParse(Console.ReadLine(), out int taskId))
-            throw new BlWorngValueException("WORNG ID");
+            throw new BlWrongValueException("WORNG ID");
         Console.WriteLine(s_bl.Task.Read(taskId));
 
         BO.Task task = s_bl.Task.Read(taskId)!;
 
-        string alias = task.Alias;
-        string description = task.Description;
-        BO.WorkerExperience? complexity = task.Complexity;
+        string alias = task.Alias??" ";
+        string description = task.Description ?? " ";
+        BO.Type complexity = task.Complexity;
         TimeSpan? requiredEffortTime = task.RequiredEffortTime;
         DateTime? startDate = task.StartDate;
         DateTime? scheduledDate = task.ScheduledDate;
         DateTime? completeDate = task.CompleteDate;
         string? deliverables = task.Deliverables;
         string? remarks = task.Remarks;
-        BO.WorkerInTask? workOnTask = task.WorkOnTask;
+        BO.EmployeeInTask? workOnTask = task.Employee;
 
 
         Console.WriteLine("If you want to change the alias of the task enter the new alias, else press no");
@@ -431,9 +402,9 @@ partial class Program
 
         Console.WriteLine("If you want to change the complexity of the task enter the new complexity, else press -1");
         if (!int.TryParse(Console.ReadLine(), out int newComplexity))
-            throw new BlWorngValueException("WORNG LEVEL");
+            throw new BlWrongValueException("WORNG LEVEL");
         if (newComplexity != -1)
-            complexity = (BO.WorkerExperience)newComplexity;
+            complexity = (BO.Type)newComplexity;
 
         Console.WriteLine("If you want to change the deliverables of the task enter the new deliverables, else press no");
         string newDeliverables = Console.ReadLine()!;
@@ -451,7 +422,7 @@ partial class Program
         {
             Console.WriteLine("enter the new scheduled date:");
             if (!DateTime.TryParse(Console.ReadLine(), out DateTime newScheduledDate))
-                throw new BlWorngValueException("WORNG DATE");
+                throw new BlWrongValueException("WORNG DATE");
             scheduledDate = newScheduledDate;
         }
 
@@ -461,7 +432,7 @@ partial class Program
         {
             Console.WriteLine("enter the new required effort time:");
             if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan newRequiredEffortTime))
-                throw new BlWorngValueException("WORNG DATE");
+                throw new BlWrongValueException("WORNG DATE");
             requiredEffortTime = newRequiredEffortTime;
         }
 
@@ -473,7 +444,7 @@ partial class Program
             if (!int.TryParse(Console.ReadLine(), out int workerId))
                 Console.WriteLine("Enter Name of the worker:");
             string name = Console.ReadLine()!;
-            workOnTask = new BO.WorkerInTask { Id = workerId, Name = name };
+            workOnTask = new BO.EmployeeInTask { Id = workerId, Name = name };
         }
 
         List<BO.TaskInList> dependencies = new List<BO.TaskInList>();
@@ -481,21 +452,21 @@ partial class Program
         answer = Console.ReadLine()!;
         if (answer == "yes")
         {
-            IEnumerable<BO.TaskInList> tasks = s_bl.Task.ReadAll();
+            IEnumerable<BO.TaskInList> tasks = s_bl.Task.ReadAllTaskInList();
             do
             {
                 Console.WriteLine($"Enter the ID of the task on which the task depends:");
                 try
                 {
                     if (!int.TryParse(Console.ReadLine(), out int id))
-                        throw new BlWorngValueException("WORNG ID");
+                        throw new BlWrongValueException("WORNG ID");
                     BO.TaskInList? taskInList = tasks.FirstOrDefault(task => task.Id == id);
                     if (taskInList != null)
                         dependencies.Add(taskInList);
                     else
-                        throw new BlDoesNotExistsException($"Task with ID={id} doe's NOT exists");
+                        throw new BlDoesNotExistException($"Task with ID={id} doe's NOT exists");
                 }
-                catch (BlDoesNotExistsException ex)
+                catch (BlDoesNotExistException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -511,14 +482,13 @@ partial class Program
             Alias = alias,
             Description = description,
             Status = task.Status,
-            WorkOnTask = workOnTask,
+            Employee = workOnTask,
             Dependencies = dependencies,
             CreatedAtDate = task.CreatedAtDate,
             ScheduledDate = scheduledDate,
             StartDate = task.StartDate,
             CompleteDate = task.CompleteDate,
-            ForeCastDate = task.ForeCastDate,
-            DeadlineDate = null,
+            ForecastDate = task.ForecastDate,
             RequiredEffortTime = requiredEffortTime,
             Deliverables = deliverables,
             Remarks = remarks,
@@ -532,15 +502,16 @@ partial class Program
     {
         Console.WriteLine("Enter ID:");
         if (!int.TryParse(Console.ReadLine(), out int id))
-            throw new BlWorngValueException("WORNG ID");
+            throw new BlWrongValueException("WORNG ID");
         s_bl.Task.Delete(id);
     }
 
-    static void ListOfTasksForWorker()
+    //
+    static void ListOfTasksForWorker() 
     {
         Console.WriteLine("Enter  worker Id:");
         if (!int.TryParse(Console.ReadLine(), out int id))
-            throw new BlWorngValueException("WORNG ID");
+            throw new BlWrongValueException("WORNG ID");
         IEnumerable<BO.TaskInList>? tasksForWorker;
         tasksForWorker = s_bl.Task.TasksForWorker(id);
         if (tasksForWorker != null)

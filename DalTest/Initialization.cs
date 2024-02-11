@@ -129,20 +129,14 @@ public static class Initialization
             string description = taskDescriptions[i];
             // Generate a random complexity
             Type complexity = (Type)s_rand.Next(0, 5);
-            // Generate a random date
-
-            Random rand = new Random(DateTime.Now.Millisecond);
-            DateTime start = new DateTime(2024, 2, 8, 0, 0, 0);
-            int rangeStart = (start - DateTime.Today).Days;
-            DateTime createdAtDate = start.AddDays(rand.Next(rangeStart));
-
+           
             // Create a new task object
             Task task = new Task(
                 0,//the id is gonna to be changed by the function create
                 0,
                 name,
                 description,
-                createdAtDate,
+                DateTime.Now,
                  IsMilestone: false,
                 Complexity: complexity
             );
@@ -201,9 +195,11 @@ public static class Initialization
 
             // Generate a random email address
             string? email = null;
-            if (s_rand.Next(0, 2) == 0) //Not every Employee has an email
+
+            if (s_rand.Next(0, 2) == 0) 
             {
-                email = $"{name}@example.com";
+                string sanitizedName = name.Replace(" ", ""); 
+                email = $"{sanitizedName}@example.com";
             }
             // Generate a random hourly rate
             int hourlyRate = 0;

@@ -1,5 +1,6 @@
 ﻿namespace BlImplementation;
 using System.Collections.Generic;
+using BlImplementation;
 using BlApi;
 using BO;
 
@@ -54,7 +55,26 @@ internal class EmployeeImplementation : BlApi.IEmployee
         };
     }
 
-    public IEnumerable<BO.Employee> ReadAll(Func<DO.Employee, bool>? filter = null)
+    //public IEnumerable<BO.Employee> ReadAll(Func<DO.Employee, bool>? filter = null)
+    //{
+    //    IEnumerable<DO.Employee?> doEmployees;
+    //    if (filter is not null)
+    //        doEmployees = _dal.Employee.ReadAll(filter);
+    //    else
+    //        doEmployees = _dal.Employee.ReadAll();
+    //    return (from doEmployee in doEmployees
+    //            select new BO.Employee()
+    //            {
+    //                Id = doEmployee.Id,
+    //                Name = doEmployee.Name,
+    //                Email = doEmployee.Email,
+    //                HourlyRate = doEmployee.HourlyRate,
+    //                Status = (BO.WorkStatus?)doEmployee.WorkStatus,
+    //                Type = (BO.Type?)doEmployee.Type,
+    //                CurrentTaskId = Tools.GetTaskInEmployee(_dal, doEmployee.Id)
+    //            });
+    //}
+    public IEnumerable<BO.EmployeeInTask> ReadAll(Func<DO.Employee, bool>? filter = null)
     {
         IEnumerable<DO.Employee?> doEmployees;
         if (filter is not null)
@@ -62,15 +82,10 @@ internal class EmployeeImplementation : BlApi.IEmployee
         else
             doEmployees = _dal.Employee.ReadAll();
         return (from doEmployee in doEmployees
-                select new BO.Employee()
+                select new BO.EmployeeInTask()
                 {
                     Id = doEmployee.Id,
                     Name = doEmployee.Name,
-                    Email = doEmployee.Email,
-                    HourlyRate = doEmployee.HourlyRate,
-                    Status = (BO.WorkStatus?)doEmployee.WorkStatus,
-                    Type = (BO.Type?)doEmployee.Type,
-                    CurrentTaskId = Tools.GetTaskInEmployee(_dal, doEmployee.Id)
                 });
     }
     public void Delete(int idEmp)
@@ -126,16 +141,16 @@ internal class EmployeeImplementation : BlApi.IEmployee
         {
             
             if (boEmployee.CurrentTaskId is not null &&
-            Tools.GetCurrentTaskId(_dal, boEmployee.Id) != boEmployee.CurrentTaskId.Id) // you realy changed the id of the task
+            Tools.GetCurrentTaskId(boEmployee.Id) != boEmployee.CurrentTaskId.Id) // you realy changed the id of the task
             {
                 BO.ProjectStatus? statusProject = IBl.GetProjectStatus();
                 if (statusProject != BO.ProjectStatus.ExecutionStage) //updating id of task can only be during the Execution Stage
                     throw new BlNotAppropriateTheProjectStageException("The project is not in the Execution process—you can't update the id of the task");
-                if (!Tools.CanTaskBeAssignedFor(_dal, boEmployee.CurrentTaskId.Id, boEmployee.Id))
+                if (!Tools.CanTaskBeAssignedFor(boEmployee.CurrentTaskId.Id, boEmployee.Id))
                 {
                     throw new BlWrongValueException("Someone is already working on the task you updated");
                 }
-                if (Tools.IsEmployeeWorkingOnTask(_dal, boEmployee.Id))
+                if (Tools.IsEmployeeWorkingOnTask(boEmployee.Id))
                 {
                     throw new BlWrongValueException("The employee is in the middle of working on a task, you cannot update  a new task for him");
                 }
@@ -176,8 +191,18 @@ internal class EmployeeImplementation : BlApi.IEmployee
             throw new BO.BlDoesNotExistException($"Employee with ID={boEmployee.Id} already exists", ex);
         }
     }
-    public void Clear()
+  
+    public List<EmployeeInTask>? GetSortedEmployees()
     {
-        _dal.Employee.Clear();
+        IEnumerable<DO.Employee?> employees = _dal.Employee.ReadAll();
+        List<EmployeeInTask>? employeeList=null;
+        if (employees != null)
+            employeeList = employees.Select(emp => new EmployeeInTask()
+           {
+            Id = emp!.Id,
+            Name = emp.Name
+           }).OrderBy(emp => emp.Name).ToList();
+        return employeeList;
     }
+
 }

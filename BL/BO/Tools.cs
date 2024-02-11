@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using DalApi;
+using System.Data;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,6 +8,7 @@ namespace BO;
 
 public static class Tools
 {
+    private static DalApi.IDal _dal = DalApi.Factory.Get;
     public static string ToStringProperty<T>(this T obj)
     {
         StringBuilder sb = new StringBuilder();
@@ -50,35 +52,35 @@ public static class Tools
         }
         return true;
     }
-    public static int? GetCurrentTaskId(DalApi.IDal dal, int? idEmp)
+    public static DateTime? GetMaxDate(DateTime? date1, DateTime? date2)
     {
-        DO.Task? t= dal.Task.Read(task => task.EmployeeId == idEmp);
+        if (date1 == null && date2 == null)
+            return DateTime.MinValue;
+        return (date1 > date2) ? date1 : date2;
+    }
+    public static int? GetCurrentTaskId(this int? idEmp)
+    {
+        DO.Task? t = _dal.Task.Read(task => task.EmployeeId == idEmp);
         if (t != null)
-           return t.Id;
+            return t.Id;
         return null;
     }
-    public static string? GetCurrentTaskAlias(DalApi.IDal dal, int? idEmp)
+    public static bool CanTaskBeAssignedFor(int id, int empId)
     {
-        DO.Task? t = dal.Task.Read(task => task.EmployeeId == idEmp);
-        if (t is not null)
-            return t.Alias;
-        return null;
+        DO.Task? task = _dal.Task.Read(id);
+        BO.TaskStatus s;
+        if (task != null)
+        {
+            if (task.EmployeeId == empId)
+                return true;
+            s = GetStatus(task);
+            if (s == BO.TaskStatus.Unscheduled)
+                return true;
+            return false;
+        }
+        throw new BO.BlTaskCantBeAssignedException($"task with ID={id} cant be assigned for employee with ID={empId} ");
     }
-  
-    public static TaskInEmployee? GetTaskInEmployee(DalApi.IDal dal, int? idEmp)
-    {
-        int? id = Tools.GetCurrentTaskId(dal, idEmp);
-        if(id==null) return null;
-         return new BO.TaskInEmployee {Id= (int)id, Alias= Tools.GetCurrentTaskAlias(dal, idEmp)};
-    }
-    public static EmployeeInTask? GetEmployeeInTask(DalApi.IDal dal, int idEmp)
-    {
-        DO.Employee? emp = dal.Employee.Read(idEmp);
-        if(emp is not null)
-           return new EmployeeInTask { Id=idEmp, Name=emp.Name };
-        return null;
-    }
-    public static TaskStatus GetStatus(DO.Task doTask)
+    public static BO.TaskStatus GetStatus(DO.Task doTask)
     {
         if (doTask == null)
         {
@@ -88,118 +90,40 @@ public static class Tools
         // Determine the task status based on relevant properties
         if (doTask.CompleteDate.HasValue)
         {
-            return TaskStatus.Done;
+            return BO.TaskStatus.Done;
         }
         else if (doTask.ScheduledDate.HasValue)
         {
             if (DateTime.Now >= doTask.ScheduledDate)
             {
-                return TaskStatus.OnTrack;
+                return BO.TaskStatus.OnTrack;
             }
             else
             {
-                return TaskStatus.Scheduled;
+                return BO.TaskStatus.Scheduled;
             }
         }
         else
         {
-            return TaskStatus.Unscheduled;
+            return BO.TaskStatus.Unscheduled;
         }
     }
-    public static bool CanTaskBeAssignedFor(DalApi.IDal dal,int id,int empId)
+    public static bool IsEmployeeWorkingOnTask(int empId)
     {
-        DO.Task? task =dal.Task.Read(id) ;
-        TaskStatus s;
-        if (task != null)
-        {
-            if(task.EmployeeId==empId)
-                return true;
-            s = GetStatus(task);
-            if (s == TaskStatus.Unscheduled)
-                return true;
-            return false;
-        }
-        throw new BO.BlTaskCantBeAssignedException($"task with ID={id} cant be assigned for employee with ID={empId} ");
-    }
-    public static bool IsEmployeeWorkingOnTask(DalApi.IDal dal, int empId)
-    {
-        DO.Task? task = dal.Task.Read(empId);
+        DO.Task? task = _dal.Task.Read(empId);
         if (task == null) { return false; }
-        TaskStatus status = GetStatus(task);
-        if (status == TaskStatus.Done)
+        BO.TaskStatus status = Tools.GetStatus(task);
+        if (status == BO.TaskStatus.Done)
             return false;
         return true;
     }
-    public static DateTime? GetMaxDate(DateTime? date1, DateTime? date2)
+    public static void clear()
     {
-        if (date1 == null && date2 == null)
-            return DateTime.MinValue;
-        return (date1 > date2) ? date1 : date2;
-    }
-    //The function receives an ID number of a task and checks whether the task is available
-    //i.e. whether there is no one else working on the task and also whether all the tasks preceding it have been performed
-    public static bool IsTaskAvailable(DalApi.IDal dal,DO.Task task)
-    {
-        if (task.EmployeeId != 0)
-            return false;
-        var dependencies = dal.Dependency.ReadAll().Where(d => d!.DependentTask == task.Id).ToList();// A list of dependencies when my task depends on others
-        List<TaskInList> taskList = (from DO.Dependency d in dependencies
-                                     let temporary = dal.Task.Read(d.DependsOnTask ?? 0) //A list of tasks that the current task depends on
-                                     select new TaskInList
-                                     {
-                                         Id = d.DependsOnTask ?? 0,
-                                         Description = temporary.Description,
-                                         Alias = temporary.Alias,
-                                         Status = Tools.GetStatus(temporary)
-                                     }).ToList();
-        foreach (var prevTask in taskList)
-        {
-            if (prevTask.Status != TaskStatus.Done)
-                return false;
-        }
-        return true;
-    }
-     public static List<TaskInList> GetListOfPreviousTask(DalApi.IDal dal, int id)
-    {
-        List<TaskInList> taskList = (from DO.Dependency d in dal.Dependency.ReadAll()
-                                     where d.DependentTask == id
-                                     let temporary = dal.Task.Read(d.DependsOnTask ?? 0)
-                                     select new TaskInList
-                                     {
-                                         Id = d.DependsOnTask ?? 0,
-                                         Description = temporary.Description,
-                                         Alias = temporary.Alias,
-                                         Status = Tools.GetStatus(temporary)
-                                     }).ToList();
-        return taskList;
-    }
-    public static BO.Type? GetComplexity(DalApi.IDal dal, DO.Task task)
-    {
-        int? temp = (int?)task.Complexity;
-        BO.Type? complexity = null;
-        if (temp != null)
-            return complexity = (BO.Type)temp;
-        return null;
-    }
-    public static bool CanTaskBeDeleted(DalApi.IDal dal, DO.Task task)
-    {
-        DO.Task? task1=dal.Task.Read(task.Id);
-        if(task1 == null) return false;
-        var dep = dal.Dependency.ReadAll(d => d.DependsOnTask == task.Id);
-        if (dep != null) return false;
-        return true;                           
+        _dal.Employee.Clear();
+        _dal.Task.Clear();
+        _dal.Dependency.Clear();
     }
 
-    public static List<EmployeeInTask> GetSortedEmployees(DalApi.IDal dal)
-{
-        IEnumerable<DO.Employee?> employees = dal.Employee.ReadAll();
-        List<EmployeeInTask> employeeList = employees.Select(emp => new EmployeeInTask()
-    {
-            Id = emp.Id,
-            Name = emp.Name
-        }).OrderBy(emp => emp.Name).ToList();
-        return employeeList;
-    }
 }
 
 

@@ -133,6 +133,7 @@ internal class EmployeeImplementation : IEmployee
     /// </summary>
     public void Clear()
     {
+
         // Create an empty XElement to represent the root of the XML file
         XElement employeesRoot = new XElement("Employees");
 

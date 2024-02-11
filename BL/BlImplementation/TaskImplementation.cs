@@ -1,10 +1,7 @@
 ﻿using BlApi;
 using BO;
-using DalApi;
 using DO;
 using System.Data;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 namespace BlImplementation;
 internal class TaskImplementation : BlApi.ITask
 {
@@ -45,7 +42,7 @@ internal class TaskImplementation : BlApi.ITask
             //
             if (boTask.Dependencies != null)
             {
-                A task has a list of tasks it depends on, create those dependencies
+               // A task has a list of tasks it depends on, create those dependencies
                 foreach (BO.TaskInList item in boTask.Dependencies)
                 {
                     DO.Dependency dependency = new DO.Dependency(0, boTask.Id, item.Id);
@@ -81,35 +78,35 @@ internal class TaskImplementation : BlApi.ITask
             }
         }
     }
-    public BO.Task? Read(int id)
+    public BO.Task? Read(int id)    
     {
-            DO.Task? task = _dal.Task.Read(id);
+        DO.Task? task = _dal.Task.Read(id);
 
-            if (task == null)
-            {
-                throw new BO.BlDoesNotExistException($"task with ID={id} does not exist");
-            }
-          
-             return new BO.Task()
-            {
-                Id = id,
-                Alias = task.Alias,
-                Description = task.Description,
-                CreatedAtDate = task.CreatedAtDate,
-                Status = Tools.GetStatus(task),
-                Dependencies = Tools.GetListOfPreviousTask(_dal,task.Id),
-                RequiredEffortTime = task.RequiredEffortTime,
-                StartDate = task.StartDate,
-                ForecastDate = Tools.GetMaxDate(task.StartDate, task.ScheduledDate)!.Value.Add(task.RequiredEffortTime ?? TimeSpan.MinValue),
-                CompleteDate= task.CompleteDate,
-                Deliverables=task.Deliverables,
-                Remarks=task.Remarks,
-                Employee=Tools.GetEmployeeInTask(_dal,task.EmployeeId),
-                Complexity=Tools.GetComplexity(_dal,task)??0
-            };
+        if (task == null)
+        {
+            throw new BO.BlDoesNotExistException($"task with ID={id} does not exist");
+        }
 
-        
-        
+        return new BO.Task()
+        {
+            Id = id,
+            Alias = task.Alias,
+            Description = task.Description,
+            CreatedAtDate = task.CreatedAtDate,
+            Status = Tools.GetStatus(task),
+            Dependencies = GetListOfPreviousTask(task.Id),
+            RequiredEffortTime = task.RequiredEffortTime,
+            StartDate = task.StartDate,
+            ForecastDate = Tools.GetMaxDate(task.StartDate, task.ScheduledDate)!.Value.Add(task.RequiredEffortTime ?? TimeSpan.MinValue),
+            CompleteDate = task.CompleteDate,
+            Deliverables = task.Deliverables,
+            Remarks = task.Remarks,
+            Employee = GetEmployeeInTask(task.EmployeeId),
+            Complexity = GetComplexity(task) ?? 0
+        };
+
+
+
     }
     public IEnumerable<BO.Task> ReadAll(Func<DO.Task, bool>? filter = null)
     {
@@ -120,23 +117,39 @@ internal class TaskImplementation : BlApi.ITask
         else
             doTask = _dal.Task.ReadAll();
         return (from task in doTask
-        select new BO.Task()
-        {
-            Id = task.Id,
-            Alias = task.Alias,
-            Description = task.Description,
-            CreatedAtDate = task.CreatedAtDate,
-            Status = Tools.GetStatus(task),
-            Dependencies = Tools.GetListOfPreviousTask(_dal, task.Id),
-            RequiredEffortTime = task.RequiredEffortTime,
-            StartDate = task.StartDate,
-            ForecastDate = Tools.GetMaxDate(task.StartDate, task.ScheduledDate)!.Value.Add(task.RequiredEffortTime ?? TimeSpan.MinValue),
-            CompleteDate = task.CompleteDate,
-            Deliverables = task.Deliverables,
-            Remarks = task.Remarks,
-            Employee = Tools.GetEmployeeInTask(_dal, task.EmployeeId),
-            Complexity = Tools.GetComplexity(_dal, task) ?? 0
-        });
+                select new BO.Task()
+                {
+                    Id = task.Id,
+                    Alias = task.Alias,
+                    Description = task.Description,
+                    CreatedAtDate = task.CreatedAtDate,
+                    Status = Tools.GetStatus(task),
+                    Dependencies = GetListOfPreviousTask(task.Id),
+                    RequiredEffortTime = task.RequiredEffortTime,
+                    StartDate = task.StartDate,
+                    ForecastDate = Tools.GetMaxDate(task.StartDate, task.ScheduledDate)!.Value.Add(task.RequiredEffortTime ?? TimeSpan.MinValue),
+                    CompleteDate = task.CompleteDate,
+                    Deliverables = task.Deliverables,
+                    Remarks = task.Remarks,
+                    Employee = GetEmployeeInTask(task.EmployeeId),
+                    Complexity = GetComplexity(task) ?? 0
+                });
+    }
+    public IEnumerable<BO.TaskInList> ReadAllTaskInList(Func<DO.Task, bool>? filter = null)
+    {
+        IEnumerable<DO.Task?> doTask;
+        if (filter is not null)
+            doTask = _dal.Task.ReadAll(filter);
+        else
+            doTask = _dal.Task.ReadAll();
+        return (from task in doTask
+                select new BO.TaskInList()
+                {
+                    Id = task.Id,
+                    Alias = task.Alias,
+                    Description = task.Description,
+                    Status = Tools.GetStatus(task)
+                });
     }
     public void Delete(int idTask)
     {
@@ -148,7 +161,7 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BlDoesNotExistException($"task with ID={idTask} does not exist");
         }
-        if (!Tools.CanTaskBeDeleted(_dal, task))
+        if (!CanTaskBeDeleted(task))
         {
             throw new BlDeletionImpossible("Task cannot be deleted because it is either assigned to an employee or has incomplete dependent tasks.");
         }
@@ -248,10 +261,7 @@ internal class TaskImplementation : BlApi.ITask
         return doTask;
     }
 
-    public void Clear()
-    {
-        _dal.Task.Clear();
-    }
+ 
     public void UpdateScheduledStartDate(int taskId, DateTime plannedStartDate)
     {
         // 1. Validate task ID:
@@ -319,8 +329,152 @@ internal class TaskImplementation : BlApi.ITask
         // 6. Update the task in the data layer:
         _dal.Task.Update( updatedTask);
     }
+    public bool CanTaskBeDeleted( DO.Task task)
+    {
+        DO.Task? task1 = _dal.Task.Read(task.Id);
+        if (task1 == null) return false;
+        var dep = _dal.Dependency.ReadAll(d => d.DependsOnTask == task.Id);
+        if (dep != null) return false;
+        return true;
+    }
+    //The function receives an ID number of a task and checks whether the task is available
+    //i.e. whether there is no one else working on the task and also whether all the tasks preceding it have been performed
+    public bool IsTaskAvailable( DO.Task task)
+    {
+        if (task.EmployeeId != 0)
+            return false;
+        var dependencies = _dal.Dependency.ReadAll().Where(d => d!.DependentTask == task.Id).ToList();// A list of dependencies when my task depends on others
+        List<TaskInList> taskList = (from DO.Dependency d in dependencies
+                                     let temporary = _dal.Task.Read(d.DependsOnTask ?? 0) //A list of tasks that the current task depends on
+                                     select new TaskInList
+                                     {
+                                         Id = d.DependsOnTask ?? 0,
+                                         Description = temporary.Description,
+                                         Alias = temporary.Alias,
+                                         Status = Tools.GetStatus(temporary)
+                                     }).ToList();
+        foreach (var prevTask in taskList)
+        {
+            if (prevTask.Status != BO.TaskStatus.Done)
+                return false;
+        }
+        return true;
+    }
+    public List<TaskInList> GetListOfPreviousTask(int id)
+    {
+        List<TaskInList> taskList = (from DO.Dependency d in _dal.Dependency.ReadAll()
+                                     where d.DependentTask == id
+                                     let temporary = _dal.Task.Read(d.DependsOnTask ?? 0)
+                                     select new TaskInList
+                                     {
+                                         Id = d.DependsOnTask ?? 0,
+                                         Description = temporary.Description,
+                                         Alias = temporary.Alias,
+                                         Status = Tools.GetStatus(temporary)
+                                     }).ToList();
+        return taskList;
+    }
+    public  BO.Type? GetComplexity(DO.Task task)
+    {
+        int? temp = (int?)task.Complexity;
+        BO.Type? complexity = null;
+        if (temp != null)
+            return complexity = (BO.Type)temp;
+        return null;
+    }
 
 
+    public IEnumerable<BO.TaskInList>? TasksForWorker(int empId)
+    {
+        IEnumerable<DO.Task?> tasks = _dal.Task.ReadAll();
+        return from DO.Task? item in tasks
+               let task = _dal.Task.Read(item.Id)
+               where Tools.CanTaskBeAssignedFor(item.Id, empId) && IsTaskAvailable(task)
+               select new BO.TaskInList { Id = item.Id, Alias = item.Alias, Description = item.Description, Status = Tools.GetStatus(item) };
+    }
+  
+    public  string? GetCurrentTaskAlias( int? idEmp)
+    {
+        DO.Task? t = _dal.Task.Read(task => task.EmployeeId == idEmp);
+        if (t is not null)
+            return t.Alias;
+        return null;
+    }
 
+    public  TaskInEmployee? GetTaskInEmployee( int? idEmp)
+    {
+        int? id = Tools.GetCurrentTaskId(idEmp);
+        if (id == null) return null;
+        return new BO.TaskInEmployee { Id = (int)id, Alias = GetCurrentTaskAlias(idEmp) };
+    }
+    public  EmployeeInTask? GetEmployeeInTask(int idEmp)
+    {
+        DO.Employee? emp = _dal.Employee.Read(idEmp);
+        if (emp is not null)
+            return new EmployeeInTask { Id = idEmp, Name = emp.Name };
+        return null;
+    }
 
+    public void StartTask(int idT, int idEmp)
+    {
+        DO.Task? task = _dal.Task.Read(idT);
+        if (task == null)
+        {
+            throw new BlDoesNotExistException($"Task with ID {idT} does not exist.");
+        }
+        if(task.EmployeeId != idEmp)
+            throw new BlDataException($"Task with ID {idT} has done by someone else.");
+
+        if (task.StartDate.HasValue && task.StartDate!= DateTime.Now)
+        {
+            throw new BlDataException($"Task with ID {idT} has already started.");
+        }
+        var newT=task with { CreatedAtDate = DateTime.Now };
+
+        _dal.Task.Update(newT);
+    }
+    public void EndTask(int idT, int idEmp)
+    {
+        DO.Task? task = _dal.Task.Read(idT);
+        if (task == null)
+        {
+            throw new BlDoesNotExistException($"Task with ID {idT} does not exist.");
+        }
+
+        if (task.CompleteDate.HasValue)
+        {
+            throw new BlDataException($"Task with ID {idT} has already been completed.");
+        }
+        var newT = task with { CompleteDate = DateTime.Now };
+        _dal.Task.Update(newT);
+    }
+    public void SignUpForTask(int idT, int idEmp)
+    {
+
+        // 1. נבדוק אם העובד והמשימה קיימים
+        DO.Task? task = _dal.Task.Read(idT);
+        if (task == null)
+        {
+            throw new BlDoesNotExistException($"Task with ID {idT} does not exist.");
+        }
+
+        DO.Employee? employee = _dal.Employee.Read(idEmp);
+        if (employee == null)
+        {
+            throw new BlDoesNotExistException($"Employee with ID {idEmp} does not exist.");
+        }
+
+        if (!IsTaskAvailable(task))
+        {
+            throw new BlTaskCantBeAssignedException($"Task with ID {idT} is not available for assignment.");
+        }
+
+        if (!Tools.IsEmployeeWorkingOnTask(idEmp))
+        {
+            throw new Exception($"Employee with ID {idEmp} is already assigned to another task.");
+        }
+        var newT = task with { EmployeeId = idEmp };
+        _dal.Task.Update(newT);
+    }
+ 
 }
