@@ -3,11 +3,7 @@
 public interface IEmployee
 {
    
-    /// <summary>
-    /// Returns a list of all employees.
-    /// </summary>
-    /// <returns>A list of employees.</returns>
-    IEnumerable<BO.Employee> ReadAll();
+  
 
     /// <summary>
     /// Returns an employee by ID.
@@ -34,5 +30,7 @@ public interface IEmployee
     /// </summary>
     /// <param name="id">The employee ID.</param>
     void Delete(int id);
+    public IEnumerable<BO.Employee> ReadAll(Func<DO.Employee, bool>? filter = null);
+    public void Clear();
 
 }

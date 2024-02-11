@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -11,12 +11,6 @@
 	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
 	  <RootNamespace />
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="BlImplementation\**" />
-    <EmbeddedResource Remove="BlImplementation\**" />
-    <None Remove="BlImplementation\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DalFacade\DalFacade.csproj" />

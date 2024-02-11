@@ -11,4 +11,8 @@ public enum TaskStatus
 {
     Unscheduled, Scheduled, OnTrack , Done  
 }
+public enum ProjectStatus
+{
+    PlanningStage, IntermediateStage, ExecutionStage
+}
 

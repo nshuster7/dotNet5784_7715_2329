@@ -1,39 +1,13 @@
 ﻿//Efrat Aharoni & Noa Shuster
 //We used the TryParse
-//using System.Reflection.Emit;
-//using System.Runtime.InteropServices;
 namespace DalTest;
-using Dal;
 using DalApi;
 using DO;
 using System;
 using Type = DO.Type;
 
-public enum CRUD
-{
-    Exit,
-    Create,
-    Read,
-    ReadAll,
-    Update,
-    Delete,
-    ReadDependencyOfTwoTasks
-}
-public enum Entity
-{
-    Exit,
-    Employee,
-    Task,
-    Dependency,
-    Initialization
-}
 internal class Program
 {
-    //private static IEmployee? s_dalEmployee = new EmployeeImplementation(); //stage 1
-    //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
-    //private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
-    //static readonly IDal s_dal = new DalList(); //stage 2
-    //static readonly IDal s_dal = new DalXml(); // stage 3
     static readonly IDal s_dal = Factory.Get;
 
     private static readonly Random s_rand = new();
@@ -271,17 +245,13 @@ internal class Program
                     if (!DateTime.TryParse(Console.ReadLine(), out DateTime scheduledDate))
                         throw new DalWrongValueException("the date is not correct");
 
-                    Console.WriteLine("Press the DEADLINE to complete the task");
-                    if (!DateTime.TryParse(Console.ReadLine(), out DateTime DeadLine))
-                        throw new DalWrongValueException("the date is not correct");
-
                     Console.WriteLine("Enter the actual end date");
                     if (!DateTime.TryParse(Console.ReadLine(), out DateTime completeDate))
                         throw new DalWrongValueException("the date is not correct");
 
                     // Create a new task with the provided details and add it to the system
                     var x = new Task(0, IdWorker, name, Description, createAtDate, requiredEffortTime, milestone,
-                        complexity, startDate, scheduledDate, DeadLine, completeDate, ResultProduct, Remarks);
+                        complexity, startDate, scheduledDate,null, completeDate, ResultProduct, Remarks);
                     s_dal.Task!.Create(x);
                     break;
 

@@ -18,7 +18,7 @@
 public record Task
 (
     int Id,
-    int EngineerId,
+    int EmployeeId,
     string? Alias = null,
     string? Description = null,
     DateTime? CreatedAtDate = null,

@@ -104,6 +104,7 @@
             Delete(item.Id);
             DataSource.Tasks.Add(item);
         }
+
     }
 }
 
