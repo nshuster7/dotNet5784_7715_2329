@@ -1,6 +1,5 @@
 ﻿using BlApi;
 using BO;
-using DO;
 using System.Data;
 namespace BlImplementation;
 internal class TaskImplementation : BlApi.ITask
@@ -39,15 +38,15 @@ internal class TaskImplementation : BlApi.ITask
             DO.Type? complexity = null;
             if (temp != null)
                 complexity = (DO.Type)temp;
-            //
-            if (boTask.Dependencies != null)
+            //-------------------------------------
+            if (boTask.Dependencies != null)// A task has a list of tasks it depends on, create those dependencies
             {
-               // A task has a list of tasks it depends on, create those dependencies
-                foreach (BO.TaskInList item in boTask.Dependencies)
-                {
-                    DO.Dependency dependency = new DO.Dependency(0, boTask.Id, item.Id);
-                    _dal.Dependency.Create(dependency);
-                }
+                //foreach (BO.TaskInList item in boTask.Dependencies)
+                //{
+                //    DO.Dependency dependency = new DO.Dependency(0, boTask.Id, item.Id);
+                //    _dal.Dependency.Create(dependency);
+                //}
+                boTask.Dependencies.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, boTask.Id, dependency.Id)));
 
             }
             DO.Task doTask = new DO.Task
@@ -78,16 +77,22 @@ internal class TaskImplementation : BlApi.ITask
             }
         }
     }
-    public BO.Task? Read(int id)    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlDoesNotExistException"></exception>
+    public BO.Task? Read(int id)// מחזירה משימה בתצוגה של בו    
     {
-        DO.Task? task = _dal.Task.Read(id);
+        DO.Task? task = _dal.Task.Read(id);//נפעיל את פונקצית הקריאה של שכבת הדאל  
 
         if (task == null)
         {
             throw new BO.BlDoesNotExistException($"task with ID={id} does not exist");
         }
 
-        return new BO.Task()
+        return new BO.Task()// נחזיר את המשימה בתוספת תכונות נוספות שלא קיימות במשימה של שכבת הדאל
         {
             Id = id,
             Alias = task.Alias,
@@ -208,13 +213,14 @@ internal class TaskImplementation : BlApi.ITask
             if (task.Dependencies != null)
             {
                 DO.Task? unupdatedT = _dal.Task.Read(task.Id);
-                IEnumerable<Dependency> t = from TaskInList item in task.Dependencies
-                        where _dal.Dependency.Check(task.Id, item.Id) == null
-                        select new DO.Dependency(0, task.Id, item.Id);
-                t.ToList().ForEach(dependency =>
-                {
-                    _dal.Dependency.Create(dependency);
-                });
+                //IEnumerable<Dependency> t = from TaskInList item in task.Dependencies
+                //        where _dal.Dependency.Check(task.Id, item.Id) == null
+                //        select new DO.Dependency(0, task.Id, item.Id);
+                //t.ToList().ForEach(dependency =>
+                //{
+                //    _dal.Dependency.Create(dependency);
+                //});
+                task.Dependencies.Where(t => _dal.Dependency.Check(task.Id, t.Id) == null).Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, task.Id, dependency.Id)));
             }
 
             DO.Task doTask = DataChecking(task);
@@ -260,8 +266,6 @@ internal class TaskImplementation : BlApi.ITask
 
         return doTask;
     }
-
- 
     public void UpdateScheduledStartDate(int taskId, DateTime plannedStartDate)
     {
         // 1. Validate task ID:
@@ -277,8 +281,7 @@ internal class TaskImplementation : BlApi.ITask
             throw new BO.BlDoesNotExistException($"Task with ID {taskId} does not exist.");
         }
 
-        // 3. Ensure all preceding tasks have forecast start dates:
-        IEnumerable<DO.Dependency?> dependencies = _dal.Dependency.ReadAll(d => d.DependentTask == taskId);
+        IEnumerable<DO.Dependency?> dependencies = _dal.Dependency.ReadAll(d => d.DependentTask == taskId);// רשימת כל התלויות שהמשימה הנוכחית שלי תלויה תלוי במשימה אחרת
         
         foreach (DO.Dependency? dependency in dependencies)
         {
@@ -353,11 +356,14 @@ internal class TaskImplementation : BlApi.ITask
                                          Alias = temporary.Alias,
                                          Status = Tools.GetStatus(temporary)
                                      }).ToList();
-        foreach (var prevTask in taskList)
-        {
-            if (prevTask.Status != BO.TaskStatus.Done)
-                return false;
-        }
+        var result = taskList.Where(prevTask => prevTask.Status != BO.TaskStatus.Done);
+        if(result.Any())
+           return false;
+        //foreach (var prevTask in taskList)
+        //{
+        //    if (prevTask.Status != BO.TaskStatus.Done)
+        //        return false;
+        //}
         return true;
     }
     public List<TaskInList> GetListOfPreviousTask(int id)
@@ -382,8 +388,6 @@ internal class TaskImplementation : BlApi.ITask
             return complexity = (BO.Type)temp;
         return null;
     }
-
-
     public IEnumerable<BO.TaskInList>? TasksForWorker(int empId)
     {
         IEnumerable<DO.Task?> tasks = _dal.Task.ReadAll();
@@ -392,7 +396,6 @@ internal class TaskImplementation : BlApi.ITask
                where Tools.CanTaskBeAssignedFor(item.Id, empId) && IsTaskAvailable(task)
                select new BO.TaskInList { Id = item.Id, Alias = item.Alias, Description = item.Description, Status = Tools.GetStatus(item) };
     }
-  
     public  string? GetCurrentTaskAlias( int? idEmp)
     {
         DO.Task? t = _dal.Task.Read(task => task.EmployeeId == idEmp);
@@ -400,7 +403,6 @@ internal class TaskImplementation : BlApi.ITask
             return t.Alias;
         return null;
     }
-
     public  TaskInEmployee? GetTaskInEmployee( int? idEmp)
     {
         int? id = Tools.GetCurrentTaskId(idEmp);
@@ -414,7 +416,6 @@ internal class TaskImplementation : BlApi.ITask
             return new EmployeeInTask { Id = idEmp, Name = emp.Name };
         return null;
     }
-
     public void StartTask(int idT, int idEmp)
     {
         DO.Task? task = _dal.Task.Read(idT);

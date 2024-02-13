@@ -1,6 +1,4 @@
-﻿using DalApi;
-using System.Data;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 

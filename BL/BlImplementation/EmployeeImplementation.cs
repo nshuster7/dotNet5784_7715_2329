@@ -1,8 +1,6 @@
-﻿namespace BlImplementation;
-using System.Collections.Generic;
-using BlImplementation;
-using BlApi;
+﻿using BlApi;
 using BO;
+namespace BlImplementation;
 
 internal class EmployeeImplementation : BlApi.IEmployee
 {
@@ -92,13 +90,17 @@ internal class EmployeeImplementation : BlApi.IEmployee
     {
 
         IEnumerable<DO.Task?> tasks = _dal.Task.ReadAll(task => task.EmployeeId == idEmp);
-        foreach (var task in tasks)
+        //foreach (var task in tasks)
+        //{
+        //    TaskStatus taskStatus = Tools.GetStatus(task!);
+        //    if (taskStatus != TaskStatus.Unscheduled && taskStatus != TaskStatus.Scheduled)
+        //    {
+        //        throw new BO.BlDeletionImpossible($"Cannot delete an Employee with task in {taskStatus} status");
+        //    }
+        //}
+       if( tasks.Select(task => Tools.GetStatus(task!)).Where(taskStatus=> taskStatus != BO.TaskStatus.Unscheduled && taskStatus != BO.TaskStatus.Scheduled).Any())
         {
-            TaskStatus taskStatus = Tools.GetStatus(task!);
-            if (taskStatus != TaskStatus.Unscheduled && taskStatus != TaskStatus.Scheduled)
-            {
-                throw new BO.BlDeletionImpossible($"Cannot delete an Employee with task in {taskStatus} status");
-            }
+            throw new BO.BlDeletionImpossible($"Cannot delete an Employee with task in Unscheduled/Scheduled status");
         }
         try
         {

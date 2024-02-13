@@ -114,6 +114,8 @@ internal class Program
 
                     // Read and display the specified employee
                     Employee? readEmployee = s_dal!.Employee.Read(ID);
+                    if(readEmployee == null)
+                        throw new DalDoesNotExistException("Id of Employee is not found");
                     Console.WriteLine(readEmployee);
                     break;
 
@@ -263,13 +265,16 @@ internal class Program
 
                     // Read and display the specified task
                     Task? readTask = s_dal.Task!.Read(ID);
+                    if (readTask == null)
+                        throw new DalDoesNotExistException("Id of task is not found");
                     Console.WriteLine(readTask);
                     break;
 
                 case CRUD.ReadAll:
                     // Display all tasks in the system
+                    IEnumerable<Task?> tasks = s_dal.Task!.ReadAll();
                     Console.WriteLine("List of the Tasks: ");
-                    foreach (var item in s_dal.Task!.ReadAll())
+                    foreach (var item in tasks)
                         Console.WriteLine(item);
                     break;
 
