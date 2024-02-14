@@ -4,9 +4,6 @@ namespace BlApi;
 
 public interface IEmployee
 {
-   
-  
-
     /// <summary>
     /// Returns an employee by ID.
     /// </summary>

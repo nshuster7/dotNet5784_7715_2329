@@ -1,6 +1,5 @@
 ﻿using BO;
 
-
 namespace BlApi;
 
 public interface ITask
@@ -22,7 +21,4 @@ public interface ITask
     public void SignUpForTask(int idT, int idEmp);
     public void EndTask(int idT, int idEmp);
     public void StartTask(int idT, int idEmp);
-
-
-
 }

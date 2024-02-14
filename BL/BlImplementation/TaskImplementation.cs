@@ -22,6 +22,7 @@ internal class TaskImplementation : BlApi.ITask
     /// <exception cref="BO.BlAlreadyExistsException">
     /// Thrown when attempting to create a task that already exists in the system.
     /// </exception>
+    ///
     public int Create(BO.Task boTask)
     {
         BO.ProjectStatus? status = IBl.GetProjectStatus();
@@ -47,7 +48,6 @@ internal class TaskImplementation : BlApi.ITask
                 //    _dal.Dependency.Create(dependency);
                 //}
                 boTask.Dependencies.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, boTask.Id, dependency.Id)));
-
             }
             DO.Task doTask = new DO.Task
       (
@@ -78,21 +78,22 @@ internal class TaskImplementation : BlApi.ITask
         }
     }
     /// <summary>
-    /// 
+    /// Returns a task in Bo's view
     /// </summary>
     /// <param name="id"></param>
-    /// <returns></returns>
+    /// <returns>We'll return the taskin the Dahl layer mission</returns>
     /// <exception cref="BO.BlDoesNotExistException"></exception>
-    public BO.Task? Read(int id)// מחזירה משימה בתצוגה של בו    
-    {
-        DO.Task? task = _dal.Task.Read(id);//נפעיל את פונקצית הקריאה של שכבת הדאל  
+    /// Throws an exception if what we were looking for was not found
+    public BO.Task? Read(int id)
+    {//Returns a task in Bo's view
+        DO.Task? task = _dal.Task.Read(id);//call the reading function of the dal layer  
 
         if (task == null)
         {
             throw new BO.BlDoesNotExistException($"task with ID={id} does not exist");
         }
 
-        return new BO.Task()// נחזיר את המשימה בתוספת תכונות נוספות שלא קיימות במשימה של שכבת הדאל
+        return new BO.Task() //We'll return the task with additional features not present in the Dahl layer mission
         {
             Id = id,
             Alias = task.Alias,
@@ -109,18 +110,21 @@ internal class TaskImplementation : BlApi.ITask
             Employee = GetEmployeeInTask(task.EmployeeId),
             Complexity = GetComplexity(task) ?? 0
         };
-
-
-
     }
+    /// <summary>
+    /// Reads all tasks from the system.
+    /// </summary>
+    /// <param name="filter">An optional filter function to apply to the list of tasks. 
+    /// (Returns true for tasks that should remain in the list and false for those that should be excluded).</param>
+    /// <returns>A list of BO.Task objects representing the found tasks.</returns>
     public IEnumerable<BO.Task> ReadAll(Func<DO.Task, bool>? filter = null)
     {
-
         IEnumerable<DO.Task?> doTask;
-        if (filter is not null)
+        if (filter is not null) //Check if a filter exist, and if so use it to read tasks from the DAL.
             doTask = _dal.Task.ReadAll(filter);
-        else
+        else //If a filter doesn't exist, read all tasks from the DAL without a filter.
             doTask = _dal.Task.ReadAll();
+        // Convert the list of DO tasks to a list of BO tasks.
         return (from task in doTask
                 select new BO.Task()
                 {
@@ -140,13 +144,20 @@ internal class TaskImplementation : BlApi.ITask
                     Complexity = GetComplexity(task) ?? 0
                 });
     }
+    /// <summary>
+    /// Reads all tasks in a list format from the system.
+    /// </summary>
+    /// <param name="filter">An optional filter function to apply to the list of tasks. 
+    /// (Returns true for tasks that should remain in the list and false for those that should be excluded).</param>
+    /// <returns>A list of BO.TaskInList objects representing the found tasks in a concise format.</returns>
     public IEnumerable<BO.TaskInList> ReadAllTaskInList(Func<DO.Task, bool>? filter = null)
     {
         IEnumerable<DO.Task?> doTask;
-        if (filter is not null)
+        if (filter is not null) // Check if a filter exist, and if so use it to read tasks from the DAL.
             doTask = _dal.Task.ReadAll(filter);
-        else
+        else  // Otherwise, read all tasks from the DAL without a filter.
             doTask = _dal.Task.ReadAll();
+        // Convert the list of DO tasks to a list of BO tasks in the list format.
         return (from task in doTask
                 select new BO.TaskInList()
                 {
@@ -156,17 +167,34 @@ internal class TaskImplementation : BlApi.ITask
                     Status = Tools.GetStatus(task)
                 });
     }
+    /// <summary>
+    /// Deletes a task from the system.
+    /// </summary>
+    /// <param name="idTask">The ID of the task to be deleted.</param>
+    /// <exception cref="BlNotAppropriateTheProjectStageException">
+    /// Thrown when attempting to delete a task in a project that is not in the planning stage.
+    /// </exception>
+    /// <exception cref="BlDoesNotExistException">
+    /// Thrown when the task with the provided ID does not exist in the system.
+    /// </exception>
+    /// <exception cref="BlDeletionImpossible">
+    /// Thrown when the task cannot be deleted because it is either assigned to an employee or has incomplete dependent tasks.
+    /// </exception>
+    /// <exception cref="BO.BlDeletionImpossible">
+    /// Thrown when the deletion fails at the data layer (DO) level.
+    /// </exception>
     public void Delete(int idTask)
     {
         BO.ProjectStatus? status = IBl.GetProjectStatus();
-        if (status != BO.ProjectStatus.PlanningStage)//Tasks can only be added during the planning phase
+        if (status != BO.ProjectStatus.PlanningStage)  //Tasks can only be added during the planning phase
+            // Throws an exception if the project is not in the planning stage.
             throw new BlNotAppropriateTheProjectStageException("The project is not in the planning process—you can't delete a task");
         DO.Task? task = _dal.Task.Read(idTask);
-        if (task == null)
+        if (task == null)  //Checks if the task exists.
         {
             throw new BlDoesNotExistException($"task with ID={idTask} does not exist");
         }
-        if (!CanTaskBeDeleted(task))
+        if (!CanTaskBeDeleted(task))  //Checks if the task can be deleted.
         {
             throw new BlDeletionImpossible("Task cannot be deleted because it is either assigned to an employee or has incomplete dependent tasks.");
         }
@@ -175,29 +203,40 @@ internal class TaskImplementation : BlApi.ITask
             _dal.Task.Delete(idTask);
         }
         catch (DO.DalDoesNotExistException ex)
-        {
+        {  // Throws an exception if the deletion fails.
             throw new BO.BlDeletionImpossible($"Failed to delete task from data layer: {ex.Message}", ex);
         }
     }
+    /// <summary>
+    /// Updates a task in the system.
+    /// </summary>
+    /// <param name="task">The updated task object.</param>
+    /// <exception cref="BlNotAppropriateTheProjectStageException">
+    /// Thrown when attempting to update a task that is not in the planning or execution stage.
+    /// </exception>
+    /// <exception cref="BlDoesNotExistException">
+    /// Thrown when the updated task does not exist in the system.
+    /// </exception>
     public void Update(BO.Task task)
     {
-        BO.ProjectStatus projectStatus = IBl.GetProjectStatus();
-        if ( projectStatus == BO.ProjectStatus.ExecutionStage)
+        BO.ProjectStatus projectStatus = IBl.GetProjectStatus();  // Gets the current project status.
+        if ( projectStatus == BO.ProjectStatus.ExecutionStage)  // Checks if the project is in the execution stage.
         {
             try
             {
                 DO.Task? checkingTask = _dal.Task.Read(task.Id);
-                // In IntermediateStage or ExecutionStage you cant update the times or dates
+                // Checks if time and date fields can be updated in the intermediate or execution stages.
+                // In ExecutionStage you cant update the times or dates
                 if (checkingTask != null && (task.CreatedAtDate != checkingTask.CreatedAtDate || (int?)task.Complexity != (int?)checkingTask.Complexity ||
                     task.RequiredEffortTime != checkingTask.RequiredEffortTime || task.StartDate != checkingTask.StartDate || task.ScheduledDate != checkingTask.StartDate 
                     || task.CompleteDate != checkingTask.CompleteDate))
                     throw new BlNotAppropriateTheProjectStageException("You cannot update the task in this stage at the project");
-                    if (checkingTask != null)
-                    {
+                    if (checkingTask != null)  // Checks if the task exists.
+                {
                     int workerId = 0;
-                    if (task.Employee != null)
+                    if (task.Employee != null)  // Gets the employee ID from the updated task.
                         workerId = task.Employee.Id;
-                    
+                    // Updates the task in the DAL.
                     checkingTask = checkingTask with { Alias = task.Alias, Description = task.Description, Deliverables = task.Deliverables, Remarks = task.Remarks, EmployeeId = workerId };
                     _dal.Task.Update(checkingTask);
                     }
@@ -210,7 +249,7 @@ internal class TaskImplementation : BlApi.ITask
 
         else
         {
-            if (task.Dependencies != null)
+            if (task.Dependencies != null)  // Checks if the updated task has dependencies.
             {
                 DO.Task? unupdatedT = _dal.Task.Read(task.Id);
                 //IEnumerable<Dependency> t = from TaskInList item in task.Dependencies
@@ -220,6 +259,7 @@ internal class TaskImplementation : BlApi.ITask
                 //{
                 //    _dal.Dependency.Create(dependency);
                 //});
+                // Creates a new list of dependencies for the task.
                 task.Dependencies.Where(t => _dal.Dependency.Check(task.Id, t.Id) == null).Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, task.Id, dependency.Id)));
             }
 
@@ -235,19 +275,33 @@ internal class TaskImplementation : BlApi.ITask
             }
         }
     }
+    /// <summary>
+    /// Performs data checks on a task before updating the task in the DAL.
+    /// </summary>
+    /// <param name="task">The updated task object.</param>
+    /// <returns>The task object after performing data checks.</returns>
+    /// <exception cref="BlWrongValueException">
+    /// Thrown when the task ID is negative.
+    /// </exception>
+    /// <exception cref="BlNullPropertyException">
+    /// Thrown when the task name is empty or null.
+    /// </exception>
+    /// <exception cref="BlNotAppropriateTheProjectStageException">
+    /// Thrown when attempting to enter a scheduled start date in the planning stage of the project.
+    /// </exception>
     private DO.Task DataChecking(BO.Task task)
     {
         int idEmp = 0;
         if (int.IsNegative(task.Id))//Checking if the ID is negative
             throw new BlWrongValueException("The task has WORNG VALUE!");
         if (string.IsNullOrEmpty(task.Alias))//Checking if the task has a name
-            throw new BlNullPropertyException("The task has Null Property!");
+            throw new BlNullPropertyException("The task has Null Property!");// Throws an exception if the task name is empty or null.
         int? temp = (int?)task.Complexity;
         DO.Type? complexity = null;
-        if (temp != null)
+        if (temp != null)// Updates the variable if the complexity level exists.
             complexity = (DO.Type)temp;
 
-        if (task.ScheduledDate != null)
+        if (task.ScheduledDate != null)// Checks if a scheduled start date has been entered.
         {
             BO.ProjectStatus projectStatus = IBl.GetProjectStatus();
             if (projectStatus == BO.ProjectStatus.PlanningStage)
@@ -266,6 +320,20 @@ internal class TaskImplementation : BlApi.ITask
 
         return doTask;
     }
+    /// <summary>
+    /// Updates the scheduled start date of a task.
+    /// </summary>
+    /// <param name="taskId">The ID of the task.</param>
+    /// <param name="plannedStartDate">The new planned start date.</param>
+    /// <exception cref="BlWrongValueException">
+    /// Thrown when the task ID is invalid or when the planned start date is too early relative to the forecast dates of dependent tasks.
+    /// </exception>
+    /// <exception cref="BO.BlDoesNotExistException">
+    /// Thrown when the task with the provided ID does not exist in the system.
+    /// </exception>
+    /// <exception cref="BlDataException">
+    /// Thrown when the scheduled start date cannot be updated because the task depends on another task that has no forecast start date.
+    /// </exception>
     public void UpdateScheduledStartDate(int taskId, DateTime plannedStartDate)
     {
         // 1. Validate task ID:
@@ -312,7 +380,7 @@ internal class TaskImplementation : BlApi.ITask
             }
         }
 
-            // 5. Create a new DO.Task object with updated ScheduledDate:
+         // 5. Create a new DO.Task object with updated ScheduledDate:
     DO.Task updatedTask = new DO.Task(
     task.Id,
     task.EmployeeId,
@@ -332,18 +400,30 @@ internal class TaskImplementation : BlApi.ITask
         // 6. Update the task in the data layer:
         _dal.Task.Update( updatedTask);
     }
+    /// <summary>
+    /// Checks whether a task can be deleted.
+    /// </summary>
+    /// <param name="task">The task object to be deleted.</param>
+    /// <returns>True if the task can be deleted, False otherwise.</returns>
     public bool CanTaskBeDeleted( DO.Task task)
     {
         DO.Task? task1 = _dal.Task.Read(task.Id);
+        // If there are tasks dependent on the current task as a preceding task, returns False.
         if (task1 == null) return false;
         var dep = _dal.Dependency.ReadAll(d => d.DependsOnTask == task.Id);
         if (dep != null) return false;
         return true;
     }
-    //The function receives an ID number of a task and checks whether the task is available
-    //i.e. whether there is no one else working on the task and also whether all the tasks preceding it have been performed
-    public bool IsTaskAvailable( DO.Task task)
-    {
+    /// <summary>
+    ///The function receives an ID number of a task and checks whether the task is available
+    ///i.e. whether there is no one else working on the task and also whether all the tasks preceding it have been performed    /// </summary>
+    /// Checks whether a task is available for execution.
+    /// </summary>
+    /// <param name="task">The task object.</param>
+    /// <returns>True if the task is available for execution, False otherwise.</returns>
+    public bool IsTaskAvailable(DO.Task task)
+    {    //The function receives an ID number of a task and checks whether the task is available
+         //i.e. whether there is no one else working on the task and also whether all the tasks preceding it have been performed
         if (task.EmployeeId != 0)
             return false;
         var dependencies = _dal.Dependency.ReadAll().Where(d => d!.DependentTask == task.Id).ToList();// A list of dependencies when my task depends on others
@@ -357,8 +437,8 @@ internal class TaskImplementation : BlApi.ITask
                                          Status = Tools.GetStatus(temporary)
                                      }).ToList();
         var result = taskList.Where(prevTask => prevTask.Status != BO.TaskStatus.Done);
-        if(result.Any())
-           return false;
+        if (result.Any())
+            return false;// Returns False if there is at least one preceding task that is not yet completed.
         //foreach (var prevTask in taskList)
         //{
         //    if (prevTask.Status != BO.TaskStatus.Done)
@@ -366,8 +446,13 @@ internal class TaskImplementation : BlApi.ITask
         //}
         return true;
     }
+    /// <summary>
+    /// Gets a list of all preceding tasks for a specific task.
+    /// </summary>
+    /// <param name="id">The ID of the task.</param>
+    /// <returns>A list of TaskInList objects representing the preceding tasks.</returns>
     public List<TaskInList> GetListOfPreviousTask(int id)
-    {
+    {// Creates a list of dependencies where the current task is the dependent task.
         List<TaskInList> taskList = (from DO.Dependency d in _dal.Dependency.ReadAll()
                                      where d.DependentTask == id
                                      let temporary = _dal.Task.Read(d.DependsOnTask ?? 0)
@@ -380,53 +465,88 @@ internal class TaskImplementation : BlApi.ITask
                                      }).ToList();
         return taskList;
     }
-    public  BO.Type? GetComplexity(DO.Task task)
+    /// <summary>
+    /// Gets the complexity level of a task.
+    /// </summary>
+    /// <param name="task">The task object.</param>
+    /// <returns>The task's complexity level as a BO.Type, or null if the complexity level is not set.</returns>
+    public BO.Type? GetComplexity(DO.Task task)
     {
         int? temp = (int?)task.Complexity;
         BO.Type? complexity = null;
-        if (temp != null)
+        if (temp != null)// If the complexity level exists, updates the result variable. else return NULL
             return complexity = (BO.Type)temp;
         return null;
     }
+    /// <summary>
+    /// Gets a list of available tasks that a worker can perform.
+    /// </summary>
+    /// <param name="empId">The ID of the worker.</param>
+    /// <returns>A list of BO.TaskInList objects representing the available tasks, or null if there are no available tasks.</returns>
     public IEnumerable<BO.TaskInList>? TasksForWorker(int empId)
     {
         IEnumerable<DO.Task?> tasks = _dal.Task.ReadAll();
+        // Filters the tasks based on tasks that can be assigned to the worker and tasks that are available for execution.
         return from DO.Task? item in tasks
                let task = _dal.Task.Read(item.Id)
                where Tools.CanTaskBeAssignedFor(item.Id, empId) && IsTaskAvailable(task)
                select new BO.TaskInList { Id = item.Id, Alias = item.Alias, Description = item.Description, Status = Tools.GetStatus(item) };
     }
-    public  string? GetCurrentTaskAlias( int? idEmp)
+    /// <summary>
+    /// Gets the alias of the current task assigned to a specific employee,
+    /// or null if the employee does not have a current task.
+    /// </summary>
+    /// <param name="idEmp">The ID of the employee.</param>
+    /// <returns>The alias of the employee's current task, or null.</returns>
+    public string? GetCurrentTaskAlias( int? idEmp)
     {
         DO.Task? t = _dal.Task.Read(task => task.EmployeeId == idEmp);
         if (t is not null)
             return t.Alias;
         return null;
     }
-    public  TaskInEmployee? GetTaskInEmployee( int? idEmp)
+    /// <summary>
+    /// Gets information about the current task assigned to a specific employee, or null if the employee does not exist or does not have a current task.
+    /// </summary>
+    /// <param name="idEmp">The ID of the employee.</param>
+    /// <returns>A BO.TaskInEmployee object with details of the employee's current task, or null.</returns>
+    public TaskInEmployee? GetTaskInEmployee( int? idEmp)
     {
         int? id = Tools.GetCurrentTaskId(idEmp);
         if (id == null) return null;
+        // Creates a BO.TaskInEmployee object with the task details.
         return new BO.TaskInEmployee { Id = (int)id, Alias = GetCurrentTaskAlias(idEmp) };
     }
-    public  EmployeeInTask? GetEmployeeInTask(int idEmp)
+    /// <summary>
+    /// Gets information about an employee given their ID, or null if no employee with that ID exists.
+    /// </summary>
+    /// <param name="idEmp">The ID of the employee.</param>
+    /// <returns>An EmployeeInTask object with the employee's details, or null if the employee is not found.</returns>
+    public EmployeeInTask? GetEmployeeInTask(int idEmp)
     {
         DO.Employee? emp = _dal.Employee.Read(idEmp);
-        if (emp is not null)
+        if (emp is not null)// If an employee is found, creates an EmployeeInTask object with their details.
             return new EmployeeInTask { Id = idEmp, Name = emp.Name };
         return null;
     }
+    /// <summary>
+    /// Starts the execution of a task.
+    /// </summary>
+    /// <param name="idT">The ID of the task.</param>
+    /// <param name="idEmp">The ID of the employee who is starting the task.</param>
+    /// <exception cref="BlDoesNotExistException">If the task with ID idT does not exist.</exception>
+    /// <exception cref="BlDataException">If the task is already assigned to another employee or has already started.</exception>
     public void StartTask(int idT, int idEmp)
     {
         DO.Task? task = _dal.Task.Read(idT);
-        if (task == null)
+        if (task == null)// Checks if the task exists.
         {
             throw new BlDoesNotExistException($"Task with ID {idT} does not exist.");
         }
-        if(task.EmployeeId != idEmp)
+        if(task.EmployeeId != idEmp)// Checks if the task is already assigned to another employee.
             throw new BlDataException($"Task with ID {idT} has done by someone else.");
 
-        if (task.StartDate.HasValue && task.StartDate!= DateTime.Now)
+        if (task.StartDate.HasValue && task.StartDate!= DateTime.Now)// Checks if the task has already started.
         {
             throw new BlDataException($"Task with ID {idT} has already started.");
         }
@@ -434,25 +554,38 @@ internal class TaskImplementation : BlApi.ITask
 
         _dal.Task.Update(newT);
     }
+    /// <summary>
+    /// Ends the execution of a task.
+    /// </summary>
+    /// <param name="idT">The ID of the task.</param>
+    /// <param name="idEmp">The ID of the employee who is ending the task.</param>
+    /// <exception cref="BlDoesNotExistException">If the task with ID idT does not exist.</exception>
+    /// <exception cref="BlDataException">If the task has already been completed.</exception>
     public void EndTask(int idT, int idEmp)
     {
         DO.Task? task = _dal.Task.Read(idT);
-        if (task == null)
+        if (task == null)// Checks if the task exists.
         {
             throw new BlDoesNotExistException($"Task with ID {idT} does not exist.");
         }
-
-        if (task.CompleteDate.HasValue)
+        if (task.CompleteDate.HasValue)// Checks if the task has already been completed.
         {
             throw new BlDataException($"Task with ID {idT} has already been completed.");
         }
-        var newT = task with { CompleteDate = DateTime.Now };
+        var newT = task with { CompleteDate = DateTime.Now };// Updates the completion date and time of the task.
         _dal.Task.Update(newT);
     }
+    /// <summary>
+    /// Assigns a task to an employee.
+    /// </summary>
+    /// <param name="idT">The ID of the task.</param>
+    /// <param name="idEmp">The ID of the employee.</param>
+    /// <exception cref="BlDoesNotExistException">If the task or employee does not exist.</exception>
+    /// <exception cref="BlTaskCantBeAssignedException">If the task is not available for assignment.</exception>
+    /// <exception cref="Exception">If the employee is already assigned to another task.</exception>
     public void SignUpForTask(int idT, int idEmp)
     {
-
-        // 1. נבדוק אם העובד והמשימה קיימים
+        //1. Checks if the employee and task exist
         DO.Task? task = _dal.Task.Read(idT);
         if (task == null)
         {
@@ -464,16 +597,17 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BlDoesNotExistException($"Employee with ID {idEmp} does not exist.");
         }
-
+        //2. Checks if the task is available for assignment.
         if (!IsTaskAvailable(task))
         {
             throw new BlTaskCantBeAssignedException($"Task with ID {idT} is not available for assignment.");
         }
-
+        //3. Checks if the employee is already assigned to another task
         if (!Tools.IsEmployeeWorkingOnTask(idEmp))
         {
             throw new Exception($"Employee with ID {idEmp} is already assigned to another task.");
         }
+        //4. Assigns the task to the employee and updates the DAL.
         var newT = task with { EmployeeId = idEmp };
         _dal.Task.Update(newT);
     }

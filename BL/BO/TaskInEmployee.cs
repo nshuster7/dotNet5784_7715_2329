@@ -1,6 +1,6 @@
 ﻿namespace BO;
 
-public class TaskInEmployee
+public class TaskInEmployee//Short view of a list
 {
     public int Id { get; init; }
     public string? Alias { get; init; }

@@ -1,6 +1,6 @@
 ﻿namespace BO;
 
-public class TaskInList
+public class TaskInList//Short view of a list
 {
     public int Id { get; init; }
     public string? Description { get; init; }
