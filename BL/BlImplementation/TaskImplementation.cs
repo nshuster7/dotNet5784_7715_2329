@@ -28,55 +28,55 @@ internal class TaskImplementation : BlApi.ITask
         BO.ProjectStatus? status = IBl.GetProjectStatus();
         if (status != BO.ProjectStatus.PlanningStage)//Tasks can only be added during the planning phase
             throw new BlNotAppropriateTheProjectStageException("The project is not in the planning process—you can't add a task");
-        else
+        if (int.IsNegative(boTask.Id))//Checking if the ID is negative
+            throw new BlWrongValueException("The task has WORNG VALUE!");
+        if (string.IsNullOrEmpty(boTask.Alias))//Checking if the task has a name
+            throw new BlNullPropertyException("The task has Null Property!");
+        //Converting the task level from BO to DO
+        int? temp = (int?)boTask.Complexity;
+        DO.Type? complexity = null;
+        if (temp != null)
+            complexity = (DO.Type)temp;
+        //-------------------------------------
+
+
+        DO.Task doTask = new DO.Task
+    (
+    boTask.Id,
+    0,
+    boTask.Alias,
+    boTask.Description,
+    boTask.CreatedAtDate,
+    boTask.RequiredEffortTime,
+    false,
+    complexity,
+    boTask.StartDate,
+    boTask.ScheduledDate,
+    null,
+    boTask.CompleteDate,
+    boTask.Deliverables,
+    boTask.Remarks
+    );
+        try
         {
-            if (int.IsNegative(boTask.Id))//Checking if the ID is negative
-                throw new BlWrongValueException("The task has WORNG VALUE!");
-            if (string.IsNullOrEmpty(boTask.Alias))//Checking if the task has a name
-                throw new BlNullPropertyException("The task has Null Property!");
-            //Converting the task level from BO to DO
-            int? temp = (int?)boTask.Complexity;
-            DO.Type? complexity = null;
-            if (temp != null)
-                complexity = (DO.Type)temp;
-            //-------------------------------------
+            int idTask = _dal.Task.Create(doTask);
             if (boTask.Dependencies != null)// A task has a list of tasks it depends on, create those dependencies
-            {
-                //foreach (BO.TaskInList item in boTask.Dependencies)
-                //{
-                //    DO.Dependency dependency = new DO.Dependency(0, boTask.Id, item.Id);
-                //    _dal.Dependency.Create(dependency);
-                //}
-                boTask.Dependencies.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, boTask.Id, dependency.Id)));
-            }
-            DO.Task doTask = new DO.Task
-      (
-        boTask.Id,
-        0,
-        boTask.Alias,
-        boTask.Description,
-        boTask.CreatedAtDate,
-        boTask.RequiredEffortTime,
-        false,
-        complexity,
-        boTask.StartDate,
-        boTask.ScheduledDate,
-        null,
-        boTask.CompleteDate,
-        boTask.Deliverables,
-        boTask.Remarks
-      );
-            try
-            {
-                int idTask = _dal.Task.Create(doTask);
-                return idTask;
-            }
-            catch (DO.DalAlreadyExistsException ex)
-            {
-                throw new BO.BlAlreadyExistsException($"Task with ID={boTask.Id} already exists", ex);
-            }
+
+                foreach (BO.TaskInList item in boTask.Dependencies)
+                {
+                    DO.Dependency dependency = new DO.Dependency(0, idTask, item.Id);
+                    _dal.Dependency.Create(dependency);
+                }
+            // boTask.Dependencies.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, boTask.Id, dependency.Id)));
+
+            return idTask;
+        }
+        catch (DO.DalAlreadyExistsException ex)
+        {
+            throw new BO.BlAlreadyExistsException($"Task with ID={boTask.Id} already exists", ex);
         }
     }
+    
     /// <summary>
     /// Returns a task in Bo's view
     /// </summary>
@@ -100,7 +100,7 @@ internal class TaskImplementation : BlApi.ITask
             Description = task.Description,
             CreatedAtDate = task.CreatedAtDate,
             Status = Tools.GetStatus(task),
-            Dependencies = GetListOfPreviousTask(task.Id),
+            Dependencies = Tools.GetListOfPreviousTask(task.Id),
             RequiredEffortTime = task.RequiredEffortTime,
             StartDate = task.StartDate,
             ForecastDate = Tools.GetMaxDate(task.StartDate, task.ScheduledDate)!.Value.Add(task.RequiredEffortTime ?? TimeSpan.MinValue),
@@ -133,7 +133,7 @@ internal class TaskImplementation : BlApi.ITask
                     Description = task.Description,
                     CreatedAtDate = task.CreatedAtDate,
                     Status = Tools.GetStatus(task),
-                    Dependencies = GetListOfPreviousTask(task.Id),
+                    Dependencies = Tools.GetListOfPreviousTask(task.Id),
                     RequiredEffortTime = task.RequiredEffortTime,
                     StartDate = task.StartDate,
                     ForecastDate = Tools.GetMaxDate(task.StartDate, task.ScheduledDate)!.Value.Add(task.RequiredEffortTime ?? TimeSpan.MinValue),
@@ -307,7 +307,7 @@ internal class TaskImplementation : BlApi.ITask
             if (projectStatus == BO.ProjectStatus.PlanningStage)
                 throw new BlNotAppropriateTheProjectStageException("You cannot enter a scheduled start date for a task at this stage of the project");
             else
-                UpdateScheduledStartDate(task.Id, (DateTime)task.ScheduledDate);
+                Tools.UpdateScheduledStartDate(task.Id, (DateTime)task.ScheduledDate);
         }
 
         int? workerId = null;
@@ -320,86 +320,7 @@ internal class TaskImplementation : BlApi.ITask
 
         return doTask;
     }
-    /// <summary>
-    /// Updates the scheduled start date of a task.
-    /// </summary>
-    /// <param name="taskId">The ID of the task.</param>
-    /// <param name="plannedStartDate">The new planned start date.</param>
-    /// <exception cref="BlWrongValueException">
-    /// Thrown when the task ID is invalid or when the planned start date is too early relative to the forecast dates of dependent tasks.
-    /// </exception>
-    /// <exception cref="BO.BlDoesNotExistException">
-    /// Thrown when the task with the provided ID does not exist in the system.
-    /// </exception>
-    /// <exception cref="BlDataException">
-    /// Thrown when the scheduled start date cannot be updated because the task depends on another task that has no forecast start date.
-    /// </exception>
-    public void UpdateScheduledStartDate(int taskId, DateTime plannedStartDate)
-    {
-        // 1. Validate task ID:
-        if (taskId <= 0)
-        {
-            throw new BlWrongValueException("Invalid task ID. Must be a positive integer.");
-        }
-
-        // 2. Retrieve task details:
-        DO.Task? task = _dal.Task.Read(taskId);
-        if (task == null)
-        {
-            throw new BO.BlDoesNotExistException($"Task with ID {taskId} does not exist.");
-        }
-
-        IEnumerable<DO.Dependency?> dependencies = _dal.Dependency.ReadAll(d => d.DependentTask == taskId);// רשימת כל התלויות שהמשימה הנוכחית שלי תלויה תלוי במשימה אחרת
-        
-        foreach (DO.Dependency? dependency in dependencies)
-        {
-            DO.Task? precedingTask;
-            if (dependency != null)
-            {
-                precedingTask = _dal.Task.Read(dependency.DependsOnTask ?? 0);
-                if (precedingTask == null || precedingTask.ScheduledDate == null)
-                {
-                    throw new BlDataException($"Cannot update scheduled start date: " +
-                                              $"Preceding task {dependency.DependsOnTask} has no forecast start date.");
-                }
-            }
-        }
-
-        // 4. Check for early start date compared to preceding task forecast dates:
-        foreach (DO.Dependency? dependency in dependencies)
-        {
-            if (dependency != null)
-            {
-                DO.Task? precedingTask = _dal.Task.Read(dependency.DependsOnTask ?? 0);
-                DateTime? forecast = Tools.GetMaxDate(precedingTask!.StartDate, precedingTask.ScheduledDate)!.Value.Add(precedingTask.RequiredEffortTime ?? TimeSpan.MinValue);
-                if (forecast != null && plannedStartDate < forecast)
-                {
-                    throw new BlWrongValueException($"Planned start date cannot be earlier than forecast date " +
-                                              $"of any preceding task: {precedingTask.Id} forecasted on {forecast.Value}.");
-                }
-            }
-        }
-
-         // 5. Create a new DO.Task object with updated ScheduledDate:
-    DO.Task updatedTask = new DO.Task(
-    task.Id,
-    task.EmployeeId,
-    task.Alias,
-    task.Description,
-    task.CreatedAtDate,
-    task.RequiredEffortTime,
-    false,
-    task.Complexity,
-    plannedStartDate,
-    task.ScheduledDate,
-    null,
-    task.CompleteDate,
-    task.Deliverables,
-    task.Remarks
-    );
-        // 6. Update the task in the data layer:
-        _dal.Task.Update( updatedTask);
-    }
+    
     /// <summary>
     /// Checks whether a task can be deleted.
     /// </summary>
@@ -446,25 +367,7 @@ internal class TaskImplementation : BlApi.ITask
         //}
         return true;
     }
-    /// <summary>
-    /// Gets a list of all preceding tasks for a specific task.
-    /// </summary>
-    /// <param name="id">The ID of the task.</param>
-    /// <returns>A list of TaskInList objects representing the preceding tasks.</returns>
-    public List<TaskInList> GetListOfPreviousTask(int id)
-    {// Creates a list of dependencies where the current task is the dependent task.
-        List<TaskInList> taskList = (from DO.Dependency d in _dal.Dependency.ReadAll()
-                                     where d.DependentTask == id
-                                     let temporary = _dal.Task.Read(d.DependsOnTask ?? 0)
-                                     select new TaskInList
-                                     {
-                                         Id = d.DependsOnTask ?? 0,
-                                         Description = temporary.Description,
-                                         Alias = temporary.Alias,
-                                         Status = Tools.GetStatus(temporary)
-                                     }).ToList();
-        return taskList;
-    }
+
     /// <summary>
     /// Gets the complexity level of a task.
     /// </summary>

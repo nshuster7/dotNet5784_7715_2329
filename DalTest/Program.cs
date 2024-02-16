@@ -99,6 +99,7 @@ internal class Program
                     string? email = Console.ReadLine() ?? throw new DalWrongValueException("WRONG email");
 
                     // Generate random values for work status and complexity if not provided by the user
+                    Console.WriteLine("Enter the worker's status and level");
                     WorkStatus status = (WorkStatus)int.Parse(Console.ReadLine() ?? $"{s_rand.Next(0, 3)}");
                     Type complexity = (Type)int.Parse(Console.ReadLine() ?? $"{s_rand.Next(0, 5)}");
 
@@ -153,6 +154,7 @@ internal class Program
                     string? _email = Console.ReadLine() ?? throw new DalWrongValueException("WRONG email");
 
                     // Generate random values for work status and complexity if not provided by the user
+                    Console.WriteLine("Enter the worker's status and level");
                     WorkStatus _status = (WorkStatus)int.Parse(Console.ReadLine() ?? $"{s_rand.Next(0, 3)}");
                     Type _complexity = (Type)int.Parse(Console.ReadLine() ?? $"{s_rand.Next(0, 5)}");
 

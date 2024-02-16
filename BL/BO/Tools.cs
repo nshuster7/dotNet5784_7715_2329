@@ -7,35 +7,35 @@ namespace BO;
 public static class Tools
 {
     private static DalApi.IDal _dal = DalApi.Factory.Get;
-    //public static string ToStringProperty<T>(this T obj)
-    //{
-    //    StringBuilder sb = new StringBuilder();
-    //    // Get all properties of the object
-    //    PropertyInfo[] properties = typeof(T).GetProperties();
-    //    foreach (PropertyInfo property in properties)
-    //    {
-    //        // Get the property value
-    //        object? value = property.GetValue(obj);
-    //        // Check if the property is a collection
-    //        if (property.PropertyType.IsGenericType &&
-    //            property.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>))
-    //        {
-    //            // Iterate over the collection and add each item to the string builder
-    //            foreach (object item in (IEnumerable<object>)value!)
-    //            {
-    //                sb.AppendLine($"{property.Name}: {item}");
-    //            }
-    //        }
-    //        else
-    //        {
-    //            // Add the property value to the string builder
-    //            sb.AppendLine($"{property.Name}: {value}");
-    //        }
-    //    }
-    //    return sb.ToString();
-    //}
-    public static string ToStringProperty<T>(this T t) where T : struct => 
-        t.GetType().GetProperties().Aggregate("", (str, prop) => str + "\n" + prop.Name + ": " + prop.GetValue(t, null));
+    public static string ToStringProperty<T>(this T obj)
+    {
+        StringBuilder sb = new StringBuilder();
+        // Get all properties of the object
+        PropertyInfo[] properties = typeof(T).GetProperties();
+        foreach (PropertyInfo property in properties)
+        {
+            // Get the property value
+            object? value = property.GetValue(obj);
+            // Check if the property is a collection
+            if (property.PropertyType.IsGenericType &&
+                property.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>))
+            {
+                // Iterate over the collection and add each item to the string builder
+                foreach (object item in (IEnumerable<object>)value!)
+                {
+                    sb.AppendLine($"{property.Name}: {item}");
+                }
+            }
+            else
+            {
+                // Add the property value to the string builder
+                sb.AppendLine($"{property.Name}: {value}");
+            }
+        }
+        return sb.ToString();
+    }
+    //public static string ToStringProperty<T>(this T t) where T : struct => 
+    //    t.GetType().GetProperties().Aggregate("", (str, prop) => str + "\n" + prop.Name + ": " + prop.GetValue(t, null));
     /// <summary>
     /// Checks if a string represents a valid email address.
     /// </summary>
@@ -166,7 +166,106 @@ public static class Tools
         _dal.Task.Clear();
         _dal.Dependency.Clear();
     }
+    /// <summary>
+    /// Updates the scheduled start date of a task.
+    /// </summary>
+    /// <param name="taskId">The ID of the task.</param>
+    /// <param name="plannedStartDate">The new planned start date.</param>
+    /// <exception cref="BlWrongValueException">
+    /// Thrown when the task ID is invalid or when the planned start date is too early relative to the forecast dates of dependent tasks.
+    /// </exception>
+    /// <exception cref="BO.BlDoesNotExistException">
+    /// Thrown when the task with the provided ID does not exist in the system.
+    /// </exception>
+    /// <exception cref="BlDataException">
+    /// Thrown when the scheduled start date cannot be updated because the task depends on another task that has no forecast start date.
+    /// </exception>
+    public static void UpdateScheduledStartDate(int taskId, DateTime plannedStartDate)
+    {
+        // 1. Validate task ID:
+        if (taskId <= 0)
+        {
+            throw new BlWrongValueException("Invalid task ID. Must be a positive integer.");
+        }
 
+        // 2. Retrieve task details:
+        DO.Task? task = _dal.Task.Read(taskId);
+        if (task == null)
+        {
+            throw new BO.BlDoesNotExistException($"Task with ID {taskId} does not exist.");
+        }
+
+        IEnumerable<DO.Dependency?> dependencies = _dal.Dependency.ReadAll(d => d.DependentTask == taskId);// רשימת כל התלויות שהמשימה הנוכחית שלי תלויה תלוי במשימה אחרת
+
+        foreach (DO.Dependency? dependency in dependencies)
+        {
+            DO.Task? precedingTask;
+            if (dependency != null)
+            {
+                precedingTask = _dal.Task.Read(dependency.DependsOnTask ?? 0);
+                if (precedingTask == null || precedingTask.ScheduledDate == null)
+                {
+                    throw new BlDataException($"Cannot update scheduled start date: " +
+                                              $"Preceding task {dependency.DependsOnTask} has no forecast start date.");
+                }
+            }
+        }
+
+        // 4. Check for early start date compared to preceding task forecast dates:
+        foreach (DO.Dependency? dependency in dependencies)
+        {
+            if (dependency != null)
+            {
+                DO.Task? precedingTask = _dal.Task.Read(dependency.DependsOnTask ?? 0);
+                DateTime? forecast = Tools.GetMaxDate(precedingTask!.StartDate, precedingTask.ScheduledDate)!.Value.Add(precedingTask.RequiredEffortTime ?? TimeSpan.MinValue);
+                if (forecast != null && plannedStartDate < forecast)
+                {
+                    throw new BlWrongValueException($"Planned start date cannot be earlier than forecast date " +
+                                              $"of any preceding task: {precedingTask.Id} forecasted on {forecast.Value}.");
+                }
+            }
+        }
+
+        // 5. Create a new DO.Task object with updated ScheduledDate:
+        DO.Task updatedTask = new DO.Task(
+        task.Id,
+        task.EmployeeId,
+        task.Alias,
+        task.Description,
+        task.CreatedAtDate,
+        task.RequiredEffortTime,
+        false,
+        task.Complexity,
+        null,
+        plannedStartDate,
+        null,
+        task.CompleteDate,
+        task.Deliverables,
+        task.Remarks
+        );
+        // 6. Update the task in the data layer:
+        _dal.Task.Update(updatedTask);
+    }
+    /// <summary>
+    /// Gets a list of all preceding tasks for a specific task.
+    /// </summary>
+    /// <param name="id">The ID of the task.</param>
+    /// <returns>A list of TaskInList objects representing the preceding tasks.</returns>
+    public static List<TaskInList>? GetListOfPreviousTask(int id)
+    {// Creates a list of dependencies where the current task is the dependent task.
+        List<TaskInList>? taskList = null;
+        taskList = (from DO.Dependency d in _dal.Dependency.ReadAll()
+                    where d.DependentTask == id && d.DependsOnTask != null
+                    let temporary = _dal.Task.Read(d.DependsOnTask ?? 0)
+                    select new TaskInList
+                    {
+                        Id = d.DependsOnTask ?? 0,
+                        Description = temporary.Description,
+                        Alias = temporary.Alias,
+                        Status = Tools.GetStatus(temporary)
+                    }).ToList();
+        return taskList;
+    }
 }
 
 

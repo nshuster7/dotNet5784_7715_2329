@@ -12,7 +12,6 @@ public interface ITask
     public void Update(BO.Task task);
     public bool CanTaskBeDeleted(DO.Task task);
     public bool IsTaskAvailable(DO.Task task);
-    public List<TaskInList> GetListOfPreviousTask(int id);
     public BO.Type? GetComplexity(DO.Task task);
     public IEnumerable<BO.TaskInList>? TasksForWorker(int empId);
     public string? GetCurrentTaskAlias(int? idEmp);

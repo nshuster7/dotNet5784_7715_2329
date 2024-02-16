@@ -41,13 +41,14 @@ partial class Program
                         taskFunc();
                         break;
                     case Entity.Schedule:
-                        Console.WriteLine("To create an automatic schedule press: 1");
+                       // Console.WriteLine("To create an automatic schedule press: 1");
                         Console.WriteLine("To create a manual schedule press: 2");
                         if (!int.TryParse(Console.ReadLine(), out int scheduleChoice))
                             throw new BlWrongValueException("WORNG VALUE");
-                        if (scheduleChoice == 1)
-                            s_bl.AutomaticSchedule();
-                        else if (scheduleChoice == 2)
+                        //if (scheduleChoice == 1)
+                        //    s_bl.AutomaticSchedule();
+                        //else 
+                        if (scheduleChoice == 2)
                             s_bl.ManualSchedule();
                         break;
                     case 0:
@@ -225,7 +226,7 @@ partial class Program
             email = newEmail;
         Console.WriteLine("If you want to change the status of the worker enter the new status, else press -1");
         if (!int.TryParse(Console.ReadLine(), out int newStatus))
-            throw new BlWrongValueException("WORNG LEVEL");
+            throw new BlWrongValueException("WORNG STATUS");
         if (newStatus != -1)
             status = (BO.WorkStatus)newStatus;
 
@@ -289,7 +290,7 @@ partial class Program
 
     static void CreateT()
     {
-        Console.WriteLine("Enter alias, description, complexity, deliverables");
+        Console.WriteLine("Enter alias, description, complexity, deliverables, remarks");
 
         string alias = Console.ReadLine()!;
         string description = Console.ReadLine()??" ";

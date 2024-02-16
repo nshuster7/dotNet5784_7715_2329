@@ -52,7 +52,7 @@ internal class EmployeeImplementation : BlApi.IEmployee
     {
         DO.Employee? doEmployee = _dal.Employee.Read(id);
 
-        if (doEmployee == null)// Checks if the employee exists.
+        if (doEmployee == null)// Checks if the employee is not exists.
         {
             throw new BO.BlDoesNotExistException($"Employee with ID={id} does not exist");
         }
@@ -93,12 +93,11 @@ internal class EmployeeImplementation : BlApi.IEmployee
     /// <returns>An IEnumerable<BO.EmployeeInTask> list containing the employee details.</returns>
     public IEnumerable<BO.EmployeeInTask> ReadAll(Func<DO.Employee, bool>? filter = null)
     {
-        IEnumerable<DO.Employee?> doEmployees;// Reads the list of employees from the DAL.
+        IEnumerable<DO.Employee?> doEmployees;// Reads the list of the all employees from the DAL.
         if (filter is not null)
             doEmployees = _dal.Employee.ReadAll(filter);
         else
             doEmployees = _dal.Employee.ReadAll();
-        // Converts a list of DO.Employee objects to a list of BO.EmployeeInTask objects.
         return (from doEmployee in doEmployees
                 select new BO.EmployeeInTask()
                 {
@@ -123,12 +122,12 @@ internal class EmployeeImplementation : BlApi.IEmployee
         //        throw new BO.BlDeletionImpossible($"Cannot delete an Employee with task in {taskStatus} status");
         //    }
         //}
-        // Checks if the employee has tasks that cannot be deleted.
+        //Tasks that have started executing them cannot be deleted.
         if ( tasks.Select(task => Tools.GetStatus(task!)).Where(taskStatus=> taskStatus != BO.TaskStatus.Unscheduled && taskStatus != BO.TaskStatus.Scheduled).Any())
         {
             throw new BO.BlDeletionImpossible($"Cannot delete an Employee with task in Unscheduled/Scheduled status");
         }
-        try// Tries to delete the employee from the DAL and handles exceptions.
+        try
         {
             _dal.Employee.Delete(idEmp);
         }
@@ -155,8 +154,8 @@ internal class EmployeeImplementation : BlApi.IEmployee
         }
         if (string.IsNullOrEmpty(boEmployee.Name))
             throw new BlNullPropertyException("The employee has Null Property!");
-        //Checks if you try to demote (downgrade) the employee
-        var emp = _dal.Employee.Read(emp => emp.Id == boEmployee.Id);
+        var emp = _dal.Employee.Read(emp => emp.Id == boEmployee.Id);// read the employee from DAL
+        
         int? tB = null;
         int? tD = null;
         if (emp != null)
@@ -164,11 +163,11 @@ internal class EmployeeImplementation : BlApi.IEmployee
             tD = (int?)emp.Type;
             tB = (int?)boEmployee.Type;
         }
-        if (emp is not null && tB is not null && tD is not null && tB < tD)
+        if (emp is not null && tB is not null && tD is not null && tB < tD)//It is not possible to lower the employee's level
         {
             throw new BlWrongValueException("Cannot downgrade employee type");
         }
-        // Converts values from Nullable<> types to the corresponding DO types.
+        //convert STATUS from BO to DO
         DO.WorkStatus? status = null;
         DO.Type? type = null;
         int? t = (int?)boEmployee.Type;
@@ -177,7 +176,7 @@ internal class EmployeeImplementation : BlApi.IEmployee
         { type = (DO.Type)t; }
         if (s is not null)
         { status = (DO.WorkStatus)s; }
-        try// Updates the employee's details and their task (if relevant).
+        try// Updates the employee's details.
         {
             
             if (boEmployee.CurrentTaskId is not null &&
@@ -238,7 +237,6 @@ internal class EmployeeImplementation : BlApi.IEmployee
     public List<EmployeeInTask>? GetSortedEmployees()
     {
         IEnumerable<DO.Employee?> employees = _dal.Employee.ReadAll();
-        // Converts the list of employees from an IEnumerable<DO.Employee> list to a List<EmployeeInTask> list.
         // Filters the employees and sorts them by name.
         List<EmployeeInTask>? employeeList=null;
         if (employees != null)
