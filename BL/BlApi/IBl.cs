@@ -1,6 +1,6 @@
-﻿using BlImplementation;
-using BO;
-using DO;
+﻿using BO;
+
+
 
 namespace BlApi;
 
@@ -78,7 +78,10 @@ public interface IBl
     //        return IBl.startProjectDate.Value;
     //    }
     //}
-
+    /// <summary>
+    /// Updating the schedule manually by request from the manager
+    /// </summary>
+    /// <exception cref="BlWrongValueException">Thrown when input with an invalid value is received</exception>
     public void ManualSchedule()
     {
         IBl.startProjectDate = DateTime.Now;
@@ -107,6 +110,13 @@ public interface IBl
       
     }
 
+   
+    /// <summary>
+    /// Schedules tasks recursively based on dependencies.
+    /// </summary>
+    /// <param name="tasks">The collection of tasks to be scheduled.</param>
+    /// <param name="parentTask">The parent task on which dependent tasks are based.</param>
+    /// <exception cref="BlWrongValueException">Thrown when an invalid value is encountered.</exception>
     private void ScheduleTasks(IEnumerable<DO.Task?> tasks, DO.Task? parentTask)
     {
         // Filter tasks that depend on the current task

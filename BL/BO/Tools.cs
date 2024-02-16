@@ -162,6 +162,7 @@ public static class Tools
     /// </summary>
     public static void clear()
     {
+
         _dal.Employee.Clear();
         _dal.Task.Clear();
         _dal.Dependency.Clear();

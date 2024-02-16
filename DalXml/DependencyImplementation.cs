@@ -120,5 +120,6 @@ internal class DependencyImplementation : IDependency
 
         // Save the empty list back to the XML file
         XMLTools.SaveListToXMLSerializer(dependencies, s_dependency_xml);
+        Config.NextDependencyId = 1;
     }
 }

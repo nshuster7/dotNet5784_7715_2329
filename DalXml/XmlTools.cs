@@ -65,6 +65,21 @@ static class XMLTools
         }
     }
     #endregion
+    /// <summary>
+    /// Sets the value of the specified element in the XML configuration file to the given integer value.
+    /// </summary>
+    /// <param name="data_config_xml">The file path of the XML configuration file.</param>
+    /// <param name="elemName">The name of the element whose value needs to be set.</param>
+    /// <param name="val">The integer value to set.</param>
+    public static void SetNextId(string data_config_xml, string elemName, int val)
+
+    {
+
+        XElement root= LoadListFromXMLElement(data_config_xml);
+        root.Element(elemName)?.SetValue((val).ToString());
+        SaveListToXMLElement(root, data_config_xml);
+
+    }
 
     #region SaveLoadWithXMLSerializer
     public static void SaveListToXMLSerializer<T>(List<T> list, string entity) where T : class

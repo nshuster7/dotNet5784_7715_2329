@@ -21,6 +21,7 @@ internal class TaskImplementation : ITask
 
         // Save the empty list back to the XML file
         XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
+        Config.NextTaskId = 1;
     }
     /// <summary>
     /// Creates a new task and adds it to the tasks XML file.
