@@ -1,7 +1,5 @@
 ﻿using BO;
 
-
-
 namespace BlApi;
 
 public interface IBl
@@ -141,6 +139,6 @@ public interface IBl
         }
     }
 
-
-
+    public void InitializeDB();
+    public void ResetDB();
 }

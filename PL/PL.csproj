@@ -1,22 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
 	  <BaseOutputPath>$(SolutionDir)\bin\</BaseOutputPath>
 	  <OutputPath>$(SolutionDir)\bin\</OutputPath>
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	  <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DalFacade\DalFacade.csproj" />
-    <ProjectReference Include="..\DalList\DalList.csproj" />
-    <ProjectReference Include="..\DalTest\DalTest.csproj" />
-    <ProjectReference Include="..\DalXml\DalXml.csproj" />
+    <ProjectReference Include="..\BL\BL.csproj" />
   </ItemGroup>
 
 </Project>
