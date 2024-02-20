@@ -514,5 +514,11 @@ internal class TaskImplementation : BlApi.ITask
         var newT = task with { EmployeeId = idEmp };
         _dal.Task.Update(newT);
     }
- 
+
+    /// <summary>
+    /// Groups all tasks by status.
+    /// </summary>
+    /// <returns>Tasks grouped by status (key) and task objects (value).</returns>
+    public IEnumerable<IGrouping<BO.TaskStatus, DO.Task?>> GroupTasksByStatus()
+        => _dal.Task.ReadAll().GroupBy(task => Tools.GetStatus(task!));
 }

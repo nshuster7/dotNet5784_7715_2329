@@ -20,4 +20,5 @@ public interface ITask
     public void SignUpForTask(int idT, int idEmp);
     public void EndTask(int idT, int idEmp);
     public void StartTask(int idT, int idEmp);
+    public IEnumerable<IGrouping<BO.TaskStatus, DO.Task?>> GroupTasksByStatus();
 }
