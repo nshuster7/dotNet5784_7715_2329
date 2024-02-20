@@ -35,8 +35,12 @@ namespace PL
             switch (result)
             {
                 case MessageBoxResult.OK:
-                    Factory.Get().
-
+                    Factory.Get().InitializeDB();
+                    break; 
+                case MessageBoxResult.Cancel:
+                    break;
+                default: 
+                    break; 
             }
         }
     }

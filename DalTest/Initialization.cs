@@ -260,5 +260,6 @@ public static class Initialization
         s_dal!.Employee.Clear();
         s_dal!.Task.Clear();
         s_dal!.Dependency.Clear();
+        s_dal!.startProjectDate = null;
     }
 }

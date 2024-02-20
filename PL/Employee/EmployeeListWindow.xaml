@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Employee"
         mc:Ignorable="d"
-     Title="EmployeeListWindow" Height="640" Width="800">
+        Title="EmployeeListWindow" Height="640" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--External Grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -22,7 +23,15 @@
             <Label Content="Label" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
             <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" />
         </Grid>
-        <ListView Grid.Row="1" >
+        <ListView Grid.Row="1" RenderTransformOrigin="0.5,0.5" >
+            <ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.602"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ListView.RenderTransform>
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

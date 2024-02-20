@@ -12,16 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.Employee
+namespace PL.Employee;
+
+/// <summary>
+/// Interaction logic for EmployeeListWindow.xaml
+/// </summary>
+public partial class EmployeeListWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for EmployeeListWindow.xaml
-    /// </summary>
-    public partial class EmployeeListWindow : Window
+    public EmployeeListWindow()
     {
-        public EmployeeListWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        EmployeeList = s_bl?.Employee.ReadAll()!;
     }
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public IEnumerable<BO.EmployeeInTask> EmployeeList
+    {
+        get { return (IEnumerable<BO.EmployeeInTask>)GetValue(CourseListProperty); }
+        set { SetValue(CourseListProperty, value); }
+    }
+
+    public static readonly DependencyProperty CourseListProperty =
+        DependencyProperty.Register("CourseList", typeof(IEnumerable<BO.EmployeeInTask>), typeof(EmployeeListWindow), new PropertyMetadata(null));
+
 }

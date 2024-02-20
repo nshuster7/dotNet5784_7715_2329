@@ -5,6 +5,7 @@
         IDependency Dependency { get; }
         IEmployee Employee { get; }
         ITask Task { get; }
-        
+        DateTime? startProjectDate { get; set; } 
+
     }
 }

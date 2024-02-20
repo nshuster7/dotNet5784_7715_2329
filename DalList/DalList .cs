@@ -1,5 +1,7 @@
 ﻿namespace Dal;
 using DalApi;
+using System;
+
 //using DO;
 sealed internal class DalList : IDal
 {
@@ -10,4 +12,6 @@ sealed internal class DalList : IDal
     public IEmployee Employee => new EmployeeImplementation();
 
     public ITask Task => new TaskImplementation();
+
+    DateTime? IDal.startProjectDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 }
