@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+
 namespace BlImplementation;
 
 internal class EmployeeImplementation : BlApi.IEmployee
@@ -91,7 +92,7 @@ internal class EmployeeImplementation : BlApi.IEmployee
     /// </summary>
     /// <param name="filter">A filter function to get a filtered list (optional).</param>
     /// <returns>An IEnumerable<BO.EmployeeInTask> list containing the employee details.</returns>
-    public IEnumerable<BO.EmployeeInTask> ReadAll(Func<DO.Employee, bool>? filter = null)
+    public IEnumerable<BO.Employee> ReadAll(Func<DO.Employee, bool>? filter = null)
     {
         IEnumerable<DO.Employee?> doEmployees;// Reads the list of the all employees from the DAL.
         if (filter is not null)
@@ -99,11 +100,12 @@ internal class EmployeeImplementation : BlApi.IEmployee
         else
             doEmployees = _dal.Employee.ReadAll();
         return (from doEmployee in doEmployees
-                select new BO.EmployeeInTask()
+                select new BO.Employee()
                 {
                     Id = doEmployee.Id,
                     Name = doEmployee.Name,
-                });
+                    Email = doEmployee.Email, //we need to complite it
+                }) ;
     }
     /// <summary>
     /// Deletes an employee from the system.
