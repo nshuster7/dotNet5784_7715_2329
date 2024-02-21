@@ -5,7 +5,7 @@ public enum WorkStatus
 }
 public enum Type
 {
-    Beginner, AdvancedBeginner, Intermediate, Advanced, Expert
+    Beginner, AdvancedBeginner, Intermediate, Advanced, Expert, All
 }
 public enum TaskStatus
 {

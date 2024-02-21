@@ -27,11 +27,19 @@ public partial class EmployeeListWindow : Window
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public IEnumerable<BO.EmployeeInTask> EmployeeList
     {
-        get { return (IEnumerable<BO.EmployeeInTask>)GetValue(CourseListProperty); }
-        set { SetValue(CourseListProperty, value); }
+        get { return (IEnumerable<BO.EmployeeInTask>)GetValue(EmployeeListProperty); }
+        set { SetValue(EmployeeListProperty, value); }
     }
 
-    public static readonly DependencyProperty CourseListProperty =
-        DependencyProperty.Register("CourseList", typeof(IEnumerable<BO.EmployeeInTask>), typeof(EmployeeListWindow), new PropertyMetadata(null));
+    public static readonly DependencyProperty EmployeeListProperty =
+        DependencyProperty.Register("EmployeeList", typeof(IEnumerable<BO.EmployeeInTask>), typeof(EmployeeListWindow), new PropertyMetadata(null));
 
+    public BO.Type Type { get; set; } = BO.Type.All;
+
+    private void WorkerListSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+       EmployeeList  = (Type == BO.Type.All) ?
+    s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (BO.Type)item.Type! == Type)!;
+
+    }
 }

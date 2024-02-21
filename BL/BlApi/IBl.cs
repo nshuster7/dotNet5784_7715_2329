@@ -50,7 +50,6 @@ public interface IBl
         }
       
     }
-
    
     /// <summary>
     /// Schedules tasks recursively based on dependencies.
@@ -81,7 +80,6 @@ public interface IBl
                 ScheduleTasks(tasks, task);
         }
     }
-
     public void InitializeDB();
     public void ResetDB();
 }
