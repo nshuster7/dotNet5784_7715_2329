@@ -395,31 +395,8 @@ internal class TaskImplementation : BlApi.ITask
                where Tools.CanTaskBeAssignedFor(item.Id, empId) && IsTaskAvailable(task)
                select new BO.TaskInList { Id = item.Id, Alias = item.Alias, Description = item.Description, Status = Tools.GetStatus(item) };
     }
-    /// <summary>
-    /// Gets the alias of the current task assigned to a specific employee,
-    /// or null if the employee does not have a current task.
-    /// </summary>
-    /// <param name="idEmp">The ID of the employee.</param>
-    /// <returns>The alias of the employee's current task, or null.</returns>
-    public string? GetCurrentTaskAlias( int? idEmp)
-    {
-        DO.Task? t = _dal.Task.Read(task => task.EmployeeId == idEmp);
-        if (t is not null)
-            return t.Alias;
-        return null;
-    }
-    /// <summary>
-    /// Gets information about the current task assigned to a specific employee, or null if the employee does not exist or does not have a current task.
-    /// </summary>
-    /// <param name="idEmp">The ID of the employee.</param>
-    /// <returns>A BO.TaskInEmployee object with details of the employee's current task, or null.</returns>
-    public TaskInEmployee? GetTaskInEmployee( int? idEmp)
-    {
-        int? id = Tools.GetCurrentTaskId(idEmp);
-        if (id == null) return null;
-        // Creates a BO.TaskInEmployee object with the task details.
-        return new BO.TaskInEmployee { Id = (int)id, Alias = GetCurrentTaskAlias(idEmp) };
-    }
+    
+   
     /// <summary>
     /// Gets information about an employee given their ID, or null if no employee with that ID exists.
     /// </summary>

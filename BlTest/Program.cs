@@ -193,9 +193,9 @@ partial class Program
 
     static void ReadAllE()
     {
-        List<BO.EmployeeInTask> list;
+        List<BO.Employee> list;
         list = s_bl.Employee.ReadAll().ToList();
-        foreach (BO.EmployeeInTask? worker in list)
+        foreach (BO.Employee? worker in list)
             Console.WriteLine(worker);
     }
 

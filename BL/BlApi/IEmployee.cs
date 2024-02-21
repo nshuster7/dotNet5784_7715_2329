@@ -29,7 +29,7 @@ public interface IEmployee
     /// </summary>
     /// <param name="id">The employee ID.</param>
     void Delete(int id);
-    public IEnumerable<BO.EmployeeInTask> ReadAll(Func<DO.Employee, bool>? filter = null);
+    public IEnumerable<BO.Employee> ReadAll(Func<DO.Employee, bool>? filter = null);
     public List<EmployeeInTask>? GetSortedEmployees();
 
 }

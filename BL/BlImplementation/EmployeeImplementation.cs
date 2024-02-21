@@ -68,33 +68,15 @@ internal class EmployeeImplementation : BlApi.IEmployee
             Type = (BO.Type?)doEmployee.Type
         };
     }
-    //public IEnumerable<BO.Employee> ReadAll(Func<DO.Employee, bool>? filter = null)
-    //{
-    //    IEnumerable<DO.Employee?> doEmployees;
-    //    if (filter is not null)
-    //        doEmployees = _dal.Employee.ReadAll(filter);
-    //    else
-    //        doEmployees = _dal.Employee.ReadAll();
-    //    return (from doEmployee in doEmployees
-    //            select new BO.Employee()
-    //            {
-    //                Id = doEmployee.Id,
-    //                Name = doEmployee.Name,
-    //                Email = doEmployee.Email,
-    //                HourlyRate = doEmployee.HourlyRate,
-    //                Status = (BO.WorkStatus?)doEmployee.WorkStatus,
-    //                Type = (BO.Type?)doEmployee.Type,
-    //                CurrentTaskId = Tools.GetTaskInEmployee(_dal, doEmployee.Id)
-    //            });
-    //}
     /// <summary>
     /// Gets a list of all employees in the system, or a filtered list based on a filter function.
     /// </summary>
     /// <param name="filter">A filter function to get a filtered list (optional).</param>
     /// <returns>An IEnumerable<BO.EmployeeInTask> list containing the employee details.</returns>
+
     public IEnumerable<BO.Employee> ReadAll(Func<DO.Employee, bool>? filter = null)
     {
-        IEnumerable<DO.Employee?> doEmployees;// Reads the list of the all employees from the DAL.
+        IEnumerable<DO.Employee?> doEmployees;
         if (filter is not null)
             doEmployees = _dal.Employee.ReadAll(filter);
         else
@@ -104,9 +86,28 @@ internal class EmployeeImplementation : BlApi.IEmployee
                 {
                     Id = doEmployee.Id,
                     Name = doEmployee.Name,
-                    Email = doEmployee.Email, //we need to complite it
-                }) ;
+                    Email = doEmployee.Email,
+                    HourlyRate = doEmployee.HourlyRate,
+                    Status = (BO.WorkStatus?)doEmployee.WorkStatus,
+                    Type = (BO.Type?)doEmployee.Type,
+                    CurrentTaskId = Tools.GetTaskInEmployee(doEmployee.Id)
+                });
     }
+    //public IEnumerable<BO.Employee> ReadAll(Func<DO.Employee, bool>? filter = null)
+    //{
+    //    IEnumerable<DO.Employee?> doEmployees;// Reads the list of the all employees from the DAL.
+    //    if (filter is not null)
+    //        doEmployees = _dal.Employee.ReadAll(filter);
+    //    else
+    //        doEmployees = _dal.Employee.ReadAll();
+    //    return (from doEmployee in doEmployees
+    //            select new BO.Employee()
+    //            {
+    //                Id = doEmployee.Id,
+    //                Name = doEmployee.Name,
+    //                Email = doEmployee.Email, //we need to complite it
+    //            }) ;
+    //}
     /// <summary>
     /// Deletes an employee from the system.
     /// </summary>
