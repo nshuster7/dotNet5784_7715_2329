@@ -7,8 +7,35 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="View employee list" HorizontalAlignment="Left" Margin="372,263,0,0" VerticalAlignment="Top" Height="97" Width="177" Click="ViewEmployeeListClick"/>
-        <Button Content="Data initalization" HorizontalAlignment="Left" Margin="372,125,0,0" VerticalAlignment="Top" Height="97" Width="177" Click="DataInitalization"/>
+        <Button Content="View employee list" HorizontalAlignment="Left" Margin="290,235,0,0" VerticalAlignment="Top" Height="135" Width="215" Click="ViewEmployeeListClick" FontFamily="Baskerville Old Face" FontSize="20" FontWeight="Bold" Foreground="#FF302424">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0.035"/>
+                    <GradientStop Color="#FF1EF8FF" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.55"/>
+                    <GradientStop Color="#FFE1E1E1" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Data initalization" HorizontalAlignment="Left" Margin="290,82,0,0" VerticalAlignment="Top" Height="135" Width="215" Click="DataInitalization" FontFamily="Baskerville Old Face" FontSize="20" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF00FFEB"/>
+                    <GradientStop Color="#FF002421"/>
+                    <GradientStop Color="#FF00514B"/>
+                    <GradientStop Color="#FF00A093"/>
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF00322E"/>
+                    <GradientStop Color="#FF000101"/>
+                    <GradientStop Color="#FF00F1F1" Offset="0.779"/>
+                    <GradientStop Color="#FFDFEDEC"/>
+                    <GradientStop Color="#FF9BDAD7"/>
+                    <GradientStop Color="#FF0B0B0B" Offset="0"/>
+                    <GradientStop Color="#FFD4F1F1" Offset="0.555"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
