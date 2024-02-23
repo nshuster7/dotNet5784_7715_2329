@@ -6,5 +6,6 @@
     <Application.Resources>
         <local:EmployeeType x:Key="EmployeeTypeKey" />
         <local:WorkStatus x:Key="WorkStatusKey" />
+        <local:ConvertIdToContent x:Key="ConvertIdToContentKey" />
     </Application.Resources>
 </Application>

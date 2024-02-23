@@ -41,4 +41,15 @@ public partial class EmployeeListWindow : Window
         EmployeeList = (Type == BO.Type.All) ?
             s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (BO.Type)item.Type! == Type)!;
     }
+
+    private void AddEmployee(object sender, SelectionChangedEventArgs e)
+    {
+        new EmployeeWindow().ShowDialog();
+    }
+
+    private void UpdateEmployee(object sender, SelectionChangedEventArgs e)
+    {
+        BO.Employee? Employee= (sender as ListView)?.SelectedItem as BO.Employee;
+        new EmployeeWindow(Employee!.Id).ShowDialog();  
+    }
 }
