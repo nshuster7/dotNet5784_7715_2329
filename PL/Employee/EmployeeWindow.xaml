@@ -8,29 +8,29 @@
         Title="EmployeeWindow" Height="450" Width="800"
         DataContext="{Binding CurrentEmployee, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid>
-        <Label Content="Id:" HorizontalAlignment="Left" Margin="322,126,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
-        <TextBox Text= "{Binding Id, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-                 HorizontalAlignment="Left" Margin="368,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="NaN" Width="120"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="298,99,0,0" VerticalAlignment="Top" Height="26" Width="47" FontSize="14" FontFamily="Arial"/>
         <TextBox Text= "{Binding Name, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-                 HorizontalAlignment="Left" Margin="368,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            HorizontalAlignment="Left" Margin="368,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
+        <Label Content="Id:" HorizontalAlignment="Left" Margin="322,130,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
+        <TextBox Text= "{Binding Id, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
+                 HorizontalAlignment="Left" Margin="368,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="120"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="296,164,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
         <TextBox Text= "{Binding Email, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-                 HorizontalAlignment="Left" Margin="368,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                 HorizontalAlignment="Left" Margin="368,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="291,197,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Margin="368,201,0,0" VerticalAlignment="Top" Width="120" Grid.Row="3" Grid.Column="1" Height="NaN"
+        <ComboBox HorizontalAlignment="Left" Margin="368,199,0,0" VerticalAlignment="Top" Width="120" Height="20"
                ItemsSource="{Binding Source={StaticResource WorkStatusKey }}"
                SelectedValue="{Binding WorkStatus, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="301,236,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Margin="368,238,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox HorizontalAlignment="Left" Margin="368,240,0,0" VerticalAlignment="Top" Width="120"
                ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}"
-               SelectedValue="{Binding Type, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
+               SelectedValue="{Binding Type, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }" Height="20"/>
         <Label Content="HourlyRate:" HorizontalAlignment="Left" Margin="274,275,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
         <TextBox Text="{Binding HourlyRate, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-                 HorizontalAlignment="Left" Margin="368,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                 HorizontalAlignment="Left" Margin="368,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
         <Button Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" 
                 HorizontalAlignment="Left" Margin="42,356,0,0" VerticalAlignment="Top"  Width="90" FontFamily="Arial" FontSize="16" 
-                Height="46" Padding="5" Click="UpdateAddClick">
+                Height="39" Padding="5" Click="UpdateAddClick">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0.059"/>
