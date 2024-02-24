@@ -52,7 +52,7 @@ namespace PL.Employee
         }
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EmployeeProperty =
-            DependencyProperty.Register("CurrentEmployee", typeof(IEnumerable<BO.Employee>), typeof(EmployeeWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentEmployee", typeof(BO.Employee), typeof(EmployeeWindow), new PropertyMetadata(null));
 
         public void UpdateAddClick(object sender, RoutedEventArgs e)
         {
@@ -76,40 +76,40 @@ namespace PL.Employee
             }
         }
 
-        private void AddAndUpdateEmployee(object sender, MouseButtonEventArgs e)
-        {
-            if ((sender as Button)!.Content.ToString() == "Add")
-            {
-                try
-                {
-                    int? id = s_bl.Employee.Create(CurrentEmployee);
-                    MessageBox.Show($"worker {id} was successfuly added!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    Close();
-                }
-                catch (BlAlreadyExistsException excpt)
-                {
-                    MessageBox.Show(excpt.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-                catch (Exception excpt)
-                {
-                    MessageBox.Show(excpt.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-            }
-            else
-                try
-                {
-                    s_bl.Employee.Update(CurrentEmployee!);
-                    MessageBox.Show($"worker {CurrentEmployee.Id} was successfuly added!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    Close();
-                }
-                catch (BlAlreadyExistsException excpt)
-                {
-                    MessageBox.Show(excpt.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-                catch (Exception excpt)
-                {
-                    MessageBox.Show(excpt.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-        }
+        //private void AddAndUpdateEmployee(object sender, MouseButtonEventArgs e)
+        //{
+        //    if ((sender as Button)!.Content.ToString() == "Add")
+        //    {
+        //        try
+        //        {
+        //            int? id = s_bl.Employee.Create(CurrentEmployee);
+        //            MessageBox.Show($"worker {id} was successfuly added!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        //            Close();
+        //        }
+        //        catch (BlAlreadyExistsException excpt)
+        //        {
+        //            MessageBox.Show(excpt.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        //        }
+        //        catch (Exception excpt)
+        //        {
+        //            MessageBox.Show(excpt.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        //        }
+        //    }
+        //    else
+        //        try
+        //        {
+        //            s_bl.Employee.Update(CurrentEmployee!);
+        //            MessageBox.Show($"worker {CurrentEmployee.Id} was successfuly added!", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        //            Close();
+        //        }
+        //        catch (BlAlreadyExistsException excpt)
+        //        {
+        //            MessageBox.Show(excpt.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        //        }
+        //        catch (Exception excpt)
+        //        {
+        //            MessageBox.Show(excpt.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        //        }
+        //}
     }
 }

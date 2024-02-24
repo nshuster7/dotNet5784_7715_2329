@@ -42,14 +42,19 @@ public partial class EmployeeListWindow : Window
             s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (BO.Type)item.Type! == Type)!;
     }
 
-    private void AddEmployee(object sender, SelectionChangedEventArgs e)
+
+    private void AddEmployee(object sender, RoutedEventArgs e)
     {
         new EmployeeWindow().ShowDialog();
+        EmployeeList = (Type == BO.Type.All) ?
+        s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (BO.Type)item.Type! == Type)!;
     }
 
-    private void UpdateEmployee(object sender, SelectionChangedEventArgs e)
+    private void UpdateEmployee(object sender, MouseButtonEventArgs e)
     {
-        BO.Employee? Employee= (sender as ListView)?.SelectedItem as BO.Employee;
-        new EmployeeWindow(Employee!.Id).ShowDialog();  
+        BO.Employee? Employee = (sender as ListView)?.SelectedItem as BO.Employee;
+        new EmployeeWindow(Employee!.Id).ShowDialog();
+        EmployeeList = (Type == BO.Type.All) ?
+        s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (BO.Type)item.Type! == Type)!;
     }
 }
