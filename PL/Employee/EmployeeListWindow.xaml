@@ -20,10 +20,20 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Add:" HorizontalAlignment="Center" Height="50" Width="100" VerticalAlignment="Top" Click="AddEmployee"/>
+            <Button Content="Add:" HorizontalAlignment="Center" Height="50" Width="100" VerticalAlignment="Top" Click="AddEmployee" FontFamily="Arial" FontSize="14">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFD2860C" Offset="1"/>
+                        <GradientStop Color="#FFD2CDC4" Offset="0.563"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <Label Content="Selected Employee:" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}" SelectedValue="{Binding Path=RoleFilter, Mode=TwoWay}"
+            <ComboBox ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}" SelectedValue="{Binding Path= Employee , Mode=TwoWay}" 
  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="WorkerListSelectionChanged"/>
+            <!--<ComboBox ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}"
+ Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
         </Grid>
         <ListView Grid.Row="1" RenderTransformOrigin="0.5,0.5" Margin="5" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" >
             <ListView.RenderTransform>

@@ -20,7 +20,7 @@
         <Label Content="Status:" HorizontalAlignment="Left" Margin="291,197,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
         <ComboBox HorizontalAlignment="Left" Margin="368,199,0,0" VerticalAlignment="Top" Width="120" Height="20"
                ItemsSource="{Binding Source={StaticResource WorkStatusKey }}"
-               SelectedValue="{Binding WorkStatus, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
+               SelectedValue="{Binding Status, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="301,236,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
         <ComboBox HorizontalAlignment="Left" Margin="368,240,0,0" VerticalAlignment="Top" Width="120"
                ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}"

@@ -42,7 +42,6 @@ public partial class EmployeeListWindow : Window
             s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (BO.Type)item.Type! == Type)!;
     }
 
-
     private void AddEmployee(object sender, RoutedEventArgs e)
     {
         new EmployeeWindow().ShowDialog();

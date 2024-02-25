@@ -162,8 +162,6 @@ partial class Program
         }
     }
 
-
-
     static void CreateE()
     {
         Console.WriteLine("Enter ID, the worker's level, cost per hour, email and name:");
