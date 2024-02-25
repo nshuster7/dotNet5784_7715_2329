@@ -51,9 +51,13 @@ public partial class EmployeeListWindow : Window
 
     private void UpdateEmployee(object sender, MouseButtonEventArgs e)
     {
-        BO.Employee? Employee = (sender as ListView)?.SelectedItem as BO.Employee;
-        new EmployeeWindow(Employee!.Id).ShowDialog();
-        EmployeeList = (Type == BO.Type.All) ?
-        s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (BO.Type)item.Type! == Type)!;
+        BO.Employee? employee = (sender as ListView)?.SelectedItem as BO.Employee;
+        if (employee != null)
+        {
+            new EmployeeWindow(employee.Id).ShowDialog();
+            //update the list of the workers after the changes
+            EmployeeList = (Type == BO.Type.All) ?
+            s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (int)item.Type! == (int)Type)!;
+        }
     }
 }

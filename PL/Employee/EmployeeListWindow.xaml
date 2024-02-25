@@ -30,20 +30,10 @@
                 </Button.Background>
             </Button>
             <Label Content="Selected Employee:" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}" SelectedValue="{Binding Path= Employee , Mode=TwoWay}" 
+            <ComboBox ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}" SelectedValue="{Binding Path= Type , Mode=TwoWay}" 
  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="WorkerListSelectionChanged"/>
-            <!--<ComboBox ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}"
- Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
         </Grid>
-        <ListView Grid.Row="1" RenderTransformOrigin="0.5,0.5" Margin="5" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" >
-            <ListView.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.602"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ListView.RenderTransform>
+        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" Grid.ColumnSpan="2" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
