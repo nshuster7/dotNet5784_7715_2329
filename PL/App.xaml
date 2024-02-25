@@ -8,5 +8,27 @@
         <local:WorkStatus x:Key="WorkStatusKey" />
         <local:ConvertIdToContent x:Key="ConvertIdToContentKey" />
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey" />
+        <Style x:Key="myButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#CC7700" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Height" Value="135" />
+            <Setter Property="Width" Value="215" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Orange" Offset="0.035"/>
+                        <GradientStop Color="#FFFFFF" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.55"/>
+                        <GradientStop Color="#FFE1E1E1" Offset="0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#FFD800" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
     </Application.Resources>
 </Application>

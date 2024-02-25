@@ -35,6 +35,7 @@ namespace PL
             switch (result)
             {
                 case MessageBoxResult.OK:
+                    Factory.Get().ResetDB();
                     Factory.Get().InitializeDB();
                     break; 
                 case MessageBoxResult.Cancel:

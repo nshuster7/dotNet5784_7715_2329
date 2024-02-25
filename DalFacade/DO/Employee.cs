@@ -1,4 +1,6 @@
-﻿namespace DO;
+﻿using System.Xml.Linq;
+
+namespace DO;
 /// <summary>
 /// Represents a construction worker with their essential details.
 /// </summary>
@@ -20,4 +22,7 @@ public record Employee
 )
 {
     public Employee() : this(0, " ") { } // Empty constructor for stage 3
+
+
 }
+

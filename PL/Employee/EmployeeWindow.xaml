@@ -29,17 +29,10 @@
         <Label Content="HourlyRate:" HorizontalAlignment="Left" Margin="274,275,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
         <TextBox Text="{Binding HourlyRate, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
                  HorizontalAlignment="Left" Margin="368,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
-        <Button Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" 
+        <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" 
                 HorizontalAlignment="Left" Margin="42,356,0,0" VerticalAlignment="Top"  Width="90" FontFamily="Arial" FontSize="16" 
                 Height="39" Padding="5" Click="UpdateAddClick">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Orange" Offset="0.035"/>
-                    <GradientStop Color="#FFFFFF" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.55"/>
-                    <GradientStop Color="#FFE1E1E1" Offset="0"/>
-                </LinearGradientBrush>
-            </Button.Background>
+         
         </Button>
     </Grid>
 </Window>
