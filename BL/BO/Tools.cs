@@ -16,23 +16,27 @@ public static class Tools
         {
             // Get the property value
             object? value = property.GetValue(obj);
-            // Check if the property is a collection
-            if (property.PropertyType.IsGenericType &&
-                property.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>))
+            if (value != null)
             {
-                // Iterate over the collection and add each item to the string builder
-                foreach (object item in (IEnumerable<object>)value!)
+                // Check if the property is a collection
+                if (property.PropertyType.IsGenericType &&
+                    property.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>))
                 {
-                    sb.AppendLine($"{property.Name}: {item}");
+                    // Iterate over the collection and add each item to the string builder
+                    foreach (object item in (IEnumerable<object>)value!)
+                    {
+                        sb.AppendLine($"{property.Name}: {item}");
+                    }
+                }
+                else
+                {
+                    // Add the property value to the string builder
+                    sb.AppendLine($"{property.Name}: {value}");
                 }
             }
-            else
-            {
-                // Add the property value to the string builder
-                sb.AppendLine($"{property.Name}: {value}");
-            }
         }
-        return sb.ToString();
+            return sb.ToString();
+        
     }
     //public static string ToStringProperty<T>(this T t) where T : struct => 
     //    t.GetType().GetProperties().Aggregate("", (str, prop) => str + "\n" + prop.Name + ": " + prop.GetValue(t, null));
