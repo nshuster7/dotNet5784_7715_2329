@@ -43,7 +43,7 @@
             if (Read(id) == null)
                 throw new DalDoesNotExistException($"Worker with ID={id} does NOT exist");
             else
-                DataSource.Employees.RemoveAt(id);
+                DataSource.Employees.Remove(Read(id)!);
         }
 
         /// <summary>
