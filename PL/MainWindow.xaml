@@ -8,6 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Style="{StaticResource myButtonStyle}" Content="View employee list"  Margin="290,235,0,0"  Click="ViewEmployeeListClick"  />
-        <Button Style="{StaticResource myButtonStyle}" Content="Data initalization"  Margin="290,82,0,0" Click="DataInitalization" />
+        <Button Style="{StaticResource myButtonStyle}" Content="Data initalization"  Margin="290,82,0,0" Click="DataInitalization"/>
+
+
     </Grid>
 </Window>

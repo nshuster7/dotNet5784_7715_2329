@@ -25,7 +25,7 @@ namespace PL
 
         private void ViewEmployeeListClick(object sender, RoutedEventArgs e)
         {
-            new EmployeeListWindow().Show();
+            new EmployeeListWindow().ShowDialog();
         }
 
         private void DataInitalization(object sender, RoutedEventArgs e)

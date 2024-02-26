@@ -15,7 +15,20 @@ internal class EmployeeImplementation : IEmployee
     public int Create(Employee item)
     {
         // Create an XElement representing the employee
-        XElement employeeElem = new XElement("Employee",
+        XElement employeeElem;
+        if (item.Email == null)
+        {
+            employeeElem = new XElement("Employee",
+            new XElement("Id", item.Id),
+            new XElement("Name", item.Name),
+            new XElement("HourlyRate", item.HourlyRate),
+            new XElement("WorkStatus", item.WorkStatus?.ToString()),
+            new XElement("Type", item.Type?.ToString())
+        );
+        }
+        else
+        {
+            employeeElem = new XElement("Employee",
             new XElement("Id", item.Id),
             new XElement("Name", item.Name),
             new XElement("Email", item.Email),
@@ -23,6 +36,7 @@ internal class EmployeeImplementation : IEmployee
             new XElement("WorkStatus", item.WorkStatus?.ToString()),
             new XElement("Type", item.Type?.ToString())
         );
+        }
         // Add the employee element to the XML file
         XElement employeesRoot = XMLTools.LoadListFromXMLElement(s_employees_xml);
         employeesRoot.Add(employeeElem);
