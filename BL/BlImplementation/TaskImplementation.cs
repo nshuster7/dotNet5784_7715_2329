@@ -204,7 +204,7 @@ internal class TaskImplementation : BlApi.ITask
         }
         catch (DO.DalDoesNotExistException ex)
         {  // Throws an exception if the deletion fails.
-            throw new BO.BlDeletionImpossible($"Failed to delete task from data layer: {ex.Message}", ex);
+            throw new BO.BlDoesNotExistException($"Failed to delete task from data layer: {ex.Message}", ex);
         }
     }
     /// <summary>

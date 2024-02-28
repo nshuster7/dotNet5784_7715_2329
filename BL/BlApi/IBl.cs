@@ -6,6 +6,7 @@ public interface IBl
 {
     public IEmployee Employee { get; }
     public ITask Task { get; }
+    public IUser User { get; }
 
     private static DalApi.IDal dal = DalApi.Factory.Get;
 

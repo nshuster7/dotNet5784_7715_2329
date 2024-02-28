@@ -14,4 +14,6 @@ sealed internal class DalList : IDal
     public ITask Task => new TaskImplementation();
 
     public DateTime? startProjectDate { get { return DataSource.Config.StartProjectDate; }  set { DataSource.Config.StartProjectDate = value; } }
+
+    public IUser User =>  new UserImplementation();
 }
