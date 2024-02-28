@@ -51,7 +51,7 @@ namespace PL.Task
                 }
                 else
                 {
-                    BO.Task t = new BO.Task { Id = CurrentTask.Id, Alias = CurrentTask.Alias, Description = CurrentTask.Description, Status = CurrentTask.Status };
+                    BO.Task t = new BO.Task{ Id = CurrentTask.Id, Alias = CurrentTask.Alias, Description = CurrentTask.Description, Status = CurrentTask.Status };
                     s_bl.Task.Update(t);
                     MessageBox.Show("The Task has been updated successfully", "message", MessageBoxButton.OK);
                 }

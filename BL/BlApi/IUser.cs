@@ -24,8 +24,6 @@ namespace BlApi
         /// <returns>User</returns>
         public User Read(int userID);
 
-      
-
         /// <summary>
         /// Gets user's ID and password and resets his password
         /// </summary>
