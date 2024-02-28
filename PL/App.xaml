@@ -8,7 +8,7 @@
         <local:WorkStatus x:Key="WorkStatusKey" />
         <local:ConvertIdToContent x:Key="ConvertIdToContentKey" />
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey" />
-        <Style x:Key="myButtonStyle" TargetType="Button">
+        <Style x:Key="BaseControlStyle" TargetType="Control">
             <Setter Property="Foreground" Value="#CC7700" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="VerticalAlignment" Value="Top" />
@@ -30,5 +30,34 @@
             <Setter Property="BorderBrush" Value="#FFD800" />
             <Setter Property="BorderThickness" Value="1" />
         </Style>
+
+        <Style x:Key="myButtonStyle" BasedOn="{StaticResource BaseControlStyle}" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property = "IsMouseOver" Value = "True">
+                    <Setter Property = "Foreground" Value = "DarkOrange" />
+                </Trigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.300" Storyboard.TargetProperty="FontSize" To="28" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.800" Storyboard.TargetProperty="FontSize" To="18" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+     
+
     </Application.Resources>
 </Application>

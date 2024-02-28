@@ -49,7 +49,7 @@
     <Name>Khaled Al-Wazir</Name>
     <Email>KhaledAl-Wazir@example.com</Email>
     <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
+    <WorkStatus>Terminated</WorkStatus>
     <Type>Expert</Type>
   </Employee>
   <Employee>
@@ -183,6 +183,13 @@
     <Name>Moshe Baruch</Name>
     <HourlyRate>500</HourlyRate>
     <WorkStatus>Active</WorkStatus>
+    <Type>AdvancedBeginner</Type>
+  </Employee>
+  <Employee>
+    <Id>3456789</Id>
+    <Name>כעיח</Name>
+    <HourlyRate>400</HourlyRate>
+    <WorkStatus>Passive</WorkStatus>
     <Type>AdvancedBeginner</Type>
   </Employee>
 </Employees>
