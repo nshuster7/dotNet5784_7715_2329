@@ -15,7 +15,7 @@ namespace BlApi
         /// Return a list of the users
         /// </summary>
         /// <returns>IEnumerable<User?></returns>
-        public IEnumerable<User?> Read();
+        public IEnumerable<User?> ReadAll(Func<DO.User, bool>? filter = null);
 
         /// <summary>
         /// Gets user's ID and returns user with this ID

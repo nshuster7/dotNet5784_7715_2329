@@ -10,16 +10,16 @@
     <Grid>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="298,99,0,0" VerticalAlignment="Top" Height="26" Width="47" FontSize="14" FontFamily="Arial"/>
         <TextBox Text= "{Binding Name, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-            HorizontalAlignment="Left" Margin="368,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto" Height="20"/>
+            HorizontalAlignment="Left" Margin="368,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="20"/>
         <Label Content="Id:" HorizontalAlignment="Left" Margin="322,130,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
         <TextBox Text= "{Binding Id, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
                  IsEnabled="{Binding Id, Converter={StaticResource ConvertIdToBoolKey} ,Mode=OneTime}" 
-                 HorizontalAlignment="Left" Margin="368,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="120"/>
+                 HorizontalAlignment="Left" Margin="368,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="150"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="296,164,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
         <TextBox Text= "{Binding Email, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
                  HorizontalAlignment="Left" Margin="368,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="291,197,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>
-        <ComboBox HorizontalAlignment="Left" Margin="368,199,0,0" VerticalAlignment="Top" Width="120" Height="20"
+        <ComboBox HorizontalAlignment="Left" Margin="368,199,0,0" VerticalAlignment="Top" Width="150" Height="20"
                ItemsSource="{Binding Source={StaticResource WorkStatusKey }}"
                SelectedValue="{Binding Status, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="301,236,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14"/>

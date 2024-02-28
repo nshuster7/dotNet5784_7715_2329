@@ -14,13 +14,13 @@ namespace PL.Task
             ID = Id1;
             if (Id1 == 0)
             {
-                CurrentTask = new BO.Task { Id = 0 };
+                CurrentTask = new BO.TaskInList { Id = 0 };
             }
             else
             {
                 try
                 {
-                    CurrentTask = s_bl.Task.Read(Id1)!;
+                    CurrentTask = s_bl.Task.ReadAllTaskInList().FirstOrDefault(t=> t.Id== Id1)!;
                 }
                 catch (Exception except)
                 {
@@ -29,14 +29,14 @@ namespace PL.Task
             }
         }
 
-        public BO.Task CurrentTask
+        public BO.TaskInList CurrentTask
         {
-            get { return (BO.Task)GetValue(TaskProperty); }
+            get { return (BO.TaskInList)GetValue(TaskProperty); }
             set { SetValue(TaskProperty, value); }
         }
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskProperty =
-            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentTask", typeof(BO.TaskInList), typeof(TaskWindow), new PropertyMetadata(null));
 
         public void UpdateAddClick(object sender, RoutedEventArgs e)
         {
@@ -45,12 +45,14 @@ namespace PL.Task
             {
                 if (ID == 0)
                 {
-                    s_bl.Task.Create(CurrentTask);
+                    BO.Task t= new BO.Task{Id= CurrentTask.Id,Alias=CurrentTask.Alias,Description=CurrentTask.Description,Status=CurrentTask.Status};
+                    s_bl.Task.Create(t);
                     MessageBox.Show("The Task has been added successfully", "message", MessageBoxButton.OK);
                 }
                 else
                 {
-                    s_bl.Task.Update(CurrentTask);
+                    BO.Task t = new BO.Task { Id = CurrentTask.Id, Alias = CurrentTask.Alias, Description = CurrentTask.Description, Status = CurrentTask.Status };
+                    s_bl.Task.Update(t);
                     MessageBox.Show("The Task has been updated successfully", "message", MessageBoxButton.OK);
                 }
             }
