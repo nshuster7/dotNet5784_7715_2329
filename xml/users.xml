@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUser>
+	<User>
+		<ID>100000000</ID>
+		<Name>Sara</Name>
+		<Password>111110</Password>
+		<IsManeger>false</IsManeger>
+	</User>
+	<User>
+		<ID>100000001</ID>
+		<Name>Rebeka</Name>
+		<Password>111111</Password>
+		<IsManeger>false</IsManeger>
+	</User>
+	<User>
+		<ID>100000002</ID>
+		<Name>Rachel</Name>
+		<Password>111112</Password>
+		<IsManeger>false</IsManeger>
+	</User>
+	<User>
+		<ID>100000003</ID>
+		<Name>Leah</Name>
+		<Password>111113</Password>
+		<IsManeger>false</IsManeger>
+	</User>
+	<User>
+		<ID>100000005</ID>
+		<Name>Adina</Name>
+		<Password>100005</Password>
+		<IsManeger>true</IsManeger>
+	</User>
+</ArrayOfUser>

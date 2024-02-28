@@ -1,4 +1,6 @@
-﻿namespace Dal;
+﻿using DO;
+
+namespace Dal;
 internal static class DataSource
 {
     internal static class Config
@@ -14,4 +16,5 @@ internal static class DataSource
     internal static List<DO.Employee> Employees { get; } = new();
     internal static List<DO.Dependency> Dependencies { get; } = new();
     internal static List<DO.Task> Tasks { get; } = new();
+    internal static List<DO.User> Users { get; } = new();
 }

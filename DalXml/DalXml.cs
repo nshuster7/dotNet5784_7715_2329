@@ -16,6 +16,6 @@ sealed internal class DalXml : IDal
     public IEmployee Employee => new EmployeeImplementation();
 
     public ITask Task =>  new TaskImplementation();
-
+    public IUser User => new UserImplementation();
     public DateTime? startProjectDate { get { return Config.GetProjectDate("StartProjectDate"); } set { Config.SetProjectDate("StartProjectDate", value); } }
 }
