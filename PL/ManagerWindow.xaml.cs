@@ -5,11 +5,11 @@ using System.Windows;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ManagerWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ManagerWindow : Window
     {
-        public MainWindow()
+        public ManagerWindow()
         {
             InitializeComponent();
         }
