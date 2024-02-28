@@ -7,11 +7,11 @@ public class Task
     public string? Description { get; set; }
     public DateTime? CreatedAtDate { get; init; }
     public TaskStatus Status { get; set; }
-    public List<TaskInList>? Dependencies { get; set; }
+    public List<TaskInList>? Dependencies { get; set; }//
     public TimeSpan? RequiredEffortTime { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? ScheduledDate { get; set; }
-    public DateTime? ForecastDate { get; set; }
+    public DateTime? ForecastDate { get; set; }//
     public DateTime? CompleteDate { get; set; }
     public string? Deliverables { get; set; }
     public string? Remarks { get; set; }

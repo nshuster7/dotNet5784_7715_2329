@@ -14,9 +14,20 @@ namespace PL
             InitializeComponent();
         }
 
-        private void ViewEmployeeListClick(object sender, RoutedEventArgs e)
+        private void DataReset(object sender, RoutedEventArgs e)
         {
-            new EmployeeListWindow().ShowDialog();
+            MessageBoxResult result = MessageBox.Show("Press OK to reset the data", "Reseting",
+        MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            switch (result)
+            {
+                case MessageBoxResult.OK:
+                    Factory.Get().ResetDB();
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void DataInitalization(object sender, RoutedEventArgs e)
@@ -26,7 +37,6 @@ namespace PL
             switch (result)
             {
                 case MessageBoxResult.OK:
-                    Factory.Get().ResetDB();
                     Factory.Get().InitializeDB();
                     break; 
                 case MessageBoxResult.Cancel:
@@ -34,6 +44,15 @@ namespace PL
                 default: 
                     break; 
             }
+        }
+
+        private void ViewEmployeeListClick(object sender, RoutedEventArgs e)
+        {
+            new EmployeeListWindow().ShowDialog();
+        }
+        private void ViewGantClick(object sender, RoutedEventArgs e)
+        {
+            new GantWindow().ShowDialog();
         }
     }
 }

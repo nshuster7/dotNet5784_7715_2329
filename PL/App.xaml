@@ -5,16 +5,17 @@
              StartupUri="ManagerWindow.xaml">
     <Application.Resources>
         <local:EmployeeType x:Key="EmployeeTypeKey" />
+        <local:EmployeeType x:Key="TaskTypeKey" />
         <local:WorkStatus x:Key="WorkStatusKey" />
         <local:ConvertIdToContent x:Key="ConvertIdToContentKey" />
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey" />
         <Style x:Key="BaseControlStyle" TargetType="Control">
             <Setter Property="Foreground" Value="#CC7700" />
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="17" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Height" Value="135" />
-            <Setter Property="Width" Value="215" />
+            <Setter Property="Height" Value="120" />
+            <Setter Property="Width" Value="170" />
             <Setter Property="FontFamily" Value="Segoe UI" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Background">
@@ -56,8 +57,6 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
-
-     
 
     </Application.Resources>
 </Application>
