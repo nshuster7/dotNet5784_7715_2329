@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using PL.Employee;
+using PL.Task;
 using System.Windows;
 
 namespace PL
@@ -49,6 +50,10 @@ namespace PL
         private void ViewEmployeeListClick(object sender, RoutedEventArgs e)
         {
             new EmployeeListWindow().ShowDialog();
+        }
+        private void ViewTaskListClick(object sender, RoutedEventArgs e)
+        {
+            new TaskListWindow().ShowDialog();
         }
         private void ViewGantClick(object sender, RoutedEventArgs e)
         {

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using BO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -42,16 +43,26 @@ public partial class TaskListWindow : Window
         s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => (BO.Type)item.Complexity! == Type)!;
     }
 
-    private void UpdateTask(object sender, MouseButtonEventArgs e)
+    private void UpdateTask(object sender, RoutedEventArgs e)
     {
-        BO.TaskInList? Task = (sender as ListView)?.SelectedItem as BO.TaskInList;
-
-        if (Task != null)
+        BO.TaskInList? taskInList = (sender as ListView)?.SelectedItem as BO.TaskInList;
+        BO.Task? task = null;
+        try
         {
-            new TaskWindow(Task.Id).ShowDialog();
-            //update the list of the workers after the changes
-            TaskList = (Type == BO.Type.All) ?
-            s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => (BO.Type)item.Complexity! == Type)!;
+            if (taskInList != null)
+                task = s_bl.Task.Read(taskInList.Id);
+            if (task != null)
+            {
+                new TaskWindow(task.Id).ShowDialog();
+                //update the list of the workers after the changes
+                TaskList = (Type == BO.Type.All) ?
+                 s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => (int?)item.Complexity == (int)Type)!;
+            }
+        }
+        catch (Exception exp)
+        {
+            MessageBox.Show(exp.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            this.Close();
         }
     }
 }

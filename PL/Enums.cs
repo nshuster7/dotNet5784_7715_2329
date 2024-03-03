@@ -17,3 +17,10 @@ internal class WorkStatus : IEnumerable
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
 
+internal class TaskType : IEnumerable
+{
+    static readonly IEnumerable<BO.Type> s_enums =
+(Enum.GetValues(typeof(BO.Type)) as IEnumerable<BO.Type>)!;
+
+    public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+}

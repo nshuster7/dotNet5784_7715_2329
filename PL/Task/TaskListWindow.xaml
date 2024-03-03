@@ -29,13 +29,14 @@
               Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="TaskListSelectionChanged">
             </ComboBox>
         </Grid>
-        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="UpdateTask" Grid.ColumnSpan="2" 
-                  d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFEBCE" SelectionChanged="ListView_SelectionChanged"  >
+        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" Grid.ColumnSpan="2" 
+                  d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFEBCE" MouseDoubleClick="UpdateTask">
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100" />
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="120"/>
-                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="210"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Alias}" Width="120"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="300"/>
                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
                     <GridViewColumn Header="Update" Width="60">
                         <GridViewColumn.CellTemplate>

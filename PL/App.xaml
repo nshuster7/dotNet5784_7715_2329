@@ -5,7 +5,7 @@
              StartupUri="ManagerWindow.xaml">
     <Application.Resources>
         <local:EmployeeType x:Key="EmployeeTypeKey" />
-        <local:EmployeeType x:Key="TaskTypeKey" />
+        <local:TaskType x:Key="TaskTypeKey" />
         <local:WorkStatus x:Key="WorkStatusKey" />
         <local:ConvertIdToContent x:Key="ConvertIdToContentKey" />
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey" />

@@ -10,7 +10,7 @@
         <Button Style="{StaticResource myButtonStyle}" Content="View employee list"  Margin="0,10,0,0"  Click="ViewEmployeeListClick" HorizontalAlignment="Center"/>
         <Button Style="{StaticResource myButtonStyle}" Content="Data initialization"  Margin="58,344,0,0" Click="DataInitalization" Height="60" Width="150"/>
         <Button Style="{StaticResource myButtonStyle}" Content="Reset data"  Margin="583,344,0,0"  Click="DataReset" Height="60" Width="150"/>
-        <Button Style="{StaticResource myButtonStyle}" Content="View task list"  Margin="0,150,0,0" Click="DataInitalization" HorizontalAlignment="Center"/>
+        <Button Style="{StaticResource myButtonStyle}" Content="View task list"  Margin="0,150,0,0" Click="ViewTaskListClick" HorizontalAlignment="Center"/>
         <Button Style="{StaticResource myButtonStyle}" Content="Gant"  Margin="0,284,0,0" Click="ViewGantClick" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GantWindow" Height="450" Width="800">
     <Grid>
-        <Button Style="{StaticResource myButtonStyle}" Content="Manual schedule"  Margin="305,52,0,0" Click="Button_Click"/>
-        <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule"  Margin="305,217,0,0" Click="Automatic schedule"/>
+        <Button Style="{StaticResource myButtonStyle}" Content="Manual schedule"  Margin="305,52,0,0" />
+        <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule"  Margin="305,217,0,0" />
     </Grid>
 </Window>

@@ -14,13 +14,13 @@ namespace PL.Task
             ID = Id1;
             if (Id1 == 0)
             {
-                CurrentTask = new BO.TaskInList { Id = 0 };
+                CurrentTask = new BO.Task { Id = 0 };
             }
             else
             {
                 try
                 {
-                    CurrentTask = s_bl.Task.ReadAllTaskInList().FirstOrDefault(t=> t.Id== Id1)!;
+                    CurrentTask = s_bl.Task.ReadAll().FirstOrDefault(t=> t.Id== Id1)!;
                 }
                 catch (Exception except)
                 {
@@ -29,14 +29,14 @@ namespace PL.Task
             }
         }
 
-        public BO.TaskInList CurrentTask
+        public BO.Task CurrentTask
         {
-            get { return (BO.TaskInList)GetValue(TaskProperty); }
+            get { return (BO.Task)GetValue(TaskProperty); }
             set { SetValue(TaskProperty, value); }
         }
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskProperty =
-            DependencyProperty.Register("CurrentTask", typeof(BO.TaskInList), typeof(TaskWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
         public void UpdateAddClick(object sender, RoutedEventArgs e)
         {
@@ -61,5 +61,7 @@ namespace PL.Task
                 MessageBox.Show(except.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+       
     }
 }

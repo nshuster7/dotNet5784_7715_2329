@@ -41,6 +41,7 @@ public record Task
     public bool ShouldSerializeRequiredEffortTime() { return RequiredEffortTime.HasValue; }
     public bool ShouldSerializeDeadlineDate() { return DeadlineDate.HasValue; }
     public bool ShouldSerializeCompleteDate() { return CompleteDate.HasValue; }
+    public bool ShouldSerializeCreatedAtDate() { return CreatedAtDate.HasValue; }
     public bool ShouldSerializeDeliverables() { return !string.IsNullOrEmpty(Deliverables); }
     public bool ShouldSerializeRemarks() { return !string.IsNullOrEmpty(Remarks); }
     public bool ShouldSerializeComplexity() { return Complexity.HasValue; }
