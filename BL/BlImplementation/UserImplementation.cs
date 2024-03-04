@@ -83,4 +83,6 @@ internal class UserImplementation : BlApi.IUser
             throw new BlWrongValueException("The task has WORNG VALUE!");
         dal.User.ResetPassword(ID, password);
     }
+    private readonly IBl _bl;
+    internal UserImplementation(IBl bl) => _bl = bl;
 }

@@ -250,4 +250,8 @@ internal class EmployeeImplementation : BlApi.IEmployee
            }).OrderBy(emp => emp.Name).ToList();
         return employeeList;// Returns the sorted list of employees.
     }
+
+    private readonly IBl _bl;
+    internal EmployeeImplementation(IBl bl) => _bl = bl;
+
 }

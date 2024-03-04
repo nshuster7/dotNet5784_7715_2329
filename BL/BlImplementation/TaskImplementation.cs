@@ -426,11 +426,11 @@ internal class TaskImplementation : BlApi.ITask
         if(task.EmployeeId != idEmp)// Checks if the task is already assigned to another employee.
             throw new BlDataException($"Task with ID {idT} has done by someone else.");
 
-        if (task.StartDate.HasValue && task.StartDate!= DateTime.Now)// Checks if the task has already started.
+        if (task.StartDate.HasValue && task.StartDate!= _bl.Clock)// Checks if the task has already started.
         {
             throw new BlDataException($"Task with ID {idT} has already started.");
         }
-        var newT=task with { CreatedAtDate = DateTime.Now };
+        var newT=task with { CreatedAtDate = _bl.Clock };
 
         _dal.Task.Update(newT);
     }
@@ -452,7 +452,7 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BlDataException($"Task with ID {idT} has already been completed.");
         }
-        var newT = task with { CompleteDate = DateTime.Now };// Updates the completion date and time of the task.
+        var newT = task with { CompleteDate = _bl.Clock };// Updates the completion date and time of the task.
         _dal.Task.Update(newT);
     }
     /// <summary>
@@ -498,4 +498,8 @@ internal class TaskImplementation : BlApi.ITask
     /// <returns>Tasks grouped by status (key) and task objects (value).</returns>
     public IEnumerable<IGrouping<BO.TaskStatus, DO.Task?>> GroupTasksByStatus()
         => _dal.Task.ReadAll().GroupBy(task => Tools.GetStatus(task!));
+
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;
+
 }
