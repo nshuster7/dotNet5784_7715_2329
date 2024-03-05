@@ -38,10 +38,10 @@
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Alias}" Width="120"/>
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="300"/>
                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
-                    <GridViewColumn Header="Update" Width="60">
+                    <GridViewColumn Header="Delete" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Background="Orange" Foreground="Brown" Width="50" Height="20" FontSize="10" Content="Update" MouseDoubleClick="UpdateTask"/>
+                               <Button Background="Orange" Foreground="Brown" Width="50" Height="20" FontSize="10" Content="Delete" Click="Button_Click" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

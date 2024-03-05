@@ -65,4 +65,10 @@ public partial class TaskListWindow : Window
             this.Close();
         }
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        var x=((sender as Button).DataContext as TaskInList);
+        s_bl.Task.Delete(x.Id);
+    }
 }

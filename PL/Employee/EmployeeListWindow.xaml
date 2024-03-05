@@ -28,7 +28,7 @@
               Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="WorkerListSelectionChanged">
             </ComboBox>
         </Grid>
-        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFEBCE"  >
+        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFEBCE"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100" />
@@ -37,10 +37,10 @@
                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
                     <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="100"/>
                     <GridViewColumn Header="HourlyRate" DisplayMemberBinding="{Binding HourlyRate}" Width="40"/>
-                    <GridViewColumn Header="Update" Width="60">
+                    <GridViewColumn Header="Delete" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Background="Orange" Foreground="Brown" Width="50" Height="20" FontSize="10" Content="Update" MouseDoubleClick="UpdateEmployee"/>
+                                <Button Background="Orange" Foreground="Brown" Width="50" Height="20" FontSize="10" Content="Delete" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

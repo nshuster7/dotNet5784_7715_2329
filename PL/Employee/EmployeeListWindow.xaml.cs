@@ -50,5 +50,7 @@ public partial class EmployeeListWindow : Window
             EmployeeList = (Type == BO.Type.All) ?
             s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (int)item.Type! == (int)Type)!;
         }
-    }   
+    }
+
+    
 }

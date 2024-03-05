@@ -358,4 +358,11 @@
     <IsMilestone>false</IsMilestone>
     <Complexity>Beginner</Complexity>
   </Task>
+  <Task>
+    <Id>41</Id>
+    <EmployeeId>0</EmployeeId>
+    <Alias>345678</Alias>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Beginner</Complexity>
+  </Task>
 </ArrayOfTask>
