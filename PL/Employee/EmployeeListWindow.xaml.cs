@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using BO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -52,5 +53,11 @@ public partial class EmployeeListWindow : Window
         }
     }
 
-    
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        var employee = ((sender as Button)!.DataContext as BO.Employee);
+        s_bl.Employee.Delete(employee!.Id);
+        EmployeeList = (Type == BO.Type.All) ?
+        s_bl?.Employee.ReadAll()! : s_bl?.Employee.ReadAll(item => (BO.Type)item.Type! == Type)!;
+    }
 }

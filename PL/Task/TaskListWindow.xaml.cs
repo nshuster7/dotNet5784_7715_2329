@@ -68,7 +68,9 @@ public partial class TaskListWindow : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        var x=((sender as Button).DataContext as TaskInList);
-        s_bl.Task.Delete(x.Id);
+        var task=((sender as Button)!.DataContext as TaskInList);
+        s_bl.Task.Delete(task!.Id);
+        TaskList = (Type == BO.Type.All) ?
+        s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => (BO.Type)item.Complexity! == Type)!;
     }
 }

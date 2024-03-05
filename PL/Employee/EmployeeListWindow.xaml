@@ -40,7 +40,7 @@
                     <GridViewColumn Header="Delete" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Background="Orange" Foreground="Brown" Width="50" Height="20" FontSize="10" Content="Delete" />
+                                <Button Background="Orange" Foreground="Brown" Width="50" Height="20" FontSize="10" Content="Delete" Click="Button_Click" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
