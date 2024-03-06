@@ -23,13 +23,14 @@ namespace PL.Dependency
     /// </summary>
     public partial class DependenciesForTaskWindow : Window
     {
-        public DependenciesForTaskWindow()
+        public DependenciesForTaskWindow(int ID = 0)
         {
-            InitializeComponent();
 
-            SelectedTask = s_bl.Task.Read(CurrentTask.Id)!;
+            SelectedTask = s_bl.Task.Read(ID)!;
             //List<TaskInList>? tasks = SelectedTask.Dependencies;
             DependOnTasks = SelectedTask.Dependencies?.ToImmutableArray() ?? ImmutableArray<TaskInList>.Empty;
+
+            InitializeComponent();
 
         }
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -58,8 +59,6 @@ namespace PL.Dependency
         public BO.Type Type { get; set; } = BO.Type.All;
 
 
-
-
         public ImmutableArray<TaskInList> DependOnTasks
         {
             get { return (ImmutableArray<TaskInList>)GetValue(DependOnTasksProperty); }
@@ -69,6 +68,15 @@ namespace PL.Dependency
         // Using a DependencyProperty as the backing store for DependOnTasks.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DependOnTasksProperty =
             DependencyProperty.Register("DependOnTasks", typeof(ImmutableArray<TaskInList>), typeof(DependenciesForTaskWindow), new PropertyMetadata(null));
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            var task = (TaskInList)checkBox.DataContext;
+            BO.Tools.DeleteDependency(SelectedTask.Id, task.Id);
+            var updatedList = DependOnTasks.Where(t => t.Id != task.Id).ToImmutableArray();
+            DependOnTasks = updatedList;
+        }
 
 
     }

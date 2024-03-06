@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using PL.Dependency;
+using System.Windows;
+using BlApi;
 namespace PL.Task
 {
     /// <summary>
@@ -27,6 +29,7 @@ namespace PL.Task
                     MessageBox.Show(except.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            ProjectStatus = IBl.GetProjectStatus();
         }
 
         public BO.Task CurrentTask
@@ -37,6 +40,18 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskProperty =
             DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+
+
+        public BO.ProjectStatus ProjectStatus
+        {
+            get { return (BO.ProjectStatus)GetValue(ProjectStatusProperty); }
+            set { SetValue(ProjectStatusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ProjectStatus.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ProjectStatusProperty =
+            DependencyProperty.Register("ProjectStatus", typeof(BO.ProjectStatus), typeof(TaskWindow), new PropertyMetadata(null));
+
 
         public void UpdateAddClick(object sender, RoutedEventArgs e)
         {
@@ -62,6 +77,9 @@ namespace PL.Task
             }
         }
 
-       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new DependenciesForTaskWindow(CurrentTask.Id).ShowDialog();
+        }
     }
 }

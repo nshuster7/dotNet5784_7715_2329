@@ -136,7 +136,7 @@ public static class Initialization
                 0,
                 name,
                 description,
-                DateTime.Now,
+                 CreatedAtDate:DateTime.Now,
                  IsMilestone: false,
                 Complexity: complexity
             );

@@ -24,8 +24,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Selected Task:" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
-           
+            
         </Grid>
         <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=DependOnTasks}" Grid.ColumnSpan="2" 
                 d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFEBCE" >
@@ -39,7 +38,7 @@
                     <GridViewColumn Header="Is Dependented" Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox Content="Dependented"/>
+                                <CheckBox Content="Dependented" IsChecked="True" Checked="CheckBox_Checked"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

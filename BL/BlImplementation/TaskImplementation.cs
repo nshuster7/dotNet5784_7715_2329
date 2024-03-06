@@ -46,7 +46,7 @@ internal class TaskImplementation : BlApi.ITask
     0,
     boTask.Alias,
     boTask.Description,
-    boTask.CreatedAtDate,
+    _bl.Clock,
     boTask.RequiredEffortTime,
     false,
     complexity,

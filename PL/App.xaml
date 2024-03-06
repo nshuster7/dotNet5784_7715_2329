@@ -9,6 +9,8 @@
         <local:WorkStatus x:Key="WorkStatusKey" />
         <local:ConvertIdToContent x:Key="ConvertIdToContentKey" />
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey" />
+        <local:TaskStatusToVisibilityConverter x:Key="TaskStatusToVisibilityConverter" />
+        <local:TaskStatusToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style x:Key="BaseControlStyle" TargetType="Control">
             <Setter Property="Foreground" Value="#CC7700" />
             <Setter Property="FontSize" Value="17" />

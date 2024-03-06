@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Employee"
+        
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800"
         DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    
+
     <Grid Margin="-1,4,1,-4">
         <Label Content="Name:" HorizontalAlignment="Left" Margin="97,60,0,0" VerticalAlignment="Top" Height="26" Width="91" FontSize="14" FontFamily="Arial" Background="#FFFFE2B2" HorizontalContentAlignment="Center" RenderTransformOrigin="0.487,-2.563"/>
         <TextBox Text= "{Binding Alias, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
@@ -23,9 +26,13 @@
                ItemsSource="{Binding Source={StaticResource TaskTypeKey }}"
                SelectedValue="{Binding Complexity, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
 
-        <Label Content="Start Date:" HorizontalAlignment="Left" Margin="542,138,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14" RenderTransformOrigin="3.982,3.36" Width="114" HorizontalContentAlignment="Center" Background="#FFFFE2B2"/>
-        <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay}"
-            HorizontalAlignment="Left" Margin="669,138,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Label Content="Start Date:" HorizontalAlignment="Left" Margin="542,138,0,0" VerticalAlignment="Top"
+               FontFamily="Arial" FontSize="14" RenderTransformOrigin="3.982,3.36" Width="114" HorizontalContentAlignment="Center" Background="#FFFFE2B2"
+               IsEnabled="{Binding ElementName=scedualedDateTxtBox, Path=IsEnabled}"/>
+        <DatePicker x:Name="scedualedDateTxtBox" SelectedDate="{Binding StartDate, Mode=TwoWay}"
+            HorizontalAlignment="Left" Margin="669,102,0,0" VerticalAlignment="Top" Width="auto"
+            IsEnabled="{Binding ProjectStatus, Converter={StaticResource TaskStatusToVisibilityConverter},Mode=OneTime, ConverterParameter=ScheduledDate}"/>
+
 
         <Label Content="Employee ID:" HorizontalAlignment="Left" Margin="99,251,0,0" FontFamily="Arial" FontSize="14" Background="#FFFFE2B2" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Employee, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
@@ -58,7 +65,7 @@
         <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" Margin="43,368,0,0"  Width="90" FontFamily="Arial" FontSize="16"
                 Height="39" Padding="5" Click="UpdateAddClick"/>
         <Button Style="{StaticResource myButtonStyle}" Content="Dependencies" Margin="542,368,0,0"
-                Height="38" Width="146" FontFamily="Arial" FontSize="16" Padding="5"/>
+                Height="38" Width="146" FontFamily="Arial" FontSize="16" Padding="5" Click="Button_Click" />
     </Grid>
 </Window>
 

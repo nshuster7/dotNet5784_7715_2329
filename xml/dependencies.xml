@@ -21,11 +21,6 @@
     <DependsOnTask>3</DependsOnTask>
   </Dependency>
   <Dependency>
-    <Id>5</Id>
-    <DependentTask>5</DependentTask>
-    <DependsOnTask>4</DependsOnTask>
-  </Dependency>
-  <Dependency>
     <Id>6</Id>
     <DependentTask>6</DependentTask>
     <DependsOnTask>5</DependsOnTask>

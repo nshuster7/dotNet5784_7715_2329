@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -295,6 +296,15 @@ public static class Tools
         if (t is not null)
             return t.Alias;
         return null;
+    }
+    public static void DeleteDependency(int idDepentedTask,int idDependOnTask)
+    {
+        IEnumerable<DO.Dependency?> dep =_dal.Dependency.ReadAll();
+        DO.Dependency? selectedDep=null;
+        if (dep.Any())
+           selectedDep = dep.FirstOrDefault(d => d!.DependentTask == idDepentedTask && d.DependsOnTask == idDependOnTask);
+        if(selectedDep != null)
+            _dal.Dependency.Delete(selectedDep.Id);
     }
 }
 
