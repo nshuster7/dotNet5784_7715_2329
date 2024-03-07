@@ -61,7 +61,7 @@ class TaskStatusToVisibilityConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
-public class BooleanToVisibilityConverter : IValueConverter
+public class TaskStatusToBoolConverter : IValueConverter
 {
     public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
     {
@@ -93,3 +93,17 @@ public class BooleanToVisibilityConverter : IValueConverter
     }
 
 }
+
+//public class TaskStatusToBoolConverter : IValueConverter
+//{
+//    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
+//    {
+//        if ((BO.TaskStatus)value == BO.TaskStatus.OnTrack|| (BO.TaskStatus)value == BO.TaskStatus.Done) return false; return true;  
+//    }
+
+//    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+
+//}

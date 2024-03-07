@@ -2,15 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PL"
-             StartupUri="ManagerWindow.xaml">
+             StartupUri="EmployeeUserWindow.xaml">
     <Application.Resources>
         <local:EmployeeType x:Key="EmployeeTypeKey" />
         <local:TaskType x:Key="TaskTypeKey" />
         <local:WorkStatus x:Key="WorkStatusKey" />
         <local:ConvertIdToContent x:Key="ConvertIdToContentKey" />
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey" />
-        <local:TaskStatusToVisibilityConverter x:Key="TaskStatusToVisibilityConverter" />
-        <local:TaskStatusToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:TaskStatusToVisibilityConverter x:Key="TaskStatusToVisibilityConverterKey" />
+        <local:TaskStatusToVisibilityConverter x:Key="BooleanToVisibilityConverterKey" />
         <Style x:Key="BaseControlStyle" TargetType="Control">
             <Setter Property="Foreground" Value="#CC7700" />
             <Setter Property="FontSize" Value="17" />

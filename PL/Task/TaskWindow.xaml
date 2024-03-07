@@ -31,7 +31,7 @@
                IsEnabled="{Binding ElementName=scedualedDateTxtBox, Path=IsEnabled}"/>
         <DatePicker x:Name="scedualedDateTxtBox" SelectedDate="{Binding StartDate, Mode=TwoWay}"
             HorizontalAlignment="Left" Margin="669,102,0,0" VerticalAlignment="Top" Width="auto"
-            IsEnabled="{Binding ProjectStatus, Converter={StaticResource TaskStatusToVisibilityConverter},Mode=OneTime, ConverterParameter=ScheduledDate}"/>
+            IsEnabled="{Binding ProjectStatus, Converter={StaticResource TaskStatusToVisibilityConverterKey},Mode=OneTime, ConverterParameter=ScheduledDate}"/>
 
 
         <Label Content="Employee ID:" HorizontalAlignment="Left" Margin="99,251,0,0" FontFamily="Arial" FontSize="14" Background="#FFFFE2B2" VerticalAlignment="Top"/>
@@ -62,8 +62,8 @@
         <DatePicker SelectedDate="{Binding CreatedAtDate, Mode=TwoWay}"
             HorizontalAlignment="Left" Margin="669,60,0,0" VerticalAlignment="Top" Width="auto"/>
 
-        <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" Margin="43,368,0,0"  Width="90" FontFamily="Arial" FontSize="16"
-                Height="39" Padding="5" Click="UpdateAddClick"/>
+        <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" Margin="43,368,0,0"  
+                Width="90" FontFamily="Arial" FontSize="16" Height="39" Padding="5" Click="UpdateAddClick"/>
         <Button Style="{StaticResource myButtonStyle}" Content="Dependencies" Margin="542,368,0,0"
                 Height="38" Width="146" FontFamily="Arial" FontSize="16" Padding="5" Click="Button_Click" />
     </Grid>
