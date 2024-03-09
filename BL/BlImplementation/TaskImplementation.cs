@@ -396,7 +396,6 @@ internal class TaskImplementation : BlApi.ITask
                select new BO.TaskInList { Id = item.Id, Alias = item.Alias, Description = item.Description, Status = Tools.GetStatus(item) };
     }
     
-   
     /// <summary>
     /// Gets information about an employee given their ID, or null if no employee with that ID exists.
     /// </summary>

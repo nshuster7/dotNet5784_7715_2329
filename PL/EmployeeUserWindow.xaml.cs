@@ -1,8 +1,7 @@
-﻿using BlApi;
-using PL.Dependency;
+﻿using System.Printing.IndexedProperties;
 using System.Windows;
-
-namespace PL
+using PL.Task;
+namespace PL.Employee
 {
     /// <summary>
     /// Interaction logic for EmployeeUserWindow.xaml
@@ -10,71 +9,36 @@ namespace PL
     public partial class EmployeeUserWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        int ID;
-        public EmployeeUserWindow(int Id1 = 0)
+        public EmployeeUserWindow(int EmployeeUserId)
         {
             InitializeComponent();
-            ID = Id1;
-            if (Id1 == 0)
-            {
-                CurrentTask = new BO.Task { Id = 0 };
-            }
-            else
-            {
-                try
-                {
-                    CurrentTask = s_bl.Task.ReadAll().FirstOrDefault(t => t.Id == Id1)!;
-                }
-                catch (Exception except)
-                {
-                    MessageBox.Show(except.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            ProjectStatus = IBl.GetProjectStatus();
-        }
-        public BO.Task CurrentTask
-        {
-            get { return (BO.Task)GetValue(TaskProperty); }
-            set { SetValue(TaskProperty, value); }
-        }
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TaskProperty =
-            DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(EmployeeUserWindow), new PropertyMetadata(null));
-
-
-        public BO.ProjectStatus ProjectStatus
-        {
-            get { return (BO.ProjectStatus)GetValue(ProjectStatusProperty); }
-            set { SetValue(ProjectStatusProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ProjectStatus.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ProjectStatusProperty =
-            DependencyProperty.Register("ProjectStatus", typeof(BO.ProjectStatus), typeof(EmployeeUserWindow), new PropertyMetadata(null));
-
-
-        public void UpdateAddClick(object sender, RoutedEventArgs e)
-        {
-            Close();
             try
             {
-                if (ID == 0)
-                {
-                    BO.Task t = new BO.Task { Id = CurrentTask.Id, Alias = CurrentTask.Alias, Description = CurrentTask.Description, Status = CurrentTask.Status };
-                    s_bl.Task.Create(t);
-                    MessageBox.Show("The Task has been added successfully", "message", MessageBoxButton.OK);
-                }
-                else
-                {
-                    BO.Task t = new BO.Task { Id = CurrentTask.Id, Alias = CurrentTask.Alias, Description = CurrentTask.Description, Status = CurrentTask.Status };
-                    s_bl.Task.Update(t);
-                    MessageBox.Show("The Task has been updated successfully", "message", MessageBoxButton.OK);
-                }
+                CurrentEmployeeUser = s_bl.Employee.Read(EmployeeUserId)!;
             }
-            catch (Exception except)
+            catch (BO.BlAlreadyExistsException except)
             {
-                MessageBox.Show(except.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxResult result = MessageBox.Show(except.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (result == MessageBoxResult.OK)
+                {
+                    new MainWindow().Show();
+                }
             }
+        }
+
+        public BO.Employee CurrentEmployeeUser
+        {
+            get { return (BO.Employee)GetValue(CurrentEmployeeUserProperty); }
+            set { SetValue(CurrentEmployeeUserProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentEmployeeUser.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentEmployeeUserProperty =
+            DependencyProperty.Register("CurrentEmployeeUser", typeof(BO.Employee), typeof(EmployeeUserWindow), new PropertyMetadata(new BO.Employee()));
+
+        private void UpdateAddClick(object sender, RoutedEventArgs e)
+        {//I'm debating whether I need this button. Do with it as you want
+
         }
 
         private void EndTask(object sender, RoutedEventArgs e)
@@ -84,7 +48,16 @@ namespace PL
 
         private void ChooseNewTask(object sender, RoutedEventArgs e)
         {
-
+            if (CurrentEmployeeUser is not null) 
+            {
+                MessageBoxResult result = MessageBox.Show("Do you want to choose a new task?", "message", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No) 
+                {
+                    return;
+                }
+                EndTask(sender, e);
+            }
+ //           new TaskListWindow(CurrentEmployeeUser).Show();
         }
     }
 }
