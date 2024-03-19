@@ -102,4 +102,10 @@
     <Password>87654321</Password>
     <IsManeger>true</IsManeger>
   </User>
+  <User>
+    <ID>1234</ID>
+    <Name>yosi</Name>
+    <Password>5454</Password>
+    <IsManeger>true</IsManeger>
+  </User>
 </ArrayOfUser>

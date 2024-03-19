@@ -26,18 +26,31 @@ namespace PL
     public partial class SignUpWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get();
-        AdminAccess adminAccess; //for admin access or customer
+        
         /// <summary>
         /// Constructor,Building an instance of SignUpWindow
         /// </summary>
         /// <param name="adA"></param>
-        public SignUpWindow(AdminAccess adA)
+        public SignUpWindow()
         {
             InitializeComponent();
-            adminAccess = adA;
+            
         }
+
+
+        public bool ChBox
+        {
+            get { return (bool)GetValue(ChBoxProperty); }
+            set { SetValue(ChBoxProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ChBox.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ChBoxProperty =
+            DependencyProperty.Register("ChBox", typeof(bool), typeof(SignUpWindow), new PropertyMetadata(false));
+
+
         /// <summary>
-        /// Button to Sign Up as an Admin or a customer
+        /// Button to Sign Up as an Admin or an employee
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -47,96 +60,58 @@ namespace PL
             StackPanel stack = (StackPanel)button.Parent;
 
             TextBox userNameTextBox = (TextBox)stack.Children[3];
-            PasswordBox passwordTextBox = (PasswordBox)stack.Children[5];
-            //string wrongInput = "";
-            //string name = tbName.Text;
-            //string userEmail = tbUserEmail.Text;
-            //string userAddress = tbUserAddress.Text;
-            //string userName = tbUserName.Text;
-            //string passcode = tbPasscode.Password;
-            //if (name == "")
-            //{
-            //    wrongInput += "Name is missing\n";
-            //    tbName.BorderBrush = Brushes.Red;
-            //    //MessageBox.Show("Name is missing", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-            //bool isValidEmail = true;
-            //try
-            //{
-            //    var mail = new MailAddress(userEmail);
-            //    isValidEmail = mail.Host.Contains(".");
-            //    if (!isValidEmail)//checks if the mail is valid
-            //    {
-            //        wrongInput += "UserEmail is invalid\n";
-            //        tbUserEmail.BorderBrush = Brushes.Red;
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    wrongInput += "UserEmail is invalid\n";
-            //    tbUserEmail.BorderBrush = Brushes.Red;
-            //}
-            //if (userEmail == "")
-            //{
-            //    wrongInput += "UserEmail is Missing\n";
-            //    tbUserEmail.BorderBrush = Brushes.Red;
-            //}
+            TextBox userIdTextBox = (TextBox)stack.Children[5];
+            PasswordBox passwordTextBox = (PasswordBox)stack.Children[7];
+            string userName = (string)userNameTextBox.Text;
+            string userIDstr = (string)userIdTextBox.Text;
+            string password = (string)passwordTextBox.Password;
+            bool isManager = ChBox;
 
+            string wrongInput = "";
 
-            //if (userAddress == "")
-            //{
-            //    wrongInput += "UserAddress is Missing\n";
-            //    tbUserAddress.BorderBrush = Brushes.Red;
-            //}
-            //if (userName == "")
-            //{
-            //    wrongInput += "UserName is Missing\n";
-            //    tbUserName.BorderBrush = Brushes.Red;
-            //}
-            //if (passcode == "")
-            //{
-            //    wrongInput += "Password is Missing\n";
-            //    tbPasscode.BorderBrush = Brushes.Red;
-            //}
-            //if (wrongInput != "")
-            //{
-            //    MessageBox.Show(wrongInput, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}
-            //try
-            //{
-            //    BO.User user;
-            //    if (adminAccess == AdminAccess.No) //if itsn't an admin
-            //    {
-            //        user = new BO.User() { Name = name, UserName = userName, UserEmail = userEmail, UserAddress = userAddress, Passcode = passcode, AdminAccess = false };
-            //        bl.User.Add(user);
-            //        MessageBox.Show("Signing up has ended successfully👌", "Good Luck", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            //        BO.Cart cart = new BO.Cart() { CustomerAddress = user.UserAddress, CustomerEmail = user.UserEmail, CustomerName = user.Name, Items = new List<BO.OrderItem>() };
-            //        CatalogWindow cw = new CatalogWindow(cart);//create new ProductListWindow
-            //        Close();
-            //        cw.ShowDialog();
-            //    }
-            //    else //if it is an admin
-            //    {
-            //        user = new BO.User() { Name = name, UserName = userName, UserEmail = userEmail, UserAddress = userAddress, Passcode = passcode, AdminAccess = true };
-            //        bl.User.Add(user);
-            //        MessageBox.Show("Signing up has ended successfully👌", "Good Luck", MessageBoxButton.OK, MessageBoxImage.Information);
-            //        ManagerWindow aw = new ManagerWindow(); //create new Admin Window
-            //        Close();
-            //        aw.ShowDialog();
-
-            //    }
-
-            //}
-            //catch (BO.BlAlreadyExistsException ex)
-            //{
-            //    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
+            if (userName == "")
+            {
+                wrongInput += "Name is missing\n";
+                userNameTextBox.BorderBrush = Brushes.Red;
+                //MessageBox.Show("Name is missing", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (userIDstr == "")
+            {
+                wrongInput += "UserID is Missing\n";
+                userIdTextBox.BorderBrush = Brushes.Red;
+            }
+            if (password == "")
+            {
+                wrongInput += "Password is Missing\n";
+                passwordTextBox.BorderBrush = Brushes.Red;
+            }
+            int userID;
+            if (!int.TryParse(userIDstr, out userID))
+            {
+                wrongInput += "ID is not valid\n";
+                passwordTextBox.BorderBrush = Brushes.Red;
+            }
+            if (wrongInput != "")
+            {
+                MessageBox.Show(wrongInput, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                BO.User user;
+                user = new BO.User() { Name = userName, ID = userID, Password = password, IsManeger = isManager };
+                bl.User.Create(user);
+                MessageBox.Show("Signing up has ended successfully👌", "Good Luck", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+            }
+            catch (BO.BlAlreadyExistsException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
 
         }
@@ -167,6 +142,6 @@ namespace PL
             //ShowDialog();
         }
 
-
+     
     }
 }

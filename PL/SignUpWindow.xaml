@@ -10,13 +10,14 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         AllowsTransparency="True"
         MouseDown="Window_MouseDown">
     <Border CornerRadius="12">
-        <Border.Background>
+        <!--<Border.Background>
             <ImageBrush ImageSource="/Images/back-image.jpg"
                         Stretch="None"/>
-        </Border.Background>
+        </Border.Background>-->
         <Border CornerRadius="10"                    
             BorderThickness="2"
             Opacity="0.75">
@@ -150,11 +151,11 @@
                              VerticalContentAlignment="Center"
                              Margin="0,0,0,0"
                              Padding="20,0,0,0" TextChanged="textChanged">
-                        <TextBox.Background>
+                        <!--<TextBox.Background>
                             <ImageBrush ImageSource="/Images/user-icon.png"
                                         Stretch="None"
                                         AlignmentX="Left"/>
-                        </TextBox.Background>
+                        </TextBox.Background>-->
                     </TextBox>
 
                     <TextBlock Text="ID"
@@ -175,14 +176,14 @@
                              VerticalContentAlignment="Center"
                              Margin="0,0,0,0"
                              Padding="20,0,0,0" TextChanged="textChanged">
-                        <TextBox.Background>
+                        <!--<TextBox.Background>
                             <ImageBrush ImageSource="/Images/user-icon.png"
                                         Stretch="None"
                                         AlignmentX="Left"/>
-                        </TextBox.Background>
+                        </TextBox.Background>-->
                     </TextBox>
 
-                 
+
                     <TextBlock Text="Password"
                                Foreground="DarkGray"
                                FontSize="12"
@@ -202,11 +203,11 @@
                              Margin="0,0,0,0"
                              PasswordChanged="textChanged"
                              Padding="20,0,0,0">
-                        <PasswordBox.Background>
+                        <!--<PasswordBox.Background>
                             <ImageBrush ImageSource="Images/keyIcon.png"
                                         Stretch="None"
                                         AlignmentX="Left"/>
-                        </PasswordBox.Background>
+                        </PasswordBox.Background>-->
                     </PasswordBox>
                     <Button x:Name="btnSignUp"                          
                             BorderThickness="0"
@@ -214,11 +215,11 @@
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"
-                            Cursor="Hand"                           
-                            Margin="0,30,0,0"
-                            Click="btnSignUp_Click">
+                            Cursor="Hand"
+                            Margin="00,100"
+                            Click="btnSignUp_Click" RenderTransformOrigin="0.534,2.215">
                         <Button.Style>
-                            <Style TargetType="Button">
+                            <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="#462AD8"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
@@ -228,7 +229,7 @@
                             </Style>
                         </Button.Style>
                         <Button.Template>
-                            <ControlTemplate TargetType="Button">
+                            <ControlTemplate TargetType="{x:Type Button}">
                                 <Border Width="150" Height="40"
                                         CornerRadius="20"
                                         Background="{TemplateBinding Background}">
@@ -240,6 +241,8 @@
                     </Button>
 
                 </StackPanel>
+                <CheckBox IsChecked="{Binding ChBox,Mode=TwoWay}" Content="CheckBox" Margin="88,280,283,206" Grid.Row="1" RenderTransformOrigin="-1.045,1"/>
+                <TextBlock HorizontalAlignment="Left" Height="30" Margin="113,279,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Is Manager?" VerticalAlignment="Top" Width="67" Foreground="DarkGray" FontSize="12" FontWeight="Medium"/>
             </Grid>
         </Border>
 

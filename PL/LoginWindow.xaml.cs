@@ -117,7 +117,7 @@ namespace PL
         }
         private void SignInButton(object sender, RoutedEventArgs e)
         {
-            new SignUpWindow(AdminAccess.Yes).ShowDialog();
+            new SignUpWindow().ShowDialog();
         }
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
