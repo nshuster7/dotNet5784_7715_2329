@@ -30,5 +30,6 @@ namespace BlApi
         /// <param name="ID"></param>
         /// <param name="password"></param>
         public void ResetPassword(int ID, string password);
+        public DO.User? GetByUserName(string userName);
     }
 }

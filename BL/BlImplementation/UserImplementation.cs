@@ -77,7 +77,13 @@ internal class UserImplementation : BlApi.IUser
             throw new BO.BlDoesNotExistException($"Failed to delete task from data layer: {ex.Message}", ex);
         }
     }
-   public void ResetPassword(int ID, string password)
+    public DO.User? GetByUserName(string userName)
+    {
+        var user=dal.User.ReadAll(u => u.Name == userName).FirstOrDefault(u => u!.Name == userName);
+        return user;       
+    }
+
+    public void ResetPassword(int ID, string password)
     {
         if (int.IsNegative(ID))//Checking if the ID is negative
             throw new BlWrongValueException("The task has WORNG VALUE!");

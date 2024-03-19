@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="EmployeeUserWindow" Height="450" Width="800"
-        DataContext="{Binding CurrentEmployeeUser, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
     <Grid Margin="-1,4,1,-4">
         <Label Content="Name:" HorizontalAlignment="Left" Margin="97,60,0,0" VerticalAlignment="Top" Height="26" Width="91" FontSize="14" FontFamily="Arial" 
@@ -21,11 +21,11 @@
         <Label Content="Description:" HorizontalAlignment="Left" Margin="97,142,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14" Width="95" 
                Background="#FFFFE2B2" HorizontalContentAlignment="Center"/>
         <TextBox Text= "{Binding Description, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-               HorizontalAlignment="Left" Margin="212,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="164" Height="24"/>
+               HorizontalAlignment="Left" Margin="212,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Width="164" Height="24"/>
 
         <Label Content="Type:" HorizontalAlignment="Left" Margin="97,181,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14" Width="95" 
                HorizontalContentAlignment="Center" Background="#FFFFE2B2" Height="27"/>
-        <TextBox Text= "{Binding Status, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+        <TextBox Text= "{Binding Complexity, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
                         IsEnabled="False" HorizontalAlignment="Left" Margin="212,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="24"/>
 
         <Label Content="Start Date:" HorizontalAlignment="Left" Margin="97,365,0,0" VerticalAlignment="Top" 
@@ -48,14 +48,14 @@
         <TextBox Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
        HorizontalAlignment="Left" Margin="255,221,0,0" VerticalAlignment="Top" Width="121" IsEnabled="False" Height="24"/>
 
-        <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" 
-                Margin="610,204,0,0"  Width="90" FontFamily="Arial" FontSize="16" Height="39" Padding="5" Click="UpdateAddClick"/>
+        <Button Style="{StaticResource myButtonStyle}" Content="To Update" 
+                Margin="610,204,0,0"  Width="90" FontFamily="Arial" FontSize="16" Height="39" Padding="5" Click="UpdateClick"/>
 
-        <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" 
-                Margin="610,255,0,0"  Width="90" FontFamily="Arial" FontSize="16" Height="39" Padding="5" Click="EndTask" />
+        <Button Style="{StaticResource myButtonStyle}" Content="New Task"
+                Margin="610,255,0,0"  Width="90" FontFamily="Arial" FontSize="16" Height="39" Padding="5" Click="ChooseNewTask" />
 
-        <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" 
-                Margin="610,312,0,0"  Width="90" FontFamily="Arial" FontSize="16" Height="39" Padding="5" Click="ChooseNewTask"  />
+        <Button Style="{StaticResource myButtonStyle}" Content="End Task"
+                Margin="610,312,0,0"  Width="90" FontFamily="Arial" FontSize="16" Height="39" Padding="5" Click="EndTask"  />
 
     </Grid>
 </Window>

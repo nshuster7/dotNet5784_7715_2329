@@ -35,15 +35,22 @@ namespace PL
         {
             MessageBoxResult result = MessageBox.Show("Press OK to initalize the data", "Initalizaing",
                 MessageBoxButton.OKCancel, MessageBoxImage.Question);
-            switch (result)
+            try
             {
-                case MessageBoxResult.OK:
-                    Factory.Get().InitializeDB();
-                    break; 
-                case MessageBoxResult.Cancel:
-                    break;
-                default: 
-                    break; 
+                switch (result)
+                {
+                    case MessageBoxResult.OK:
+                        Factory.Get().InitializeDB();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

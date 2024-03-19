@@ -1,6 +1,8 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System.Security.Cryptography;
+
 public static class Initialization
 {
     //private static IEmployee? s_dalEmployee; //stage 1
@@ -8,6 +10,46 @@ public static class Initialization
     //private static IDependency? s_dalDependency; //stage 1
     private static IDal? s_dal;
     private static readonly Random s_rand = new();
+    private static void createUsers()
+    {
+        // Get all employees
+        IEnumerable<Employee> allEmployees = s_dal!.Employee.ReadAll()!;
+
+        // Choose randomly 15 employees
+        IEnumerable<Employee> selectedEmployees = allEmployees.Take(15);
+
+        // Iterate over selected employees to create users
+        foreach (var employee in selectedEmployees)
+        {
+            // Use the employee's ID as the unique identifier for the user
+            int userId = employee.Id;
+
+            // Use the employee's name as the username for the user
+            string username = employee.Name;
+
+            // Generate a random password for the user
+            string password = GenerateRandomPassword();
+
+            // Create the user object
+            User user = new User(
+                userId,
+                username,
+                password,
+                false
+            );
+
+            // Add the user to the data source
+            s_dal.User.Create(user);
+        }
+        var emp1 = s_dal.Employee.Read(e => e.Name == "Moshe Baruch");
+        User nanager1 = new User(emp1!.Id, "Moshe Baruch","12345678",true);
+        var emp2 = s_dal.Employee.Read(e => e.Name == "David Levi");
+        User nanager2 = new User(emp2!.Id, "David Levi", "87654321", true);
+        s_dal.User.Create(nanager1!);
+        s_dal.User.Create(nanager2!);
+    }
+
+    
     private static void createDependency()
     {
         s_dal!.Dependency.Create(new Dependency(0, 2, 1));
@@ -253,13 +295,23 @@ public static class Initialization
         createEmployee();
         createTask();
         createDependency();
+        createUsers();
     }
+
+    private static string GenerateRandomPassword()
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        return new string(Enumerable.Repeat(chars, 8)
+            .Select(s => s[s_rand.Next(s.Length)]).ToArray());
+    }
+
     public static void Reset()
     {
         s_dal = Factory.Get;
         s_dal!.Employee.Clear();
         s_dal!.Task.Clear();
         s_dal!.Dependency.Clear();
+        s_dal!.User.Clear();
         s_dal!.startProjectDate = null;
     }
 }

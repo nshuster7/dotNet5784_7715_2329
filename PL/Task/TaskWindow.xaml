@@ -8,13 +8,11 @@
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800"
         DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-    
-
     <Grid Margin="-1,4,1,-4">
         <Label Content="Name:" HorizontalAlignment="Left" Margin="97,60,0,0" VerticalAlignment="Top" Height="26" Width="91" FontSize="14" FontFamily="Arial" Background="#FFFFE2B2" HorizontalContentAlignment="Center" RenderTransformOrigin="0.487,-2.563"/>
         <TextBox Text= "{Binding Alias, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
             HorizontalAlignment="Left" Margin="212,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Height="20"/>
-        <Label Content="Id:" HorizontalAlignment="Left" Margin="97,103,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14" Width="94" Background="#FFFFE2B2" HorizontalContentAlignment="Center"/>
+        <Label  Content="Id:" HorizontalAlignment="Left" Margin="97,103,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="14" Width="94" Background="#FFFFE2B2" HorizontalContentAlignment="Center"/>
         <TextBox Text= "{Binding Id, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
                  IsEnabled="{Binding Id, Converter={StaticResource ConvertIdToBoolKey} ,Mode=OneTime}"
                  HorizontalAlignment="Left" Margin="211,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="165"/>
@@ -34,8 +32,8 @@
             IsEnabled="{Binding ProjectStatus, Converter={StaticResource TaskStatusToVisibilityConverterKey},Mode=OneTime, ConverterParameter=ScheduledDate}"/>
 
 
-        <Label Content="Employee ID:" HorizontalAlignment="Left" Margin="99,251,0,0" FontFamily="Arial" FontSize="14" Background="#FFFFE2B2" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Employee, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+        <Label   Content="Employee ID:" HorizontalAlignment="Left" Margin="99,251,0,0" FontFamily="Arial" FontSize="14" Background="#FFFFE2B2" VerticalAlignment="Top"/>
+        <TextBox  Text="{Binding Employee, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
          HorizontalAlignment="Left" Margin="212,255,0,0" VerticalAlignment="Top" Width="164" />
 
         <Label Content="Remarks:" HorizontalAlignment="Left" Margin="102,289,0,0" FontFamily="Arial" FontSize="14" Background="#FFFFE2B2" VerticalAlignment="Top" Width="91" HorizontalContentAlignment="Center"/>

@@ -6,13 +6,282 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+         WindowStyle="None"
+         ResizeMode="NoResize"
+         Background="Transparent"
+         AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
+         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <Border CornerRadius="12">
+        <!--<Border.Background>
+            <ImageBrush ImageSource="Images/back-image.jpg"
+                      Stretch="None"/>
+        </Border.Background>-->
+        <Border CornerRadius="10"                    
+     BorderThickness="2"
+     Opacity="0.75">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
 
-    <Grid>
-        <Label Content="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" HorizontalAlignment="Left" Margin="306,108,0,0" VerticalAlignment="Top" Height="207" Width="180" FontSize="20"/>
-        <Button Style="{StaticResource myButtonStyle}" Content="Add One Day"  Margin="325,201,0,0" Click="AdvanceTimeByDay" Height="29" Width="147"/>
-        <Button Style="{StaticResource myButtonStyle}" Content="Add One Year"  Margin="325,264,0,0"  Click="AdvanceTimeByYear" Height="29" Width="147"/>
-        <Button Style="{StaticResource myButtonStyle}" Content="Add One Hour"  Margin="325,233,0,0" Click="AdvanceTimeByHour" Height="29" Width="147"/>
-        <Button Style="{StaticResource myButtonStyle}" Content="Add One Month"  Margin="325,167,0,0"  Click="AdvanceTimeByMonth" Height="29" Width="147"/>
-    </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btnMinimize"                           
+                     BorderThickness="0"
+                     Content="-"
+                     Foreground="White"
+                     FontSize="16"
+                     FontFamily="Montserrat"
+                     Cursor="Hand"
+                     Grid.Column="1"
+                     Click="btnMinimize_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#28AEED"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#278BEF"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                 CornerRadius="9"
+                                 Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="btnClose"                          
+                     BorderThickness="0"
+                     Content="X"
+                     Foreground="White"
+                     FontSize="12"
+                     FontFamily="Montserrat"
+                     Cursor="Hand"
+                     Grid.Column="2"
+                     Click="btnClose_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#DA34AE"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#C62DAE"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                 CornerRadius="9"
+                                 Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <Grid Width="220"
+                     Grid.Row="1"       
+                     Margin="0,35,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="315*"/>
+                    </Grid.RowDefinitions>
+                    <Button                         
+                     BorderThickness="0"
+                     Content="Add One Day"
+                     Foreground="White"
+                     FontSize="12"
+                     FontFamily="Montserrat"
+                     Cursor="Hand"
+                     Click="AdvanceTimeByDay" Grid.RowSpan="2" Grid.Row="2">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#462AD8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+                                 CornerRadius="20"
+                                 Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button                          
+                     BorderThickness="0"
+                     Content="Add One Hour"
+                     Foreground="White"
+                     FontSize="12"
+                     FontFamily="Montserrat"
+                     Cursor="Hand"                           
+                     Margin="0,89,0,0"
+                     Click="AdvanceTimeByHour" Grid.Row="3">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#462AD8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+             CornerRadius="20"
+             Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button                         
+             BorderThickness="0"
+             Content="Add One Month"
+             Foreground="White"
+             FontSize="12"
+             FontFamily="Montserrat"
+             Cursor="Hand"                           
+             Margin="0,-50,0,0"
+             Click="AdvanceTimeByMonth" Grid.RowSpan="4">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#462AD8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+             CornerRadius="20"
+             Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button                           
+                            BorderThickness="0"
+                            Content="Add One Year"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"                           
+                            Margin="0,-146,0,0"
+                            Click="AdvanceTimeByYear" Grid.RowSpan="4">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#462AD8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Label                          
+                        BorderThickness="0"
+                        Content="{Binding CurrentTime, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}"
+                        Foreground="White"
+                        FontSize="30"
+                        FontFamily="Montserrat"                        
+                        Margin="0,-300,0,0"
+                        Grid.RowSpan="4">
+
+                        <Label.Template>
+                            <ControlTemplate TargetType="Label">
+                                <Border Width="auto" Height="60"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}" Margin="-18,293,-18,328">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Label.Template>
+                    </Label>
+                    <Button                           
+                         BorderThickness="0"
+                         Content="To Enter->"
+                         Foreground="White"
+                         FontSize="12"
+                         FontFamily="Montserrat"
+                         Cursor="Hand"                           
+                         Margin="64,241,64,30"
+                         Background="Purple"
+                         Click="LogIn" Grid.Row="3">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="80" Height="40"
+                                       CornerRadius="20"
+                                       Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                    </Button>
+                </Grid>
+            </Grid>
+
+        </Border>
+    </Border>
+
 </Window>
