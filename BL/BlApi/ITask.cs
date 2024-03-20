@@ -18,5 +18,8 @@ public interface ITask
     public void SignUpForTask(int idT, int idEmp);
     public void EndTask(int idT, int idEmp);
     public void StartTask(int idT, int idEmp);
+    public List<DO.Dependency> FindDependencies(int id);
+    public void Rec(List<BO.Task> tasks);
+    public void AutomaticSchedule();
     public IEnumerable<IGrouping<BO.TaskStatus, DO.Task?>> GroupTasksByStatus();
 }

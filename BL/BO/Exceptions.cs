@@ -57,6 +57,12 @@ public class BlNotAppropriateTheProjectStageException : Exception
     public BlNotAppropriateTheProjectStageException(string message, Exception innerException)
           : base(message, innerException) { }
 }
+public class BlScheduledDateException : Exception
+{
+    public BlScheduledDateException(string? message) : base(message) { }
+    public BlScheduledDateException(string message, Exception innerException)
+          : base(message, innerException) { }
+}
 //public class DalXMLFileLoadCreateException : Exception
 //{
 //    public DalXMLFileLoadCreateException(string? message) : base(message) { }

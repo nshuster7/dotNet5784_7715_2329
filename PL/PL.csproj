@@ -14,7 +14,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="back-image.jpg" />
+    <None Remove="blueprint.jpg" />
+    <None Remove="keyIcon.png" />
+    <None Remove="sign.png" />
+    <None Remove="user-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="back-image.jpg" />
+    <Resource Include="blueprint.jpg" />
+    <Resource Include="keyIcon.png" />
+    <Resource Include="sign.png" />
+    <Resource Include="user-icon.png" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using DalApi;
 using System.Data;
 namespace BlImplementation;
 internal class TaskImplementation : BlApi.ITask
@@ -497,6 +498,99 @@ internal class TaskImplementation : BlApi.ITask
     /// <returns>Tasks grouped by status (key) and task objects (value).</returns>
     public IEnumerable<IGrouping<BO.TaskStatus, DO.Task?>> GroupTasksByStatus()
         => _dal.Task.ReadAll().GroupBy(task => Tools.GetStatus(task!));
+    /// <summary>
+    /// This function returns all the dependencies of a task
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public List<DO.Dependency> FindDependencies(int id)
+    {
+        List<DO.Dependency> dependencies = new List<DO.Dependency>();
+
+        dependencies = (from dependency in _dal.Dependency.ReadAll()
+                        where dependency.DependentTask == id
+                        select dependency).ToList();
+        return dependencies;
+    }
+
+    /// <summary>
+    /// This function makes a schedule automatically
+    /// </summary>
+    /// <exception cref="BO.BlDoesNotExistsException"></exception>
+    public void AutomaticSchedule()
+    {
+        if (_dal.startProjectDate == null)
+            throw new BlScheduledDateException("There is not start project date yet");
+        else
+        {
+            List<BO.Task> tasks = (from DO.Task task in _dal.Task.ReadAll()
+                                   where FindDependencies(task.Id)!.Count == 0
+                                   select Read(task.Id)).ToList();//All the tasks that didn't have dependencies
+            foreach (BO.Task task in tasks)
+            {
+                try
+                {
+                    Tools.UpdateScheduledStartDate(task.Id, (DateTime)_dal.startProjectDate);
+                }
+                catch (DO.DalDoesNotExistException ex)
+                {
+                    throw new BO.BlDoesNotExistException($"Task with ID={task.Id} doe's NOT exists", ex);
+                }
+            }
+
+            List<BO.Task> taskList = (from DO.Task task in _dal.Task.ReadAll()
+                                      where task.ScheduledDate == null
+                                      select Read(task.Id)).ToList();
+            Rec(taskList);
+        }
+    }
+
+    /// <summary>
+    /// Recursive helper function to create an automatic schedule
+    /// </summary>
+    /// <param name="tasks"></param>
+    /// <exception cref="BO.BlDoesNotExistsException"></exception>
+    public void Rec(List<BO.Task> tasks)
+    {
+        if (!tasks.Any())
+            return;
+        else
+        {
+            List<BO.Task> depentsOnTasks = new List<BO.Task>();
+            List<BO.Task> tasksToRemove = new List<BO.Task>();
+            foreach (BO.Task task in tasks)
+            {
+                if (task.Dependencies != null)
+                {
+                    depentsOnTasks = (from BO.TaskInList taskInList in task.Dependencies
+                                      select Read(taskInList.Id)).ToList();
+
+                    if ((depentsOnTasks.FirstOrDefault(t => t.ScheduledDate == null)) == null)//Check that all tasks that my task depends on have a scheduled date
+                    {
+                        DateTime? scheduledDate = IBl.ScheduleDateOffer(task);
+                        if (scheduledDate != null)
+                        {
+                            try
+                            {
+                                Tools.UpdateScheduledStartDate(task.Id, (DateTime)scheduledDate);
+                            }
+                            catch (DO.DalDoesNotExistException ex)
+                            {
+                                throw new BO.BlDoesNotExistException($"Task with ID={task.Id} doe's NOT exists", ex);
+                            }
+                            tasksToRemove.Add(task);
+                        }
+                    }
+                }
+            }
+            foreach (BO.Task task in tasksToRemove)
+            {
+                if (tasks.FirstOrDefault(t => t.Id == task.Id) != null)
+                    tasks.Remove(task);
+            }
+            Rec(tasks);
+        }
+    }
 
     private readonly IBl _bl;
     internal TaskImplementation(IBl bl) => _bl = bl;

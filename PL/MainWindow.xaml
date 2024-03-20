@@ -13,6 +13,9 @@
         MouseDown="Window_MouseDown"
          DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Border CornerRadius="12">
+        <Border.Background>
+            <ImageBrush ImageSource="/blueprint.jpg"/>
+        </Border.Background>
         <!--<Border.Background>
             <ImageBrush ImageSource="Images/back-image.jpg"
                       Stretch="None"/>

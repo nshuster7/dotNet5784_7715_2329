@@ -18,6 +18,45 @@ public interface IBl
         if(dal.Task.ReadAll().FirstOrDefault(task=> task!.ScheduledDate!=null && task.StartDate!=null&& task.StartDate<DateTime.Now)!=null)
             projectStatus = BO.ProjectStatus.ExecutionStage;
         return projectStatus;
+        
+    }
+    public static DateTime? ScheduleDateOffer(BO.Task task)
+    {
+        DateTime? dateTime = null;
+        DO.Task _task;
+        IEnumerable<DO.Dependency>? dependencies = (from dependency in dal.Dependency.ReadAll()
+                                                    where dependency.DependentTask == task.Id
+                                                    select dependency);
+        if (dependencies == null && dal.startProjectDate!= null)
+            return dal.startProjectDate;
+        else
+        {
+            List<DO.Task>? tasksList = new();
+            foreach (DO.Dependency dependency in dependencies!)
+            {
+                try
+                {
+                    DO.Task? doTask = dal.Task.Read(dependency.DependsOnTask??0);
+                    if (doTask != null)
+                        tasksList.Add(doTask);
+                }
+                catch (DO.DalDoesNotExistException ex)
+                {
+                    throw new BO.BlDoesNotExistException($"Task with ID={dependency.DependsOnTask} doe's NOT exists", ex);
+                }
+            }
+            if (tasksList.Any())
+            {
+                if (tasksList.FirstOrDefault(t => t.ScheduledDate == null) != null)
+                    throw new BlScheduledDateException($"You cannot enter scheduled date for This with ID={task.Id} task");
+                else
+                {
+                    _task = tasksList.MaxBy(t => Tools.GetMaxDate(t.StartDate, t.ScheduledDate)!.Value.Add(t.RequiredEffortTime ?? TimeSpan.Zero))!;
+                    dateTime = Tools.GetMaxDate(_task.StartDate, _task.ScheduledDate)!.Value.Add(_task.RequiredEffortTime ?? TimeSpan.Zero);
+                }
+            }
+        }
+        return (DateTime)dateTime!;
     }
 
     /// <summary>
@@ -80,6 +119,11 @@ public interface IBl
             foreach (DO.Task? task in dependentTasks)
                 ScheduleTasks(tasks, task);
         }
+    }
+
+    public void startProjectDate(DateTime date)
+    {
+        dal.startProjectDate= date;
     }
     public void InitializeDB();
     public void ResetDB();

@@ -14,10 +14,9 @@
         AllowsTransparency="True"
         MouseDown="Window_MouseDown">
     <Border CornerRadius="12">
-        <!--<Border.Background>
-            <ImageBrush ImageSource="/Images/back-image.jpg"
-                        Stretch="None"/>
-        </Border.Background>-->
+        <Border.Background>
+            <ImageBrush ImageSource="/back-image.jpg" Stretch="None"/>
+        </Border.Background>
         <Border CornerRadius="10"                    
             BorderThickness="2"
             Opacity="0.75">
@@ -151,11 +150,9 @@
                              VerticalContentAlignment="Center"
                              Margin="0,0,0,0"
                              Padding="20,0,0,0" TextChanged="textChanged">
-                        <!--<TextBox.Background>
-                            <ImageBrush ImageSource="/Images/user-icon.png"
-                                        Stretch="None"
-                                        AlignmentX="Left"/>
-                        </TextBox.Background>-->
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/user-icon.png" Stretch="None" AlignmentX="Left"/>
+                        </TextBox.Background>
                     </TextBox>
 
                     <TextBlock Text="ID"
@@ -176,11 +173,9 @@
                              VerticalContentAlignment="Center"
                              Margin="0,0,0,0"
                              Padding="20,0,0,0" TextChanged="textChanged">
-                        <!--<TextBox.Background>
-                            <ImageBrush ImageSource="/Images/user-icon.png"
-                                        Stretch="None"
-                                        AlignmentX="Left"/>
-                        </TextBox.Background>-->
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/user-icon.png" Stretch="None" AlignmentX="Left"/>
+                        </TextBox.Background>
                     </TextBox>
 
 
@@ -203,11 +198,9 @@
                              Margin="0,0,0,0"
                              PasswordChanged="textChanged"
                              Padding="20,0,0,0">
-                        <!--<PasswordBox.Background>
-                            <ImageBrush ImageSource="Images/keyIcon.png"
-                                        Stretch="None"
-                                        AlignmentX="Left"/>
-                        </PasswordBox.Background>-->
+                        <PasswordBox.Background>
+                            <ImageBrush ImageSource="/keyIcon.png" Stretch="None" AlignmentX="Left"/>
+                        </PasswordBox.Background>
                     </PasswordBox>
                     <Button x:Name="btnSignUp"                          
                             BorderThickness="0"
