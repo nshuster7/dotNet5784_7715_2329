@@ -6,8 +6,50 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="GantWindow" Height="450" Width="800">
-    <Grid>
-        <Button Style="{StaticResource myButtonStyle}" Content="Manual schedule"  Margin="305,52,0,0" />
-        <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule"  Margin="305,217,0,0" />
-    </Grid>
+    <Border CornerRadius="20">
+        <Border.Background>
+            <ImageBrush ImageSource="/blueprint.jpg"/>
+        </Border.Background>
+        <!--<Border.Background>
+           <ImageBrush ImageSource="Images/back-image.jpg"
+                     Stretch="None"/>
+       </Border.Background>-->
+        <Border CornerRadius="20"                    
+    BorderThickness="2"
+    Opacity="0.75">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Button Style="{StaticResource myButtonStyle}" Content="Manual schedule" Margin="0,90,0,0" HorizontalAlignment="Center" Width="316" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Height="93" Width="311" CornerRadius="20" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule"  Margin="0,215,0,0" Width="316" HorizontalAlignment="Center" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Height="93" Width="311" CornerRadius="20" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

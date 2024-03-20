@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
+
     <Application.Resources>
         <local:EmployeeType x:Key="EmployeeTypeKey" />
         <local:TaskType x:Key="TaskTypeKey" />
@@ -11,7 +12,8 @@
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey" />
         <local:TaskStatusToVisibilityConverter x:Key="TaskStatusToVisibilityConverterKey" />
         <local:TaskStatusToVisibilityConverter x:Key="BooleanToVisibilityConverterKey" />
-        <Style x:Key="BaseControlStyle" TargetType="Control">
+
+        <!--<Style x:Key="BaseControlStyle" TargetType="Control">
             <Setter Property="Foreground" Value="#CC7700" />
             <Setter Property="FontSize" Value="17" />
             <Setter Property="VerticalAlignment" Value="Top" />
@@ -32,9 +34,9 @@
             </Setter>
             <Setter Property="BorderBrush" Value="#FFD800" />
             <Setter Property="BorderThickness" Value="1" />
-        </Style>
+        </Style>-->
 
-        <Style x:Key="myButtonStyle" BasedOn="{StaticResource BaseControlStyle}" TargetType="Button">
+        <!--<Style x:Key="myButtonStyle" BasedOn="{StaticResource BaseControlStyle}" TargetType="Button">
             <Style.Triggers>
                 <Trigger Property = "IsMouseOver" Value = "True">
                     <Setter Property = "Foreground" Value = "DarkOrange" />
@@ -58,7 +60,72 @@
                     </EventTrigger.Actions>
                 </EventTrigger>
             </Style.Triggers>
+        </Style>-->
+
+        <Style x:Key="BaseControlStyle" TargetType="Control">
+            <Setter Property = "Foreground" Value = "White" />
+            <Setter Property = "BorderThickness" Value = "0" />
+            <Setter Property = "Background" Value = "#462AD8" />
+            <Setter Property = "FontSize" Value="24" />
+            <Setter Property = "Cursor" Value = "Hand" />
+            <Setter Property = "VerticalAlignment" Value="Top" />
+            <Setter Property = "HorizontalAlignment" Value="Left" />
+            <Setter Property = "Height" Value="120" />
+            <Setter Property = "Width" Value="170" />
+            <Setter Property = "FontFamily" Value ="Montserrat" />
+            <Setter Property = "FontWeight" Value="Bold" >
+            </Setter>
+            <Setter Property="BorderBrush" Value="Purple" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style x:Key="myButtonStyle" BasedOn="{StaticResource BaseControlStyle}" TargetType="Button" >
+            <Style.Triggers>
+                <Trigger Property = "IsMouseOver" Value = "True">
+                    <Setter Property = "Foreground" Value = "#28AEED" />
+                </Trigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.300" Storyboard.TargetProperty="FontSize" To="28" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.800" Storyboard.TargetProperty="FontSize" To="18" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+
         </Style>
 
     </Application.Resources>
 </Application>
+
+
+<!--<Button BorderThickness="0" Foreground="White" FontSize="24" FontFamily="Montserrat"
+             Cursor="Hand" Margin="218,-13,218,291" Click="ViewEmployeeListClick" FontWeight="Bold">
+    <Button.Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#462AD8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#28AEED"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Button.Style>
+    <Button.Template>
+        <ControlTemplate TargetType="Button">
+            <Border Height="93" Width="311" CornerRadius="20" Background="{TemplateBinding Background}">
+                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+        </ControlTemplate>
+    </Button.Template>
+</Button>-->

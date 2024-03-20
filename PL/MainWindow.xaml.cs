@@ -59,10 +59,8 @@ namespace PL
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            
-            Close();
-           
+        {     
+            Close();   
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
