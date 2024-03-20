@@ -7,9 +7,7 @@
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="800">
     <Border CornerRadius="12">
-        <Border.Background>
-            <ImageBrush ImageSource="/blueprint.jpg"/>
-        </Border.Background>
+
         <Border CornerRadius="10"                    
    BorderThickness="2"
    Opacity="0.75">
@@ -31,25 +29,33 @@
                 <Button Style="{StaticResource myButtonStyle}" Content="View employee list"  Margin="250,22,0,0"  Click="ViewEmployeeListClick" Height="93" Width="311">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Height="93" Width="311" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}"  Content="View task list"  Margin="248,106,0,0" Click="ViewTaskListClick" Height="131" Width="311" >
+                <Button Style="{StaticResource myButtonStyle}"  Content="View task list"  Margin="248,116,0,0" Click="ViewTaskListClick" Width="150" Height="40" RenderTransformOrigin="0.5,0.5" >
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.368"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Height="93" Width="311" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}" Content="Gant"  Margin="248,200,0,0" Click="ViewGantClick" Height="154" Width="311">
+                <Button Style="{StaticResource myButtonStyle}" Content="Gant"  Margin="248,200,0,0" Click="ViewGantClick" Width="348" Height="60">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Height="93" Width="311" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -66,7 +72,7 @@
                     </Button.Template>
                 </Button>
                 <Button Style="{StaticResource myButtonStyle}" Content="Reset data"   Click="DataReset"  
-                        FontSize="16" FontFamily="Montserrat" Cursor="Hand" Background="Purple" FontWeight="Bold" Margin="398,310,0,0">
+                        FontSize="16" FontFamily="Montserrat" Cursor="Hand" Background="Purple" FontWeight="Bold" Margin="411,340,0,0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Height="60" Width="150" CornerRadius="20" Background="{TemplateBinding Background}">

@@ -18,6 +18,8 @@
     <None Remove="blueprint.jpg" />
     <None Remove="keyIcon.png" />
     <None Remove="sign.png" />
+    <None Remove="Task\checklist.png" />
+    <None Remove="Task\nameSystem.jpg" />
     <None Remove="user-icon.png" />
   </ItemGroup>
 
@@ -30,6 +32,8 @@
     <Resource Include="blueprint.jpg" />
     <Resource Include="keyIcon.png" />
     <Resource Include="sign.png" />
+    <Resource Include="Task\checklist.png" />
+    <Resource Include="Task\nameSystem.jpg" />
     <Resource Include="user-icon.png" />
   </ItemGroup>
 

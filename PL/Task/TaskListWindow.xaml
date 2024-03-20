@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="TaskListWindow" Height="640" Width="800"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <Window.Resources>
-
-    </Window.Resources>
+           WindowStyle="None"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="/Task/checklist.png">
+   
     <!--External Grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -23,14 +22,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Style="{StaticResource myButtonStyle}" Content="Add:" HorizontalAlignment="Center" Height="50" Width="100" VerticalAlignment="Top" 
-                    Click="AddTask" FontFamily="Arial" FontSize="14"/>
+                    Click="AddTask" FontFamily="Arial" FontSize="14">
+
+            </Button>
             <Label Content="Selected Task:" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
             <ComboBox  ItemsSource="{Binding Source={StaticResource TaskTypeKey}}" SelectedValue="{Binding Path= Type , Mode=TwoWay}"
               Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="TaskListSelectionChanged">
             </ComboBox>
         </Grid>
         <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" Grid.ColumnSpan="2" 
-                  d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFEBCE" MouseDoubleClick="UpdateTask">
+                  d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="UpdateTask" Foreground="White" Opacity="0.7">
+            <ListView.Background>
+                <ImageBrush ImageSource="/Task/nameSystem.jpg" Stretch="Fill" TileMode="Tile"/>
+            </ListView.Background>
 
             <ListView.View>
                 <GridView>
@@ -41,7 +45,7 @@
                     <GridViewColumn Header="Delete" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                               <Button Background="Orange" Foreground="Brown" Width="50" Height="20" FontSize="10" Content="Delete" Click="Button_Click" />
+                                <Button Background="#FF7E6EA3" Foreground="White" Width="50" Height="20" FontSize="10" Content="Delete" Click="Button_Click" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
