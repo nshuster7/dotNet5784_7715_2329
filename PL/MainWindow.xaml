@@ -11,7 +11,7 @@
          Background="Transparent"
          AllowsTransparency="True"
         MouseDown="Window_MouseDown"
-         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="/engineering.png">
     <Border CornerRadius="12">
         <Border.Background>
             <ImageBrush ImageSource="/blueprint.jpg"/>

@@ -7,7 +7,7 @@
         
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800"
-        DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Task/task.png">
     <Grid Margin="-1,4,1,-4">
         <Label Content="Name:" HorizontalAlignment="Left" Margin="97,60,0,0" VerticalAlignment="Top" Height="26" Width="91" FontSize="14" FontFamily="Arial" Background="#FFFFE2B2" HorizontalContentAlignment="Center" RenderTransformOrigin="0.487,-2.563"/>
         <TextBox Text= "{Binding Alias, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"

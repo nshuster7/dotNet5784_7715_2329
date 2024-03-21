@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Employee"
         mc:Ignorable="d"
         Title="EmployeeWindow" Height="450" Width="800"
-        DataContext="{Binding CurrentEmployee, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding CurrentEmployee, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Employee/user.png">
     <Grid>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="234,99,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="14" FontFamily="Arial" Background="#FFFFE5A4" HorizontalContentAlignment="Center"/>
         <TextBox Text= "{Binding Name, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 

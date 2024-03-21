@@ -11,7 +11,7 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True"
-        MouseDown="Window_MouseDown">
+        MouseDown="Window_MouseDown" Icon="/plan.png">
 
     <Border CornerRadius="12">
         <Border.Background>
