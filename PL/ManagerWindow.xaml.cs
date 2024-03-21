@@ -66,5 +66,9 @@ namespace PL
         {
             new GantWindow().ShowDialog();
         }
+        private void ViewAutomaticScheduleClick(object sender, RoutedEventArgs e)
+        {
+            new ScheduledWindow().ShowDialog();
+        }
     }
 }
