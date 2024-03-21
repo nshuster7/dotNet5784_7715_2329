@@ -100,6 +100,7 @@ internal class TaskImplementation : BlApi.ITask
             Alias = task.Alias,
             Description = task.Description,
             CreatedAtDate = task.CreatedAtDate,
+            ScheduledDate = task.ScheduledDate,
             Status = Tools.GetStatus(task),
             Dependencies = Tools.GetListOfPreviousTask(task.Id),
             RequiredEffortTime = task.RequiredEffortTime,

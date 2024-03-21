@@ -1,6 +1,7 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System;
 using System.Security.Cryptography;
 
 public static class Initialization
@@ -42,11 +43,12 @@ public static class Initialization
             s_dal.User.Create(user);
         }
         var emp1 = s_dal.Employee.Read(e => e.Name == "Moshe Baruch");
-        User nanager1 = new User(emp1!.Id, "Moshe Baruch","12345678",true);
+        User manager1 = new User(emp1!.Id, "Moshe Baruch","12345678",true);
         var emp2 = s_dal.Employee.Read(e => e.Name == "David Levi");
-        User nanager2 = new User(emp2!.Id, "David Levi", "87654321", true);
-        s_dal.User.Create(nanager1!);
-        s_dal.User.Create(nanager2!);
+        User manager2 = new User(emp2!.Id, "David Levi", "87654321", true);
+
+        s_dal.User.Create(manager1!);
+        s_dal.User.Create(manager2!);
     }
 
     
@@ -170,8 +172,9 @@ public static class Initialization
             // Generate a random description
             string description = taskDescriptions[i];
             // Generate a random complexity
-            Type complexity = (Type)s_rand.Next(0, 5);
-           
+            DO.Type complexity = (DO.Type)s_rand.Next(0, 5);
+            int weeks = s_rand.Next(1, 13);
+            TimeSpan duration = TimeSpan.FromDays(weeks * 7);
             // Create a new task object
             Task task = new Task(
                 0,//the id is gonna to be changed by the function create
@@ -180,6 +183,7 @@ public static class Initialization
                 description,
                  CreatedAtDate:DateTime.Now,
                  IsMilestone: false,
+                 RequiredEffortTime: duration,
                 Complexity: complexity
             );
             // 11. Add the object to the list
@@ -245,22 +249,22 @@ public static class Initialization
             }
             // Generate a random hourly rate
             int hourlyRate = 0;
-            Type type = (Type)s_rand.Next(0, 5);
+            DO.Type type = (DO.Type)s_rand.Next(0, 5);
             switch (type)
             {
-                case Type.Beginner:
+                case DO.Type.Beginner:
                     hourlyRate = MIN_HOURLY_RATE;
                     break;
-                case Type.AdvancedBeginner:
+                case DO.Type.AdvancedBeginner:
                     hourlyRate = MIN_HOURLY_RATE + 100;
                     break;
-                case Type.Intermediate:
+                case DO.Type.Intermediate:
                     hourlyRate = MIN_HOURLY_RATE + 200;
                     break;
-                case Type.Advanced:
+                case DO.Type.Advanced:
                     hourlyRate = MIN_HOURLY_RATE + 300;
                     break;
-                case Type.Expert:
+                case DO.Type.Expert:
                     hourlyRate = MAX_HOURLY_RATE;
                     break;
             }
