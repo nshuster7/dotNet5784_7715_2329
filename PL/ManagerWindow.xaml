@@ -6,9 +6,15 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="800" Icon="/project-management.png">
-    <Border CornerRadius="12">
-
-        <Border CornerRadius="10"                    
+    <Border CornerRadius="20">
+        <Border.Background>
+            <ImageBrush ImageSource="/blueprint.jpg"/>
+        </Border.Background>
+        <!--<Border.Background>
+          <ImageBrush ImageSource="Images/back-image.jpg"
+                    Stretch="None"/>
+      </Border.Background>-->
+        <Border CornerRadius="20"                    
    BorderThickness="2"
    Opacity="0.75">
             <Border.BorderBrush>
@@ -24,7 +30,6 @@
                     <GradientStop Color="#1B1448" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80.04"/>
@@ -32,18 +37,18 @@
                     <RowDefinition Height="67.5"/>
                     <RowDefinition Height="79"/>
                     <RowDefinition Height="113.96"/>
-                  
+
                 </Grid.RowDefinitions>
-                <Button Style="{StaticResource myButtonStyle}"  Content="View employee list"  Click="ViewEmployeeListClick" Height="93" Width="312" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center">
+                <Button Style="{StaticResource myButtonStyle}"  Content="View employee list"  Click="ViewEmployeeListClick" Height="168" Width="440" Margin="69,-19,0,0" Grid.RowSpan="2" FontSize="12" FontWeight="Normal" FontFamily="Arial">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Width="240" Height="50" CornerRadius="20" Background="{TemplateBinding Background}" Margin="0,50,-213,50">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}"  Content="View task list"  Margin="333,8,0,0" Click="ViewTaskListClick" Width="150" Height="40" RenderTransformOrigin="0.5,0.5" Grid.Row="2" >
+                <Button Style="{StaticResource myButtonStyle}"  Content="View task list"  Margin="0,79,0,0" Click="ViewTaskListClick" Height="100" Width="300" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Grid.RowSpan="3" FontSize="12" FontWeight="Normal" FontFamily="Arial" >
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -54,45 +59,45 @@
                     </Button.RenderTransform>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Width="240" Height="50" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}" Content="Gant" Click="ViewGantClick" Width="348" Height="60" HorizontalAlignment="Center" Margin="0,40,0,0" Grid.Row="2" Grid.RowSpan="2">
+                <Button Style="{StaticResource myButtonStyle}" Content="Gant" Click="ViewGantClick" Height="100" Width="300" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" FontSize="12" FontWeight="Normal" FontFamily="Arial">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Width="240" Height="50" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule" Click="ViewAutomaticScheduleClick" Width="348" Height="60" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center">
+                <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule" Click="ViewAutomaticScheduleClick" Height="100" Width="300" HorizontalAlignment="Center" Grid.Row="2" Margin="0,51,0,0" Grid.RowSpan="3" FontSize="12" FontWeight="Normal" FontFamily="Arial">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Width="240" Height="50" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}" FontSize="16" Content="Data initialization" Background="Purple" Margin="243,16,0,0" 
-                        Click="DataInitalization" Height="98" Width="150" RenderTransformOrigin="0.452,-0.268" Grid.Row="4">
+                <Button Style="{StaticResource myButtonStyle}" FontSize="12" Content="Data initialization" Background="Purple" Margin="258,38,0,46" 
+                        Click="DataInitalization" Width="150" RenderTransformOrigin="0.452,-0.268" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Stretch" FontWeight="Normal" FontFamily="Arial">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Height="60" Width="150" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Height="40" Width="120" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
                 <Button Style="{StaticResource myButtonStyle}" Content="Reset data"   Click="DataReset"  
-                        FontSize="16" FontFamily="Montserrat" Cursor="Hand" Background="Purple" FontWeight="Bold" Margin="411,35,0,0" Grid.Row="4">
+                        FontSize="12" FontFamily="Arial" Cursor="Hand" Background="Purple" FontWeight="Normal" Margin="372,58,0,0" Grid.Row="3" Height="70" Width="166" Grid.RowSpan="2">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Height="60" Width="150" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Height="40" Width="120" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -102,4 +107,5 @@
             </Grid>
         </Border>
     </Border>
+
 </Window>

@@ -22,13 +22,16 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource myButtonStyle}" Content="Add:" HorizontalAlignment="Center" Height="50" Width="100" VerticalAlignment="Top" Click="AddEmployee" FontFamily="Arial" FontSize="14"/>
+            <Button Style="{StaticResource myButtonStyle}" Content="Add:" HorizontalAlignment="Center" Height="50" Width="100" VerticalAlignment="Top" Click="AddEmployee" FontFamily="Arial" FontSize="14" Background="#FF6E61B3" Foreground="Black"/>
             <Label Content="Selected Employee:" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
             <ComboBox  ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}" SelectedValue="{Binding Path= Type , Mode=TwoWay}"
               Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="WorkerListSelectionChanged">
             </ComboBox>
         </Grid>
-        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFEBCE"   >
+        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" Foreground="Black" Opacity="0.8" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}"   >
+            <ListView.Background>
+                <ImageBrush Stretch="Fill" TileMode="Tile"/>
+            </ListView.Background>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100" />
@@ -40,7 +43,7 @@
                     <GridViewColumn Header="Delete" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Background="Orange" Foreground="Brown" Width="50" Height="20" FontSize="10" Content="Delete" Click="Button_Click" />
+                                <Button Background="#FF6E61B3" Foreground="Black" Width="50" Height="20" FontSize="10" Content="Delete" Click="Button_Click" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

@@ -31,19 +31,19 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
-                <Button Style="{StaticResource myButtonStyle}" Content="Manual schedule" Margin="0,90,0,0" HorizontalAlignment="Center" Width="316" >
+                <Button Style="{StaticResource myButtonStyle}" Content="Manual schedule" Margin="0,148,0,0" HorizontalAlignment="Center" Width="361" Height="80" >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Height="93" Width="311" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Height="50" Width="200" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule"  Margin="0,215,0,0" Width="316" HorizontalAlignment="Center" >
+                <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule"  Margin="0,233,0,0" Width="360" HorizontalAlignment="Center" Height="72" >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Height="93" Width="311" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <Border Height="50" Width="200" CornerRadius="20" Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>

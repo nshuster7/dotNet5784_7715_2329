@@ -16,18 +16,23 @@
   <ItemGroup>
     <None Remove="back-image.jpg" />
     <None Remove="blueprint.jpg" />
+    <None Remove="Employee\blueprint.jpg" />
+    <None Remove="Employee\R.png" />
     <None Remove="Employee\staff.png" />
     <None Remove="Employee\user.png" />
     <None Remove="engineering.png" />
     <None Remove="keyIcon.png" />
     <None Remove="plan.png" />
     <None Remove="project-management.png" />
+    <None Remove="schedule.png" />
     <None Remove="sign.png" />
+    <None Remove="Task\blueprint.jpg" />
     <None Remove="Task\checklist.png" />
     <None Remove="Task\nameSystem.jpg" />
     <None Remove="Task\task.png" />
     <None Remove="time %281%29.png" />
     <None Remove="user-icon.png" />
+    <None Remove="working.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,18 +42,23 @@
   <ItemGroup>
     <Resource Include="back-image.jpg" />
     <Resource Include="blueprint.jpg" />
+    <Resource Include="Employee\blueprint.jpg" />
+    <Resource Include="Employee\R.png" />
     <Resource Include="Employee\staff.png" />
     <Resource Include="Employee\user.png" />
     <Resource Include="engineering.png" />
     <Resource Include="keyIcon.png" />
     <Resource Include="plan.png" />
     <Resource Include="project-management.png" />
+    <Resource Include="schedule.png" />
     <Resource Include="sign.png" />
+    <Resource Include="Task\blueprint.jpg" />
     <Resource Include="Task\checklist.png" />
     <Resource Include="Task\nameSystem.jpg" />
     <Resource Include="Task\task.png" />
     <Resource Include="time (1).png" />
     <Resource Include="user-icon.png" />
+    <Resource Include="working.png" />
   </ItemGroup>
 
 </Project>
