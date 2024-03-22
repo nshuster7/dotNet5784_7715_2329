@@ -9,28 +9,28 @@
         DataContext="{Binding CurrentEmployee, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Employee/user.png">
     <Grid>
 
-        <Label Content="Name" HorizontalAlignment="Left" Margin="199,88,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3" RenderTransformOrigin="0.506,1.004"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="67,135,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3" RenderTransformOrigin="0.506,1.004"/>
         <TextBox Text= "{Binding Name, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-            HorizontalAlignment="Left" Margin="240,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="20"/>
-        <Label Content="Id" HorizontalAlignment="Left" Margin="199,124,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
+            HorizontalAlignment="Left" Margin="108,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="20"/>
+        <Label Content="Id" HorizontalAlignment="Left" Margin="67,171,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
         <TextBox Text= "{Binding Id, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
                  IsEnabled="{Binding Id, Converter={StaticResource ConvertIdToBoolKey} ,Mode=OneTime}" 
-                 HorizontalAlignment="Left" Margin="240,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="20"/>
-        <Label Content="Email" HorizontalAlignment="Left" Margin="197,162,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3"/>
+                 HorizontalAlignment="Left" Margin="108,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="20"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="65,209,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3"/>
         <TextBox Text= "{Binding Email, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-                 HorizontalAlignment="Left" Margin="240,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="20"/>
-        <Label Content="Status" HorizontalAlignment="Left" Margin="199,199,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3"/>
-        <ComboBox HorizontalAlignment="Left" Margin="240,215,0,0" VerticalAlignment="Top" Width="180" Height="20"
+                 HorizontalAlignment="Left" Margin="108,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="20"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="67,246,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3"/>
+        <ComboBox HorizontalAlignment="Left" Margin="108,262,0,0" VerticalAlignment="Top" Width="180" Height="20"
                ItemsSource="{Binding Source={StaticResource WorkStatusKey }}"
                SelectedValue="{Binding Status, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="195,237,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3"/>
-        <ComboBox HorizontalAlignment="Left" Margin="240,255,0,0" VerticalAlignment="Top" Width="180" Height="20"
+        <Label Content="Type" HorizontalAlignment="Left" Margin="63,284,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3"/>
+        <ComboBox HorizontalAlignment="Left" Margin="108,302,0,0" VerticalAlignment="Top" Width="180" Height="20"
                ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}"
                SelectedValue="{Binding Type, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
-        <Label Content="HourlyRate" HorizontalAlignment="Left" Margin="209,275,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3"/>
+        <Label Content="HourlyRate" HorizontalAlignment="Left" Margin="77,322,0,0" VerticalAlignment="Top" Height="26" Width="111" FontSize="10" FontFamily="Arial" HorizontalContentAlignment="Center" Foreground="#FF7D73B3"/>
         <TextBox Text="{Binding HourlyRate, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" 
-                 HorizontalAlignment="Left" Margin="240,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="20"/>
-        <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" Margin="162,304,0,0"  Width="258" 
+                 HorizontalAlignment="Left" Margin="108,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" Height="20"/>
+        <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" Margin="30,351,0,0"  Width="258" 
                 FontFamily="Arial" FontSize="16" Height="52" Padding="5" Click="UpdateAddClick" Background="#FF7D73B3">
             <Button.Template>
                 <ControlTemplate TargetType="Button">

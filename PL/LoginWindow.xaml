@@ -82,7 +82,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button x:Name="btnClose"                          
+                    <Button                           
                             BorderThickness="0"
                             Content="X"
                             Foreground="White"
@@ -184,9 +184,10 @@
                             <ImageBrush ImageSource="/keyIcon.png" Stretch="None" AlignmentX="Left"/>
                         </PasswordBox.Background>
                     </PasswordBox>
-                    <Button x:Name="btnLogin"                          
+                    <Button                           
                             BorderThickness="0"
                             Content="LOG IN"
+                            IsDefault="True"
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"
