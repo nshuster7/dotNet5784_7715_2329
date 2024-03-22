@@ -47,9 +47,9 @@ namespace PL
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow();//create new OrderTrackingWindow
+ //         MainWindow mw = new MainWindow();//create new OrderTrackingWindow
             Close();
-            mw.ShowDialog();
+//          mw.ShowDialog();
         }
         /// <summary>
         /// button to Log In as a new user
