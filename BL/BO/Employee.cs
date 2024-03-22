@@ -9,5 +9,6 @@ public class Employee
     public Type? Type { get; set; }
     public int HourlyRate { get; set; }
     public BO.TaskInEmployee? CurrentTaskId { get; set; }
+    public string? ImageRelativeName { get; set; }
     public override string ToString() => this.ToStringProperty();
 }

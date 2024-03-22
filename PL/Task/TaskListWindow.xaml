@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Style="{StaticResource myButtonStyle}" Content="Add:" HorizontalAlignment="Center" Height="50" Width="100" 
-                    Click="AddTask" FontFamily="Arial" FontSize="14" Background="#FF7D73B3" Foreground="Black"/>
+                    Click="AddTask" FontFamily="Arial" FontSize="14" Background="#FF7D73B3"/>
             <Label Content="Selected Task:" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
             <ComboBox  ItemsSource="{Binding Source={StaticResource TaskTypeKey}}" SelectedValue="{Binding Path= Type , Mode=TwoWay}"
               Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="TaskListSelectionChanged">

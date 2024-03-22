@@ -18,7 +18,8 @@ public record Employee
     string? Email = null,
     int HourlyRate = 0,
     WorkStatus? WorkStatus = null,
-    Type? Type = null
+    Type? Type = null,
+    string? ImageRelativeName =null
 )
 {
     public Employee() : this(0, " ") { } // Empty constructor for stage 3

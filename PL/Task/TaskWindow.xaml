@@ -49,7 +49,7 @@
 
         <Label Content="Scheduled Date" HorizontalAlignment="Left" Margin="490,203,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
         <DatePicker SelectedDate="{Binding ScheduledDate, Mode=TwoWay}"
-            HorizontalAlignment="Left" Margin="499,220,0,0" VerticalAlignment="Top" Width="auto"/>
+            HorizontalAlignment="Left" Margin="606,220,0,0" VerticalAlignment="Top" Width="auto"/>
 
         <Label Content="Required Effort Time" HorizontalAlignment="Left" Margin="150,202,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="136" Foreground="#FF7D73B3" Height="27" VerticalAlignment="Top"/>
         <TextBox Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
@@ -57,10 +57,10 @@
 
         <Label Content="Created At Date" HorizontalAlignment="Left" Margin="489,161,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top"/>
         <DatePicker SelectedDate="{Binding CreatedAtDate, Mode=TwoWay}"
-            HorizontalAlignment="Left" Margin="606,220,0,0" VerticalAlignment="Top" Width="auto"/>
+            HorizontalAlignment="Left" Margin="499,220,0,0" VerticalAlignment="Top" Width="90"/>
 
         <Button Style="{StaticResource myButtonStyle}" Content="{Binding Id, Converter={StaticResource ConvertIdToContentKey} ,Mode=OneTime}" Margin="489,328,0,0"  
-                Height="50" Width="200" FontFamily="Arial" FontSize="16" Padding="5" Click="UpdateAddClick" Background="#FF7D73B3" Foreground="Black" FontWeight="Normal">
+                Height="50" Width="200" FontFamily="Arial" FontSize="16" Padding="5" Click="UpdateAddClick" Background="#FF7D73B3"  FontWeight="Normal">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="7" Background="{TemplateBinding Background}" Margin="78,18,0,4">
@@ -70,7 +70,7 @@
             </Button.Template>
         </Button>
         <Button Style="{StaticResource myButtonStyle}" Content="Dependencies" Margin="489,290,0,0"
-                Height="50" Width="200" FontFamily="Arial" FontSize="16" Padding="5" Click="Button_Click" Background="#FF7D73B3" Foreground="Black" FontWeight="Normal" >
+                Height="50" Width="200" FontFamily="Arial" FontSize="16" Padding="5" Click="Button_Click" Background="#FF7D73B3"  FontWeight="Normal" >
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="7" Background="{TemplateBinding Background}" Margin="78,18,0,4">

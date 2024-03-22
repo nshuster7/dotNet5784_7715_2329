@@ -23,7 +23,8 @@ internal class EmployeeImplementation : IEmployee
             new XElement("Name", item.Name),
             new XElement("HourlyRate", item.HourlyRate),
             new XElement("WorkStatus", item.WorkStatus?.ToString()),
-            new XElement("Type", item.Type?.ToString())
+            new XElement("Type", item.Type?.ToString()),
+            new XElement("ImageRelativeName", item.ImageRelativeName)
         );
         }
         else
@@ -34,7 +35,8 @@ internal class EmployeeImplementation : IEmployee
             new XElement("Email", item.Email),
             new XElement("HourlyRate", item.HourlyRate),
             new XElement("WorkStatus", item.WorkStatus?.ToString()),
-            new XElement("Type", item.Type?.ToString())
+            new XElement("Type", item.Type?.ToString()),
+            new XElement("ImageRelativeName", item.ImageRelativeName)
         );
         }
         // Add the employee element to the XML file
@@ -88,7 +90,8 @@ internal class EmployeeImplementation : IEmployee
             (string?)employeeElem.Element("Email") ?? null,
             employeeElem.ToIntNullable("HourlyRate") ?? 0,
             (WorkStatus?)employeeElem.ToEnumNullable<WorkStatus>("WorkStatus"),
-            (Type?)employeeElem.ToEnumNullable<Type>("Type")
+            (Type?)employeeElem.ToEnumNullable<Type>("Type"),
+            (string?)employeeElem.Element("ImageRelativeName") ?? ""
         );
     }
 
@@ -139,6 +142,7 @@ internal class EmployeeImplementation : IEmployee
             employeeElem.SetElementValue("HourlyRate", item.HourlyRate);
             employeeElem.SetElementValue("WorkStatus", item.WorkStatus?.ToString());
             employeeElem.SetElementValue("Type", item.Type?.ToString());
+            employeeElem.SetElementValue("ImageRelativeName", item.ImageRelativeName);
             XMLTools.SaveListToXMLElement(employeesRoot, s_employees_xml);
         }
     }

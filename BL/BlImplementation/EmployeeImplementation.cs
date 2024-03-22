@@ -65,7 +65,8 @@ internal class EmployeeImplementation : BlApi.IEmployee
             Email = doEmployee.Email,
             HourlyRate = doEmployee.HourlyRate,
             Status = (BO.WorkStatus?)doEmployee.WorkStatus,
-            Type = (BO.Type?)doEmployee.Type
+            Type = (BO.Type?)doEmployee.Type,
+            ImageRelativeName=doEmployee.ImageRelativeName
         };
     }
     /// <summary>

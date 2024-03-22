@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Employee"
         mc:Ignorable="d"
-        Title="EmployeeWindow" Height="450" Width="800"
+        Title="Employee" Height="450" Width="800"
         DataContext="{Binding CurrentEmployee, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Employee/user.png">
     <Grid>
 
@@ -41,5 +41,6 @@
             </Button.Template>
         </Button>
         <Label Content="New Employee" HorizontalAlignment="Left" Margin="270,52,0,0" VerticalAlignment="Top" Height="46" Width="124" Foreground="#FF7D73B3" FontWeight="Bold" FontSize="16" FontFamily="Arial"/>
+        <Image Source="{Binding ImageRelativeName, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"  Height="100" Width="100" Margin="112,51,588,283"/>
     </Grid>
 </Window>

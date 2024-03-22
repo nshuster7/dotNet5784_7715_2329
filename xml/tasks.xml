@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
+    <Id>1</Id>
+    <EmployeeId>0</EmployeeId>
+    <Alias>COSAS</Alias>
+    <Description>Conduct survey and analysis of sites</Description>
+    <CreatedAtDate>2024-03-22T02:45:18.4414245+02:00</CreatedAtDate>
+    <RequiredEffortTime>P77D</RequiredEffortTime>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Intermediate</Complexity>
+  </Task>
+  <Task>
     <Id>2</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>EOAP</Alias>
     <Description>Engineering or architectural plans</Description>
-    <CreatedAtDate>2024-03-21T13:12:08.9735245+02:00</CreatedAtDate>
-    <RequiredEffortTime>P49D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.4515223+02:00</CreatedAtDate>
+    <RequiredEffortTime>P28D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>AdvancedBeginner</Complexity>
   </Task>
@@ -15,28 +25,28 @@
     <EmployeeId>0</EmployeeId>
     <Alias>OTNPAP</Alias>
     <Description>Obtain necessary permits and permissions</Description>
-    <CreatedAtDate>2024-03-21T13:12:08.993322+02:00</CreatedAtDate>
-    <RequiredEffortTime>P77D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.4695247+02:00</CreatedAtDate>
+    <RequiredEffortTime>P56D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Expert</Complexity>
+    <Complexity>Advanced</Complexity>
   </Task>
   <Task>
     <Id>4</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>DSEP</Alias>
     <Description>Develop structural engineering plans</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.0728564+02:00</CreatedAtDate>
-    <RequiredEffortTime>P14D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.4820017+02:00</CreatedAtDate>
+    <RequiredEffortTime>P77D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Intermediate</Complexity>
   </Task>
   <Task>
     <Id>5</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>PDCE</Alias>
     <Description>Prepare detailed cost estimates</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.0969458+02:00</CreatedAtDate>
-    <RequiredEffortTime>P70D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.5087691+02:00</CreatedAtDate>
+    <RequiredEffortTime>P7D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Advanced</Complexity>
   </Task>
@@ -45,57 +55,57 @@
     <EmployeeId>0</EmployeeId>
     <Alias>FOFI</Alias>
     <Description>Financing or financing insurance</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.1347842+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-03-22T02:45:18.51819+02:00</CreatedAtDate>
     <RequiredEffortTime>P42D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Expert</Complexity>
   </Task>
   <Task>
     <Id>7</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>POBM</Alias>
     <Description>Purchase building materials</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.1516918+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-03-22T02:45:18.5334046+02:00</CreatedAtDate>
     <RequiredEffortTime>P77D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Advanced</Complexity>
   </Task>
   <Task>
     <Id>8</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>ETCS</Alias>
     <Description>Evacuation of the construction site</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.1727565+02:00</CreatedAtDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.5488279+02:00</CreatedAtDate>
+    <RequiredEffortTime>P7D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Expert</Complexity>
   </Task>
   <Task>
     <Id>9</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>EAPI</Alias>
     <Description>Excavation and preparation of infrastructure</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.1893484+02:00</CreatedAtDate>
-    <RequiredEffortTime>P35D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.5638998+02:00</CreatedAtDate>
+    <RequiredEffortTime>P56D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Expert</Complexity>
   </Task>
   <Task>
     <Id>10</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>IOS</Alias>
     <Description>Installation of services</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.2189307+02:00</CreatedAtDate>
-    <RequiredEffortTime>P42D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.5944251+02:00</CreatedAtDate>
+    <RequiredEffortTime>P35D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Expert</Complexity>
   </Task>
   <Task>
     <Id>11</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>CCF</Alias>
     <Description>Casting concrete foundation</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.2407677+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-03-22T02:45:18.6143398+02:00</CreatedAtDate>
     <RequiredEffortTime>P35D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Intermediate</Complexity>
@@ -105,8 +115,8 @@
     <EmployeeId>0</EmployeeId>
     <Alias>BSF</Alias>
     <Description>Building a structural frame</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.2575269+02:00</CreatedAtDate>
-    <RequiredEffortTime>P63D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.6324376+02:00</CreatedAtDate>
+    <RequiredEffortTime>P14D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Intermediate</Complexity>
   </Task>
@@ -115,48 +125,48 @@
     <EmployeeId>0</EmployeeId>
     <Alias>IWAI</Alias>
     <Description>Installation of walls and insulation</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.2736389+02:00</CreatedAtDate>
-    <RequiredEffortTime>P14D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.642152+02:00</CreatedAtDate>
+    <RequiredEffortTime>P56D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>14</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>CEWAF</Alias>
     <Description>Completion of exterior walls and finishes</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.2905129+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-03-22T02:45:18.6567213+02:00</CreatedAtDate>
     <RequiredEffortTime>P28D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Advanced</Complexity>
   </Task>
   <Task>
     <Id>15</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>IWAD</Alias>
     <Description>Installation of windows and doors</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.3057231+02:00</CreatedAtDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.6669434+02:00</CreatedAtDate>
+    <RequiredEffortTime>P28D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>16</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>PAEW</Alias>
     <Description>Plumbing and electrical work</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.323755+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-03-22T02:45:18.700122+02:00</CreatedAtDate>
     <RequiredEffortTime>P63D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Advanced</Complexity>
   </Task>
   <Task>
     <Id>17</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>HVACSI</Alias>
     <Description>HVAC system installation</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.3482297+02:00</CreatedAtDate>
-    <RequiredEffortTime>P63D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.7162386+02:00</CreatedAtDate>
+    <RequiredEffortTime>P7D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Advanced</Complexity>
   </Task>
@@ -165,8 +175,8 @@
     <EmployeeId>0</EmployeeId>
     <Alias>IOWAC</Alias>
     <Description>Insulation of walls and ceilings</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.3830261+02:00</CreatedAtDate>
-    <RequiredEffortTime>P21D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.7912399+02:00</CreatedAtDate>
+    <RequiredEffortTime>P70D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Intermediate</Complexity>
   </Task>
@@ -175,88 +185,88 @@
     <EmployeeId>0</EmployeeId>
     <Alias>IWAIP</Alias>
     <Description>Installation of interior walls and partitions</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.4019155+02:00</CreatedAtDate>
-    <RequiredEffortTime>P7D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.8052873+02:00</CreatedAtDate>
+    <RequiredEffortTime>P84D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>20</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>CFAT</Alias>
     <Description>Construction of flooring and tiles</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.4217401+02:00</CreatedAtDate>
-    <RequiredEffortTime>P28D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.8235287+02:00</CreatedAtDate>
+    <RequiredEffortTime>P35D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Expert</Complexity>
+    <Complexity>Intermediate</Complexity>
   </Task>
   <Task>
     <Id>21</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>AIF</Alias>
     <Description>Apply internal finishes</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.4407289+02:00</CreatedAtDate>
-    <RequiredEffortTime>P28D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.8386067+02:00</CreatedAtDate>
+    <RequiredEffortTime>P84D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Intermediate</Complexity>
   </Task>
   <Task>
     <Id>22</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>IOD</Alias>
     <Description>Installation of devices</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.4602511+02:00</CreatedAtDate>
-    <RequiredEffortTime>P84D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.8659658+02:00</CreatedAtDate>
+    <RequiredEffortTime>P56D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>23</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>TPEC</Alias>
     <Description>Termination of plumbing and electrical connections</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.479902+02:00</CreatedAtDate>
-    <RequiredEffortTime>P49D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.8779037+02:00</CreatedAtDate>
+    <RequiredEffortTime>P42D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
   </Task>
   <Task>
     <Id>24</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>ICAC</Alias>
     <Description>Installation of cabinets and countertops</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.5035205+02:00</CreatedAtDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.8899056+02:00</CreatedAtDate>
+    <RequiredEffortTime>P49D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Expert</Complexity>
   </Task>
   <Task>
     <Id>25</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>FAID</Alias>
     <Description>Full decoration and interior design</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.5425494+02:00</CreatedAtDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.9118895+02:00</CreatedAtDate>
+    <RequiredEffortTime>P28D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Intermediate</Complexity>
   </Task>
   <Task>
     <Id>26</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>IOEA</Alias>
     <Description>Installation of electrical appliances</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.5729111+02:00</CreatedAtDate>
-    <RequiredEffortTime>P42D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.9274815+02:00</CreatedAtDate>
+    <RequiredEffortTime>P70D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Expert</Complexity>
   </Task>
   <Task>
     <Id>27</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>PRT</Alias>
     <Description>Perform required tests</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.6008366+02:00</CreatedAtDate>
-    <RequiredEffortTime>P63D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.9424573+02:00</CreatedAtDate>
+    <RequiredEffortTime>P21D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Beginner</Complexity>
   </Task>
@@ -265,38 +275,38 @@
     <EmployeeId>0</EmployeeId>
     <Alias>AEF</Alias>
     <Description>Apply exterior finishes</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.618575+02:00</CreatedAtDate>
-    <RequiredEffortTime>P42D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:18.9615017+02:00</CreatedAtDate>
+    <RequiredEffortTime>P77D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Expert</Complexity>
+    <Complexity>Beginner</Complexity>
   </Task>
   <Task>
     <Id>29</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>GAOD</Alias>
     <Description>Gardening and outdoor devices</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.636546+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-03-22T02:45:19.041558+02:00</CreatedAtDate>
     <RequiredEffortTime>P42D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
   </Task>
   <Task>
     <Id>30</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>IFAG</Alias>
     <Description>Installation of fencing and gates</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.6562349+02:00</CreatedAtDate>
-    <RequiredEffortTime>P35D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.0581571+02:00</CreatedAtDate>
+    <RequiredEffortTime>P63D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Expert</Complexity>
   </Task>
   <Task>
     <Id>31</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>PPAB</Alias>
     <Description>Paving paths and bridges</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.6721553+02:00</CreatedAtDate>
-    <RequiredEffortTime>P21D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.0738077+02:00</CreatedAtDate>
+    <RequiredEffortTime>P14D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Beginner</Complexity>
   </Task>
@@ -305,17 +315,17 @@
     <EmployeeId>0</EmployeeId>
     <Alias>IOEL</Alias>
     <Description>Installation of external lighting</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.6930038+02:00</CreatedAtDate>
-    <RequiredEffortTime>P63D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.0931218+02:00</CreatedAtDate>
+    <RequiredEffortTime>P77D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Expert</Complexity>
+    <Complexity>Intermediate</Complexity>
   </Task>
   <Task>
     <Id>33</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>DFC</Alias>
     <Description>Do final cleaning</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.7813263+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-03-22T02:45:19.118212+02:00</CreatedAtDate>
     <RequiredEffortTime>P70D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Beginner</Complexity>
@@ -325,8 +335,8 @@
     <EmployeeId>0</EmployeeId>
     <Alias>OCOO</Alias>
     <Description>Obtain certificate of occupancy</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.8104082+02:00</CreatedAtDate>
-    <RequiredEffortTime>P7D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.1536786+02:00</CreatedAtDate>
+    <RequiredEffortTime>P56D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
     <Complexity>Beginner</Complexity>
   </Task>
@@ -335,70 +345,59 @@
     <EmployeeId>0</EmployeeId>
     <Alias>CFTAC</Alias>
     <Description>Conduct final training and handover</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.8316418+02:00</CreatedAtDate>
-    <RequiredEffortTime>P70D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.170482+02:00</CreatedAtDate>
+    <RequiredEffortTime>P7D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Advanced</Complexity>
   </Task>
   <Task>
     <Id>36</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>COMM</Alias>
     <Description>Prepare operating and maintenance manuals</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.8516257+02:00</CreatedAtDate>
-    <RequiredEffortTime>P77D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.1925692+02:00</CreatedAtDate>
+    <RequiredEffortTime>P28D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>37</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>STEAS</Alias>
     <Description>Staff training on equipment and systems</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.8720918+02:00</CreatedAtDate>
-    <RequiredEffortTime>P77D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.2093602+02:00</CreatedAtDate>
+    <RequiredEffortTime>P70D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
   </Task>
   <Task>
     <Id>38</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>MFCPO</Alias>
     <Description>Make final checks and place an order</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.8900962+02:00</CreatedAtDate>
-    <RequiredEffortTime>P84D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.2317488+02:00</CreatedAtDate>
+    <RequiredEffortTime>P49D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Expert</Complexity>
   </Task>
   <Task>
     <Id>39</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>KDAO</Alias>
     <Description>Key delivery and ownership</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.9073395+02:00</CreatedAtDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.2526029+02:00</CreatedAtDate>
+    <RequiredEffortTime>P28D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
   </Task>
   <Task>
     <Id>40</Id>
     <EmployeeId>0</EmployeeId>
     <Alias>EAPCF</Alias>
     <Description>Evaluate and analyze post-construction feedback</Description>
-    <CreatedAtDate>2024-03-21T13:12:09.9226706+02:00</CreatedAtDate>
-    <RequiredEffortTime>P42D</RequiredEffortTime>
+    <CreatedAtDate>2024-03-22T02:45:19.2737692+02:00</CreatedAtDate>
+    <RequiredEffortTime>P21D</RequiredEffortTime>
     <IsMilestone>false</IsMilestone>
-    <Complexity>Advanced</Complexity>
-  </Task>
-  <Task>
-    <Id>1</Id>
-    <EmployeeId>0</EmployeeId>
-    <Alias>COSAS</Alias>
-    <Description>Conduct survey and analysis of sites</Description>
-    <CreatedAtDate>2024-03-21T13:12:08.9668825+02:00</CreatedAtDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
-    <ScheduledDate>2024-03-23T00:00:00</ScheduledDate>
+    <Complexity>Intermediate</Complexity>
   </Task>
 </ArrayOfTask>

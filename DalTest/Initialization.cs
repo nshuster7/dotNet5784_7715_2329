@@ -185,6 +185,7 @@ public static class Initialization
                  IsMilestone: false,
                  RequiredEffortTime: duration,
                 Complexity: complexity
+               
             );
             // 11. Add the object to the list
             s_dal!.Task.Create(task);
@@ -271,7 +272,10 @@ public static class Initialization
 
             // Generate a random work status
             WorkStatus workStatus = (WorkStatus)s_rand.Next(0, 3);
-
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent!.FullName;
+            string imagesPath = Path.Combine(projectDirectory, "DalTest", "images");
+            string imageName = $"{i + 1}.jpg";
+            string imagePath = Path.Combine(imagesPath, imageName);
             // Create a new object
             Employee employee = new Employee(
                 id,
@@ -279,7 +283,9 @@ public static class Initialization
                 email,
                 hourlyRate,
                 workStatus,
-                type
+                type,
+                imagePath
+
             );
             // Add the object to the list
             s_dal.Employee.Create(employee);
