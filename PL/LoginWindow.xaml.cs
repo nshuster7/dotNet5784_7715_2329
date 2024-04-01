@@ -1,5 +1,4 @@
-﻿
-using PL.Employee;
+﻿using PL.Employee;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,7 +112,6 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
         private void SignInButton(object sender, RoutedEventArgs e)
         {
@@ -134,6 +132,5 @@ namespace PL
                 ((PasswordBox)sender).BorderBrush = Brushes.DimGray;
             }
         }
-
     }
 }

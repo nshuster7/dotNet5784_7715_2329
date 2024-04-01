@@ -3,60 +3,68 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Employee"
-        
+        xmlns:local="clr-namespace:PL.Employee"   
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800"
          WindowStartupLocation="CenterScreen"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="/Task/task.png">
     <Grid Margin="-1,4,1,-4">
-        <Label Content="Name" HorizontalAlignment="Left" Margin="126,68,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20" RenderTransformOrigin="0.382,0.667"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="126,68,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" 
+               HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20" RenderTransformOrigin="0.382,0.667"/>
         <TextBox Text= "{Binding CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
             HorizontalAlignment="Left" Margin="158,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Height="20"/>
-        <Label  Content="Id" HorizontalAlignment="Left" Margin="118,103,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
+        <Label  Content="Id" HorizontalAlignment="Left" Margin="118,103,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10"
+                HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
         <TextBox Text= "{Binding CurrentTask.Id, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
                  IsEnabled="{Binding Id, Converter={StaticResource ConvertIdToBoolKey} ,Mode=OneTime}"
                  HorizontalAlignment="Left" Margin="158,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Height="20"/>
-        <Label Content="Description" HorizontalAlignment="Left" Margin="442,66,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="30" RenderTransformOrigin="0.525,1.749"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="442,66,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" 
+               HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="30" RenderTransformOrigin="0.525,1.749"/>
         <TextBox Text= "{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
                  HorizontalAlignment="Left" Margin="462,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Height="20"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="124,175,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="40"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="124,175,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" 
+               HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="40"/>
         <ComboBox HorizontalAlignment="Left" Margin="158,194,0,0" VerticalAlignment="Top" Width="209" Height="20"
                ItemsSource="{Binding Source={StaticResource TaskTypeKey }}"
                SelectedValue="{Binding CurrentTask.Complexity, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True }"/>
-
-        <Label Content="Start Date" HorizontalAlignment="Left" Margin="545,174,0,0" VerticalAlignment="Top"
+        <Label Content="Start Date" HorizontalAlignment="Left" Margin="547,178,0,0" VerticalAlignment="Top"
                FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"
                IsEnabled="{Binding ElementName=scedualedDateTxtBox, Path=IsEnabled}"/>
         <DatePicker SelectedDate="{Binding CurrentTask.StartDate, Mode=TwoWay}"
             HorizontalAlignment="Left" Margin="569,195,0,0" VerticalAlignment="Top" Width="101"
             IsEnabled="{Binding ProjectStatus, Converter={StaticResource TaskStatusToVisibilityConverterKey},Mode=OneTime, ConverterParameter=ScheduledDate}"/>
-
-        <Label Content="Employee ID" HorizontalAlignment="Left" Margin="142,138,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="31"/>
+        <Label Content="Employee ID" HorizontalAlignment="Left" Margin="142,138,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" 
+               HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="31"/>
         <TextBox  Text="{Binding Employee, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
          HorizontalAlignment="Left" Margin="158,157,0,0" VerticalAlignment="Top" Width="209" />
 
-        <Label Content="Remarks" HorizontalAlignment="Left" Margin="437,103,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
+        <Label Content="Remarks" HorizontalAlignment="Left" Margin="437,105,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" 
+               HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
         <TextBox Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
          HorizontalAlignment="Left" Margin="462,123,0,0" VerticalAlignment="Top" Width="209" Height="20"/>
 
-        <Label Content="Deliverables" HorizontalAlignment="Left" Margin="444,138,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top"/>
+        <Label Content="Deliverables" HorizontalAlignment="Left" Margin="444,142,0,0" FontFamily="Arial" FontSize="10" 
+               HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top"/>
         <TextBox Text="{Binding CurrentTask.Deliverables, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
-         HorizontalAlignment="Left" Margin="462,154,0,0" VerticalAlignment="Top" Width="209" Height="20"/>
+         HorizontalAlignment="Left" Margin="462,160,0,0" VerticalAlignment="Top" Width="209" Height="20"/>
 
-        <Label Content="Complete Date" HorizontalAlignment="Left" Margin="558,215,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="35"/>
+        <Label Content="Complete Date" HorizontalAlignment="Left" Margin="558,215,0,0" VerticalAlignment="Top" FontFamily="Arial" 
+               FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="35"/>
         <DatePicker SelectedDate="{Binding CurrentTask.CompleteDate, Mode=TwoWay}"
             HorizontalAlignment="Left" Margin="569,233,0,0" VerticalAlignment="Top" Width="104" Height="23"/>
 
-        <Label Content="Scheduled Date" HorizontalAlignment="Left" Margin="453,216,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
+        <Label Content="Scheduled Date" HorizontalAlignment="Left" Margin="453,216,0,0" VerticalAlignment="Top" FontFamily="Arial"
+               FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20"/>
         <DatePicker SelectedDate="{Binding CurrentTask.ScheduledDate, Mode=TwoWay}"
             HorizontalAlignment="Left" Margin="462,233,0,0" VerticalAlignment="Top" Width="104"/>
 
-        <Label Content="Required Effort Time" HorizontalAlignment="Left" Margin="135,215,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="136" Foreground="#FF7D73B3" Height="27" VerticalAlignment="Top"/>
+        <Label Content="Required Effort Time" HorizontalAlignment="Left" Margin="135,215,0,0" FontFamily="Arial" FontSize="10" 
+               HorizontalContentAlignment="Center" Width="136" Foreground="#FF7D73B3" Height="27" VerticalAlignment="Top"/>
         <TextBox Text="{Binding CurrentTask.RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
          HorizontalAlignment="Left" Margin="158,233,0,0" VerticalAlignment="Top" Width="209"/>
 
-        <Label Content="Created At Date" HorizontalAlignment="Left" Margin="452,174,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top"/>
+        <Label Content="Created At Date" HorizontalAlignment="Left" Margin="452,178,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" 
+               Width="90" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top"/>
         <DatePicker SelectedDate="{Binding CurrentTask.CreatedAtDate, Mode=TwoWay}"
             HorizontalAlignment="Left" Margin="462,195,0,0" VerticalAlignment="Top" Width="104"/>
 

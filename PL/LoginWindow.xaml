@@ -213,7 +213,5 @@
                 </StackPanel>
             </Grid>
         </Border>
-
     </Border>
-
 </Window>

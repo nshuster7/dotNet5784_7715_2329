@@ -178,7 +178,6 @@
                         </TextBox.Background>
                     </TextBox>
 
-
                     <TextBlock Text="Password"
                                Foreground="DarkGray"
                                FontSize="12"

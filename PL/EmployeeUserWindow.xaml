@@ -14,11 +14,13 @@
                          IsEnabled="False" HorizontalAlignment="Left" Margin="182,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Height="24"/>
 
 
-        <Label Content="Description" HorizontalAlignment="Left" Margin="161,138,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" Width="90" Foreground="#FF7D73B3" Height="26" HorizontalContentAlignment="Center"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="161,138,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="10" Width="90"
+               Foreground="#FF7D73B3" Height="26" HorizontalContentAlignment="Center"/>
         <TextBox Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
                HorizontalAlignment="Left" Margin="182,163,0,0" IsEnabled="False" TextWrapping="Wrap" VerticalAlignment="Top"  Width="275" Height="24"/>
 
-        <Label Content="Type" HorizontalAlignment="Left" Margin="150,0,0,0" VerticalAlignment="Center" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="36"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="150,0,0,0" VerticalAlignment="Center" FontFamily="Arial" FontSize="10"
+               HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="36"/>
         <TextBox Text= "{Binding Complexity, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
                         IsEnabled="False" HorizontalAlignment="Left" Margin="182,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Height="24"/>
 
@@ -31,11 +33,13 @@
         <TextBox Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
        HorizontalAlignment="Left" Margin="182,323,0,0" VerticalAlignment="Top" Width="275" Height="24"/>
 
-        <Label Content="Deliverables" HorizontalAlignment="Left" Margin="161,246,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="90" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.23,0.519"/>
+        <Label Content="Deliverables" HorizontalAlignment="Left" Margin="161,246,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center"
+               Width="90" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.23,0.519"/>
         <TextBox Text="{Binding Deliverables, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
        HorizontalAlignment="Left" Margin="182,268,0,0" VerticalAlignment="Top" Width="275" Height="24"/>
 
-        <Label Content="Required Effort Time" HorizontalAlignment="Left" Margin="462,131,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" Width="131" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top"/>
+        <Label Content="Required Effort Time" HorizontalAlignment="Left" Margin="462,131,0,0" FontFamily="Arial" FontSize="10" HorizontalContentAlignment="Center" 
+               Width="131" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top"/>
         <TextBox Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
        HorizontalAlignment="Left" Margin="481,151,0,0" VerticalAlignment="Top" Width="164" IsEnabled="False" Height="24"/>
 
@@ -49,8 +53,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Style="{StaticResource myButtonStyle}" Content="New Task"
-                       Height="56" Width="172" FontFamily="Arial" FontSize="16" Padding="5" Background="#FF7D73B3"  FontWeight="Normal" Margin="578,307,0,0" Click="ChooseNewTask">
+        <Button Style="{StaticResource myButtonStyle}" Content="New Task" Height="56" Width="172" FontFamily="Arial" FontSize="16" Padding="5" 
+                Background="#FF7D73B3"  FontWeight="Normal" Margin="578,307,0,0" Click="ChooseNewTask">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="7" Background="{TemplateBinding Background}" Margin="78,18,0,4">

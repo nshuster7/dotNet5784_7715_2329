@@ -8,21 +8,53 @@
         Title="ScheduledWindow" Height="220" Width="400"
          WindowStartupLocation="CenterScreen"
         DataContext="{Binding StartProjectDate, RelativeSource={RelativeSource Mode=Self}}" Icon="/schedule.png">
+    <Border CornerRadius="12">
+        <Border.Background>
+            <ImageBrush ImageSource="/blueprint.jpg"/>
+        </Border.Background>
+        <Border CornerRadius="10"                    
+     BorderThickness="2"
+     Opacity="0.75">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90*"/>
+                    <ColumnDefinition Width="220*"/>
+                    <ColumnDefinition Width="90*"/>
+                </Grid.ColumnDefinitions>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90*"/>
-            <ColumnDefinition Width="220*"/>
-            <ColumnDefinition Width="90*"/>
-        </Grid.ColumnDefinitions>
-
-        <Label Content="Enter the start project date:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="215" Grid.Column="1"  Foreground="Black" Grid.ColumnSpan="2" Margin="23,66,0,0" Grid.RowSpan="2"/>
-        <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="104" SelectedDate="{Binding StartProjectDate, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" BorderBrush="#FF7EB871" Margin="0,33,0,0"/>
-        <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="67" Click="SetStartProjectDate" Grid.Row="2" Grid.Column="2"/>
-    </Grid>
+                <Label Content="Enter the start project date:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="215" Grid.Column="1" 
+                       Foreground="Black" Grid.ColumnSpan="2" Margin="23,66,0,0" Grid.RowSpan="2"/>
+                <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="104" SelectedDate="{Binding StartProjectDate, Mode=TwoWay}"
+                            Grid.Row="1" Grid.Column="1" BorderBrush="#FF7EB871" Margin="0,33,0,0"/>
+                <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="152" Click="SetStartProjectDate" Grid.Row="2" Grid.Column="1"
+                    FontSize="12" FontFamily="Arial" Cursor="Hand" Background="Purple" FontWeight="Normal" Margin="155,10,0,0" Grid.ColumnSpan="2">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Height="20" Width="60" CornerRadius="10" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

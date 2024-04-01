@@ -44,7 +44,6 @@
     <None Remove="Employee\7.jpg" />
     <None Remove="Employee\8.jpg" />
     <None Remove="Employee\9.jpg" />
-    <None Remove="Employee\blueprint.jpg" />
     <None Remove="Employee\R.png" />
     <None Remove="Employee\staff.png" />
     <None Remove="Employee\user.png" />
@@ -98,7 +97,6 @@
     <Resource Include="Employee\7.jpg" />
     <Resource Include="Employee\8.jpg" />
     <Resource Include="Employee\9.jpg" />
-    <Resource Include="Employee\blueprint.jpg" />
     <Resource Include="Employee\R.png" />
     <Resource Include="Employee\staff.png" />
     <Resource Include="Employee\user.png" />

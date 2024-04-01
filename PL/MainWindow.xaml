@@ -275,17 +275,14 @@
                                 <Border Width="80" Height="40"
                                        CornerRadius="20"
                                        Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
+                                    <ContentPresenter VerticalAlignment="Center"
                                  HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
-
                     </Button>
                 </Grid>
             </Grid>
-
         </Border>
     </Border>
-
 </Window>

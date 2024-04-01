@@ -11,10 +11,6 @@
         <Border.Background>
             <ImageBrush ImageSource="/blueprint.jpg"/>
         </Border.Background>
-        <!--<Border.Background>
-          <ImageBrush ImageSource="Images/back-image.jpg"
-                    Stretch="None"/>
-      </Border.Background>-->
         <Border CornerRadius="20"                    
    BorderThickness="2"
    Opacity="0.75">
@@ -40,7 +36,8 @@
                     <RowDefinition Height="113.96"/>
 
                 </Grid.RowDefinitions>
-                <Button Style="{StaticResource myButtonStyle}"  Content="View employee list"  Click="ViewEmployeeListClick" Height="168" Width="440" Margin="69,-19,0,0" Grid.RowSpan="2" FontSize="12" FontWeight="Normal" FontFamily="Arial">
+                <Button Style="{StaticResource myButtonStyle}"  Content="View employee list"  Click="ViewEmployeeListClick" Height="168" Width="440" Margin="69,-19,0,0" 
+                        Grid.RowSpan="2" FontSize="12" FontWeight="Normal" FontFamily="Arial">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Width="240" Height="50" CornerRadius="20" Background="{TemplateBinding Background}" Margin="0,50,-213,50">
@@ -49,7 +46,8 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}"  Content="View task list"  Margin="0,79,0,0" Click="ViewTaskListClick" Height="100" Width="300" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Grid.RowSpan="3" FontSize="12" FontWeight="Normal" FontFamily="Arial" >
+                <Button Style="{StaticResource myButtonStyle}"  Content="View task list"  Margin="0,79,0,0" Click="ViewTaskListClick" Height="100" Width="300" 
+                        RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Grid.RowSpan="3" FontSize="12" FontWeight="Normal" FontFamily="Arial" >
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -66,7 +64,8 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}" Content="Gant" Click="ViewGantClick" Height="100" Width="300" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" FontSize="12" FontWeight="Normal" FontFamily="Arial">
+                <Button Style="{StaticResource myButtonStyle}" Content="Gant" Click="ViewGantClick" Height="100" Width="300" HorizontalAlignment="Center" Grid.Row="2" 
+                        VerticalAlignment="Center" FontSize="12" FontWeight="Normal" FontFamily="Arial">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Width="240" Height="50" CornerRadius="20" Background="{TemplateBinding Background}">
@@ -75,7 +74,8 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule" Click="ViewAutomaticScheduleClick" Height="100" Width="300" HorizontalAlignment="Center" Grid.Row="2" Margin="0,51,0,0" Grid.RowSpan="3" FontSize="12" FontWeight="Normal" FontFamily="Arial">
+                <Button Style="{StaticResource myButtonStyle}" Content="Automatic schedule" Click="ViewAutomaticScheduleClick" Height="100" Width="300" 
+                        HorizontalAlignment="Center" Grid.Row="2" Margin="0,51,0,0" Grid.RowSpan="3" FontSize="12" FontWeight="Normal" FontFamily="Arial">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Width="240" Height="50" CornerRadius="20" Background="{TemplateBinding Background}">
@@ -104,9 +104,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-
             </Grid>
         </Border>
     </Border>
-
 </Window>

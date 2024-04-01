@@ -23,13 +23,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource myButtonStyle}" Content="Add:" HorizontalAlignment="Center" Height="50" Width="100" VerticalAlignment="Top" Click="AddEmployee" FontFamily="Arial" FontSize="14" Background="#FF6E61B3" />
+            <Button Style="{StaticResource myButtonStyle}" Content="Add:" HorizontalAlignment="Center" Height="50" Width="100" VerticalAlignment="Top" 
+                    Click="AddEmployee" FontFamily="Arial" FontSize="14" Background="#FF6E61B3" />
             <Label Content="Selected Employee:" HorizontalAlignment="Left" Margin="44,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
             <ComboBox  ItemsSource="{Binding Source={StaticResource EmployeeTypeKey}}" SelectedValue="{Binding Path= Type , Mode=TwoWay}"
               Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="WorkerListSelectionChanged">
             </ComboBox>
         </Grid>
-        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" Foreground="Black" Opacity="0.8" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}"   >
+        <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=EmployeeList}" MouseDoubleClick="UpdateEmployee" Foreground="Black" 
+                  Opacity="0.8" Grid.ColumnSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}"   >
             <ListView.Background>
                 <ImageBrush Stretch="Fill" TileMode="Tile"/>
             </ListView.Background>
