@@ -9,7 +9,7 @@ public enum Type
 }
 public enum TaskStatus
 {
-    Unscheduled, Scheduled, OnTrack , Done  
+    Unscheduled, Scheduled, OnTrack , Done, All  
 }
 public enum ProjectStatus
 {

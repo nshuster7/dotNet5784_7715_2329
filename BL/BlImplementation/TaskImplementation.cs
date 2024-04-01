@@ -270,7 +270,9 @@ internal class TaskImplementation : BlApi.ITask
                 // Creates a new list of dependencies for the task.
                 task.Dependencies.Where(t => _dal.Dependency.Check(task.Id, t.Id) == null).Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, task.Id, dependency.Id)));
             }
-
+            DO.Task? checkingTask = _dal.Task.Read(task.Id);
+            if (checkingTask != null && projectStatus== BO.ProjectStatus.PlanningStage &&(task.CreatedAtDate != checkingTask.CreatedAtDate ||  task.StartDate != checkingTask.StartDate ||task.CompleteDate != checkingTask.CompleteDate))
+                throw new BlNotAppropriateTheProjectStageException("You cannot update the task in this stage at the project");
             DO.Task doTask = DataChecking(task);
 
             try
@@ -299,11 +301,13 @@ internal class TaskImplementation : BlApi.ITask
     /// </exception>
     private DO.Task DataChecking(BO.Task task)
     {
-        int idEmp = 0;
+        
         if (int.IsNegative(task.Id))//Checking if the ID is negative
             throw new BlWrongValueException("The task has WORNG VALUE!");
         if (string.IsNullOrEmpty(task.Alias))//Checking if the task has a name
             throw new BlNullPropertyException("The task has Null Property!");// Throws an exception if the task name is empty or null.
+        if(task.ScheduledDate<_bl.Clock)
+            throw new BlScheduledDateException("The estimated task start date has passed!");
         int? temp = (int?)task.Complexity;
         DO.Type? complexity = null;
         if (temp != null)// Updates the variable if the complexity level exists.
@@ -311,20 +315,12 @@ internal class TaskImplementation : BlApi.ITask
 
         if (task.ScheduledDate != null)// Checks if a scheduled start date has been entered.
         {
-            BO.ProjectStatus projectStatus = IBl.GetProjectStatus();
-            if (projectStatus == BO.ProjectStatus.PlanningStage)
-                throw new BlNotAppropriateTheProjectStageException("You cannot enter a scheduled start date for a task at this stage of the project");
-            else
                 Tools.UpdateScheduledStartDate(task.Id, (DateTime)task.ScheduledDate);
         }
+        if (task.Employee != null && task.Employee.Id != 0)
+            throw new BlNotAppropriateTheProjectStageException("You can not update the id of the employee in the planning stage");
 
-        int? workerId = null;
-        if (task.Employee != null)
-            workerId = task.Employee.Id;
-        if(task.Employee!=null)
-            idEmp = task.Employee.Id;
-
-        DO.Task doTask = new DO.Task(task.Id, idEmp, task.Alias, task.Description, task.CreatedAtDate, task.RequiredEffortTime, false, complexity, task.StartDate, task.ScheduledDate, null, task.CompleteDate, task.Deliverables, task.Remarks);
+        DO.Task doTask = new DO.Task(task.Id, 0, task.Alias, task.Description, task.CreatedAtDate, task.RequiredEffortTime, false, complexity, task.StartDate, task.ScheduledDate, null, task.CompleteDate, task.Deliverables, task.Remarks);
 
         return doTask;
     }

@@ -46,9 +46,14 @@ public static class Initialization
         User manager1 = new User(emp1!.Id, "Moshe Baruch","12345678",true);
         var emp2 = s_dal.Employee.Read(e => e.Name == "David Levi");
         User manager2 = new User(emp2!.Id, "David Levi", "87654321", true);
-
+        var emp3 = s_dal.Employee.Read(e => e.Name == "Moshe Baruch");
+        User empUser1 = new User(emp1!.Id, "Amit Singh", "11223344", false);
+        var emp4 = s_dal.Employee.Read(e => e.Name == "David Levi");
+        User empUser2 = new User(emp2!.Id, "Ravi Kumar", "44332211", false);
         s_dal.User.Create(manager1!);
         s_dal.User.Create(manager2!);
+        s_dal.User.Create(empUser1!);
+        s_dal.User.Create(empUser2!);
     }
 
     

@@ -17,6 +17,11 @@ public partial class TaskListWindow : Window
     }
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+    public BO.TaskStatus Status { get; set; } = BO.TaskStatus.All;
+
+
+
+  
 
     public IEnumerable<BO.TaskInList> TaskList
     {

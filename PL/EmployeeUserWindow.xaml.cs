@@ -77,14 +77,21 @@ namespace PL.Employee
 
         private void EndTask(object sender, RoutedEventArgs e)
         {
-            if (CurrentTask is not null)
+            try
             {
-                MessageBoxResult result = MessageBox.Show("Do you want to end the task?", "message", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.No)
+                if (CurrentTask is not null)
                 {
-                    return;
+                    MessageBoxResult result = MessageBox.Show("Do you want to end the task?", "message", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+                    s_bl.Task.EndTask(CurrentTask.Id, UserID);
                 }
-                s_bl.Task.EndTask(CurrentTask.Id, UserID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void ChooseNewTask(object sender, RoutedEventArgs e)
