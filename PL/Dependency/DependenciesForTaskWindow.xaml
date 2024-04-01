@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL.Dependency"
         mc:Ignorable="d"
         Title="DependenciesForTaskWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Window.Resources>
 
@@ -27,7 +28,7 @@
             
         </Grid>
         <ListView Margin="5,5,5,5" Grid.Row="1" ItemsSource="{Binding Path=DependOnTasks}" Grid.ColumnSpan="2" 
-                d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFFFEBCE" >
+                d:ItemsSource="{d:SampleData ItemCount=5}"  >
 
             <ListView.View>
                 <GridView>

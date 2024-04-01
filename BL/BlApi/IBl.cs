@@ -15,7 +15,7 @@ public interface IBl
         BO.ProjectStatus projectStatus = BO.ProjectStatus.IntermediateStage;
         if(dal.startProjectDate == null)
             projectStatus= BO.ProjectStatus.PlanningStage;
-        if(dal.Task.ReadAll().FirstOrDefault(task=> task!.ScheduledDate!=null && task.StartDate!=null&& task.StartDate<DateTime.Now)!=null)
+        if(dal.Task.ReadAll().FirstOrDefault(task=> task!.ScheduledDate!=null && task.StartDate!=null&& task.StartDate>dal.startProjectDate)!=null)
             projectStatus = BO.ProjectStatus.ExecutionStage;
         return projectStatus;
         

@@ -10,6 +10,7 @@ namespace PL.Task
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         int ID;
+        
         public TaskWindow(int Id1 = 0)
         {
             InitializeComponent();
@@ -17,12 +18,15 @@ namespace PL.Task
             if (Id1 == 0)
             {
                 CurrentTask = new BO.Task { Id = 0 };
+              
             }
             else
             {
                 try
                 {
                     CurrentTask = s_bl.Task.ReadAll().FirstOrDefault(t=> t.Id== Id1)!;
+                    if (CurrentTask.Employee != null)
+                        Employee = CurrentTask.Employee.Id;
                 }
                 catch (Exception except)
                 {
@@ -40,6 +44,18 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskProperty =
             DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+
+
+        public int Employee
+        {
+            get { return (int)GetValue(EmployeeProperty); }
+            set { SetValue(EmployeeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Employee.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EmployeeProperty =
+            DependencyProperty.Register("Employee", typeof(int), typeof(TaskWindow), new PropertyMetadata(null));
+
 
 
         public BO.ProjectStatus ProjectStatus
@@ -66,7 +82,7 @@ namespace PL.Task
                 }
                 else
                 {
-                    BO.Task t = new BO.Task{ Id = CurrentTask.Id, Alias = CurrentTask.Alias, Description = CurrentTask.Description, Status = CurrentTask.Status };
+                    BO.Task t = new BO.Task{ Id = CurrentTask.Id, Alias = CurrentTask.Alias,RequiredEffortTime= CurrentTask.RequiredEffortTime,Description = CurrentTask.Description,Remarks= CurrentTask.Remarks, Status = CurrentTask.Status,Deliverables= CurrentTask.Deliverables,Complexity= CurrentTask.Complexity,CreatedAtDate= CurrentTask.CreatedAtDate,ScheduledDate= CurrentTask.ScheduledDate,CompleteDate= CurrentTask.CompleteDate,Employee=new BO.EmployeeInTask { Id=Employee},StartDate= CurrentTask.StartDate };
                     s_bl.Task.Update(t);
                     MessageBox.Show("The Task has been updated successfully", "message", MessageBoxButton.OK);
                 }

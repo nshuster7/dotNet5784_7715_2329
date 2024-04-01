@@ -153,13 +153,6 @@
                         <TextBox.Background>
                             <ImageBrush ImageSource="/user-icon.png" Stretch="None" AlignmentX="Left"/>
                         </TextBox.Background>
-
-
-                        <!--<TextBox.Background>
-                            <ImageBrush ImageSource="user-icon.png"
-                                        Stretch="None"
-                                        AlignmentX="Left"/>
-                        </TextBox.Background>-->
                     </TextBox>
                     <TextBlock Text="Password"
                                Foreground="DarkGray"

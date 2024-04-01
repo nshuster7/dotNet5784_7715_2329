@@ -107,7 +107,7 @@ internal class TaskImplementation : ITask
         List<DO.Task> Tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         if (Tasks.RemoveAll(it => it.Id == item.Id) == 0)
         {
-            throw new DalDoesNotExistException($"Course with ID= {item.Id} does Not exist");
+            throw new DalDoesNotExistException($"Task with ID= {item.Id} does Not exist");
         }
         Tasks.Add(item);
         XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);

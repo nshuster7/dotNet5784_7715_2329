@@ -272,10 +272,11 @@ public static class Initialization
 
             // Generate a random work status
             WorkStatus workStatus = (WorkStatus)s_rand.Next(0, 3);
-            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent!.FullName;
-            string imagesPath = Path.Combine(projectDirectory, "DalTest", "images");
-            string imageName = $"{i + 1}.jpg";
-            string imagePath = Path.Combine(imagesPath, imageName);
+            //string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent!.FullName;
+            //string imagesPath = Path.Combine(projectDirectory, "PL", "Employee");
+            //string imageName = $"{i + 1}.jpg";
+            //string imagePath = Path.Combine(imagesPath, imageName);
+            string imagePath = $"/Employee/{i + 1}.jpg";
             // Create a new object
             Employee employee = new Employee(
                 id,

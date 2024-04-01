@@ -21,6 +21,7 @@ namespace PL.Employee
                 try
                 {
                     CurrentEmployee = s_bl.Employee.Read(Id1)!;
+                    Image = CurrentEmployee.ImageRelativeName;
                 }
                 catch (Exception except)
                 {
@@ -28,6 +29,18 @@ namespace PL.Employee
                 }
             }
         }
+
+
+        public string? Image
+        {
+            get { return (string?)GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Image.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImageProperty =
+            DependencyProperty.Register("Image", typeof(string), typeof(EmployeeWindow), new PropertyMetadata(" "));
+
 
         public BO.Employee CurrentEmployee
         {

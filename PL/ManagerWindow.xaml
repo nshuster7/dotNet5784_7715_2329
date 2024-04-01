@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+         WindowStartupLocation="CenterScreen"
         Title="ManagerWindow" Height="450" Width="800" Icon="/project-management.png">
     <Border CornerRadius="20">
         <Border.Background>
