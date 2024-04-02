@@ -62,7 +62,7 @@ class TaskStatusToVisibilityConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
-public class TaskStatusToBoolConverter : IValueConverter
+class TaskStatusToBoolConverter : IValueConverter
 {
     public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
     {
@@ -94,9 +94,9 @@ public class TaskStatusToBoolConverter : IValueConverter
     }
 }
 
-public class ConvertStatusToBackground : IValueConverter
+ class ConvertStatusToBackground : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
     {
         switch (value)
         {
@@ -114,15 +114,15 @@ public class ConvertStatusToBackground : IValueConverter
                 return Brushes.White;
         }
     }
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
 
-public class ConvertStatusToForeground : IValueConverter
+class ConvertStatusToForeground : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
     {
         switch (value)
         {
@@ -143,7 +143,7 @@ public class ConvertStatusToForeground : IValueConverter
         }
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

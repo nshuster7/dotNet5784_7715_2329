@@ -106,15 +106,15 @@ namespace PL
 
                         for (DateTime date = StartDateColumn.Date; date <= CompleteDateColumn; date = date.AddDays(1))
                         {
-                            // string strDate = $"{date.Day}/{date.Month}/{date.Year}";
-                            if (date.Date < g.StartDate.Date || date.Date > g.CompleteDate.Date)
-                                row[rows] = BO.TaskStatus.All /*BO.Status.None*/;
-                            else
-                            {
-                                row[rows] = g.Status;
-                                if (s_bl.Task.checkInJeoprady(g.TaskId))
-                                    row[rows] = BO.Status.InJeopredy;
-                            }
+                            //// string strDate = $"{date.Day}/{date.Month}/{date.Year}";
+                            //if (date.Date < g.StartDate.Date || date.Date > g.CompleteDate.Date)
+                            row[rows] = BO.TaskStatus.All /*BO.Status.None*/;
+                            //else
+                            //{
+                            //    row[rows] = g.Status;
+                            //    if (s_bl.Task.checkInJeoprady(g.TaskId))
+                            //        row[rows] = BO.Status.InJeopredy;
+                            //}
                             rows++;
                         }
                         dt.Rows.Add(row);

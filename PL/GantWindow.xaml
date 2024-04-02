@@ -11,9 +11,9 @@
         <Canvas.Resources>
             <Style TargetType="DataGridCell">
                 <Setter Property="Background"
-                        Value="{Binding Content.Text, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource ConvertStatusToBackground}}"/>
+                        Value="{Binding Content.Text, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource ConvertStatusToBackgroundKey}}"/>
                 <Setter Property="Foreground" 
-                        Value="{Binding Content.Text, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource ConvertStatusToForeground}}"/>
+                        Value="{Binding Content.Text, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource ConvertStatusToForegroundKey}}"/>
             </Style>
         </Canvas.Resources>
         <DataGrid Initialized="GantGrid_Initialized" GridLinesVisibility="None" IsReadOnly="True" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible" ScrollViewer.CanContentScroll="True">
