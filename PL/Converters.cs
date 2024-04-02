@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PL;
 
@@ -91,7 +92,61 @@ public class TaskStatusToBoolConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
+}
 
+public class ConvertStatusToBackground : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        switch (value)
+        {
+            case "Unscheduled":
+                return Brushes.Gray;
+            case "Done":
+                return Brushes.LightGreen;
+            case "Scheduled":
+                return Brushes.Yellow;
+            case "OnTrack":
+                return Brushes.LightSkyBlue;
+            case "InJeopredy":
+                return Brushes.LightPink;
+            default:
+                return Brushes.White;
+        }
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class ConvertStatusToForeground : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        switch (value)
+        {
+            case "Unscheduled":
+                return Brushes.Gray;
+            case "Done":
+                return Brushes.LightGreen;
+            case "Scheduled":
+                return Brushes.Yellow;
+            case "OnTrack":
+                return Brushes.LightSkyBlue;
+            case "InJeopredy":
+                return Brushes.LightPink;
+            case "None":
+                return Brushes.White;
+            default:
+                return Brushes.Black;
+        }
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 //public class TaskStatusToBoolConverter : IValueConverter
@@ -100,10 +155,8 @@ public class TaskStatusToBoolConverter : IValueConverter
 //    {
 //        if ((BO.TaskStatus)value == BO.TaskStatus.OnTrack|| (BO.TaskStatus)value == BO.TaskStatus.Done) return false; return true;  
 //    }
-
 //    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
 //    {
 //        throw new NotImplementedException();
 //    }
-
 //}
