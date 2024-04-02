@@ -12,8 +12,8 @@
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey" />
         <local:TaskStatusToVisibilityConverter x:Key="TaskStatusToVisibilityConverterKey" />
         <local:TaskStatusToVisibilityConverter x:Key="BooleanToVisibilityConverterKey" />
-        <local:ConvertStatusToBackground x:Key="ConvertStatusToBackgroundKey" />
-        <local:ConvertStatusToForeground x:Key="ConvertStatusToForegroundKey" />
+        <local:ConvertStatusToBackground x:Key="ConvertStatusToBackground" />
+        <local:ConvertStatusToForeground x:Key="ConvertStatusToForeground" />
 
         <Style x:Key="BaseControlStyle" TargetType="Control">
             <Setter Property = "Foreground" Value = "White" />

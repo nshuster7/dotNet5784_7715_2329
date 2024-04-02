@@ -52,7 +52,7 @@
                                Grid.Column="0"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
-                    <Button x:Name="btnMinimize"                           
+                    <Button                           
                             BorderThickness="0"
                             Content="-"
                             Foreground="White"
@@ -82,7 +82,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button x:Name="btnClose"                          
+                    <Button                         
                             BorderThickness="0"
                             Content="X"
                             Foreground="White"
@@ -138,7 +138,7 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,25,0,0"/>
-                    <TextBox x:Name="tbName"
+                    <TextBox 
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            
@@ -161,7 +161,7 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
-                    <TextBox x:Name="tbUserEmail"
+                    <TextBox 
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            
@@ -184,7 +184,7 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
-                    <PasswordBox x:Name="tbPasscode"
+                    <PasswordBox 
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            
@@ -201,7 +201,7 @@
                             <ImageBrush ImageSource="/keyIcon.png" Stretch="None" AlignmentX="Left"/>
                         </PasswordBox.Background>
                     </PasswordBox>
-                    <Button x:Name="btnSignUp"                          
+                    <Button                         
                             BorderThickness="0"
                             Content="SIGN UP"
                             Foreground="White"
@@ -248,7 +248,7 @@
             <RowDefinition Height="297*"/>
             <RowDefinition Height="137*"/>
         </Grid.RowDefinitions>-->
-<!--<Grid x:Name="signUpgrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,21,0,0">
+<!--<Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,21,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -262,24 +262,24 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Content="Name:" HorizontalAlignment="Stretch" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbName" Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="0" Text="" VerticalAlignment="Center" Width="120" TextChanged="tbName_TextChanged"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="0" Text="" VerticalAlignment="Center" Width="120" TextChanged="tbName_TextChanged"/>
 
             <Label Grid.Column="0" Content="User Email:" HorizontalAlignment="Stretch" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbUserEmail" Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="1" Text="" VerticalAlignment="Center" Width="120" TextChanged="tbUserEmail_TextChanged"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="1" Text="" VerticalAlignment="Center" Width="120" TextChanged="tbUserEmail_TextChanged"/>
 
             <Label Grid.Column="0" Content="User Address:" HorizontalAlignment="Stretch" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbUserAddress" Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="2" Text="" VerticalAlignment="Center" Width="120" TextChanged="tbUserAddress_TextChanged"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="2" Text="" VerticalAlignment="Center" Width="120" TextChanged="tbUserAddress_TextChanged"/>
 
             <Label Grid.Column="0" Content="User Name:" HorizontalAlignment="Stretch" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBox x:Name="tbUserName" Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="3" Text="" VerticalAlignment="Center" Width="120" TextChanged="tbUserName_TextChanged"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="3" Text="" VerticalAlignment="Center" Width="120" TextChanged="tbUserName_TextChanged"/>
 
             <Label Grid.Column="0" Content="Passcode:" HorizontalAlignment="Stretch" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <PasswordBox x:Name="tbPasscode"  Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="4" VerticalAlignment="Center" Width="120" PasswordChanged="tbPasscode_PasswordChanged"/>
+            <PasswordBox  Grid.Column="1" HorizontalAlignment="Stretch" Height="NaN" Margin="3" Grid.Row="4" VerticalAlignment="Center" Width="120" PasswordChanged="tbPasscode_PasswordChanged"/>
 
 
         </Grid>
-        <Button x:Name="btnSignUp" Content="Sign up" HorizontalAlignment="Left" Margin="330,351,0,0" VerticalAlignment="Top" Click="btnSignUp_Click" Height="34" Width="104"/>
-        <Button x:Name="btnHome" HorizontalAlignment="Right" Margin="0,21,23,0" VerticalAlignment="Top" Height="41" Width="40" Click="btnHome_Click" Background="#FFFAF6F4" >
+        <Button Content="Sign up" HorizontalAlignment="Left" Margin="330,351,0,0" VerticalAlignment="Top" Click="btnSignUp_Click" Height="34" Width="104"/>
+        <Button orizontalAlignment="Right" Margin="0,21,23,0" VerticalAlignment="Top" Height="41" Width="40" Click="btnHome_Click" Background="#FFFAF6F4" >
             <Image Source="/Cart/HOME.png" Height="41" Width="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Button>
     </Grid>-->

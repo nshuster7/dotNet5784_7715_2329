@@ -100,6 +100,8 @@ class TaskStatusToBoolConverter : IValueConverter
     {
         switch (value)
         {
+            case 1:
+                return Brushes.Black;
             case "Unscheduled":
                 return Brushes.Gray;
             case "Done":

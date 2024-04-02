@@ -21,7 +21,7 @@ namespace PL
     /// <summary>
     /// Interaction logic for Gant.xaml
     /// </summary>
-    public partial class Gant : Window
+    public partial class GantWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public IEnumerable<BO.Gant>? ListGantTasks { get; set; }
@@ -29,7 +29,7 @@ namespace PL
         public DateTime CompleteDateColumn { get; set; }
 
 
-        public Gant()
+        public GantWindow()
         {
             
             ListGantTasks = s_bl.CreateGantList();

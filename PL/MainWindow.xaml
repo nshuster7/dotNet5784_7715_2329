@@ -51,7 +51,7 @@
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="btnMinimize"                           
+                    <Button                            
                      BorderThickness="0"
                      Content="-"
                      Foreground="White"
@@ -81,7 +81,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button x:Name="btnClose"                          
+                    <Button                          
                      BorderThickness="0"
                      Content="X"
                      Foreground="White"
