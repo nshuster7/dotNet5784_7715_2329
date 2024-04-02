@@ -134,4 +134,7 @@ public interface IBl
     public void AdvanceTimeByMonth();   
     public void AdvanceTimeByHour();
     public void ResetTime();
+    public IEnumerable<Gant>? CreateGantList();
+  
+
 }

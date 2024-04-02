@@ -24,14 +24,14 @@ namespace PL
     public partial class Gant : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public IEnumerable<Gant>? ListGantTasks { get; set; }
+        public IEnumerable<BO.Gant>? ListGantTasks { get; set; }
         public DateTime StartDateColumn { get; set; }
         public DateTime CompleteDateColumn { get; set; }
 
 
         public Gant()
         {
-
+            
             ListGantTasks = s_bl.CreateGantList();
             if (ListGantTasks is not null && ListGantTasks!.Count() != 0)
             {
