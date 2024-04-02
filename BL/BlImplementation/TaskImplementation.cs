@@ -243,6 +243,8 @@ internal class TaskImplementation : BlApi.ITask
                         var emp = _dal.Employee.Read(workerId);
                         if (emp == null)
                             throw new BlDoesNotExistException($"The ID {workerId} of the employee does not exists");
+                        if (emp.Type < checkingTask.Complexity)
+                            throw new BlDataException($"You cannot associate the employee with ID  {workerId} number because his level does not match the level of the task");
                     }
                     // Updates the task in the DAL.
                     checkingTask = checkingTask with { Alias = task.Alias, Description = task.Description, Deliverables = task.Deliverables, Remarks = task.Remarks, EmployeeId = workerId };
