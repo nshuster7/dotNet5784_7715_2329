@@ -1,216 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Employees>
   <Employee>
-    <Id>575093104</Id>
-    <Name>Ali Al-Aziz</Name>
-    <HourlyRate>400</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Beginner</Type>
-    <ImageRelativeName>/Employee/1.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>993674856</Id>
-    <Name>Ahmed Al-Hamad</Name>
-    <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Expert</Type>
-    <ImageRelativeName>/Employee/2.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>284170618</Id>
-    <Name>Mohammed Al-Hussein</Name>
-    <HourlyRate>600</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Intermediate</Type>
-    <ImageRelativeName>/Employee/3.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>360878980</Id>
-    <Name>Hassan Al-Jawad</Name>
-    <HourlyRate>500</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>AdvancedBeginner</Type>
-    <ImageRelativeName>/Employee/4.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>330621239</Id>
-    <Name>Omar Al-Mukhtar</Name>
-    <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Active</WorkStatus>
-    <Type>Expert</Type>
-    <ImageRelativeName>/Employee/5.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>829847369</Id>
-    <Name>Mahmoud Al-Sharif</Name>
-    <Email>MahmoudAl-Sharif@example.com</Email>
-    <HourlyRate>500</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>AdvancedBeginner</Type>
-    <ImageRelativeName>/Employee/6.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>985000992</Id>
-    <Name>Khaled Al-Wazir</Name>
-    <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Expert</Type>
-    <ImageRelativeName>/Employee/7.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>955420761</Id>
-    <Name>Yousef Al-Zahrani</Name>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Advanced</Type>
-    <ImageRelativeName>/Employee/8.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>554827212</Id>
-    <Name>Ibrahim Al-Qadi</Name>
-    <Email>IbrahimAl-Qadi@example.com</Email>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Advanced</Type>
-    <ImageRelativeName>/Employee/9.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>959069563</Id>
-    <Name>Li Jian</Name>
-    <HourlyRate>500</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>AdvancedBeginner</Type>
-    <ImageRelativeName>/Employee/10.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>672493012</Id>
-    <Name>Wang Wei</Name>
-    <Email>WangWei@example.com</Email>
-    <HourlyRate>600</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Intermediate</Type>
-    <ImageRelativeName>/Employee/11.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>168752926</Id>
-    <Name>Zhang Xiao</Name>
-    <Email>ZhangXiao@example.com</Email>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Advanced</Type>
-    <ImageRelativeName>/Employee/12.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>535822828</Id>
-    <Name>Zhao Hua</Name>
-    <HourlyRate>500</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>AdvancedBeginner</Type>
-    <ImageRelativeName>/Employee/13.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>353918076</Id>
-    <Name>Wu Li</Name>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Advanced</Type>
-    <ImageRelativeName>/Employee/14.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>795280637</Id>
-    <Name>Liu Yan</Name>
-    <HourlyRate>400</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Beginner</Type>
-    <ImageRelativeName>/Employee/15.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>521390238</Id>
-    <Name>Yang Jie</Name>
-    <Email>YangJie@example.com</Email>
-    <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Expert</Type>
-    <ImageRelativeName>/Employee/16.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>501869439</Id>
-    <Name>Huang Yu</Name>
-    <HourlyRate>400</HourlyRate>
-    <WorkStatus>Active</WorkStatus>
-    <Type>Beginner</Type>
-    <ImageRelativeName>/Employee/17.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>887956839</Id>
-    <Name>Ram Kumar</Name>
-    <Email>RamKumar@example.com</Email>
-    <HourlyRate>600</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Intermediate</Type>
-    <ImageRelativeName>/Employee/18.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>997157520</Id>
-    <Name>Krishna Sharma</Name>
-    <Email>KrishnaSharma@example.com</Email>
-    <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Expert</Type>
-    <ImageRelativeName>/Employee/19.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>620509457</Id>
-    <Name>Rahul Gupta</Name>
-    <HourlyRate>500</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>AdvancedBeginner</Type>
-    <ImageRelativeName>/Employee/20.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>632821158</Id>
-    <Name>Amit Singh</Name>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Active</WorkStatus>
-    <Type>Advanced</Type>
-    <ImageRelativeName>/Employee/21.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>983346193</Id>
-    <Name>Arjun Sharma</Name>
-    <Email>ArjunSharma@example.com</Email>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Active</WorkStatus>
-    <Type>Advanced</Type>
-    <ImageRelativeName>/Employee/22.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>906940815</Id>
-    <Name>Ravi Kumar</Name>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Advanced</Type>
-    <ImageRelativeName>/Employee/23.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>772911353</Id>
-    <Name>David Levi</Name>
-    <HourlyRate>500</HourlyRate>
-    <WorkStatus>Active</WorkStatus>
-    <Type>AdvancedBeginner</Type>
-    <ImageRelativeName>/Employee/24.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>479469849</Id>
-    <Name>Moshe Baruch</Name>
-    <Email>MosheBaruch@example.com</Email>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Advanced</Type>
-    <ImageRelativeName>/Employee/25.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>600929191</Id>
+    <Id>572093582</Id>
     <Name>Ali Al-Aziz</Name>
     <HourlyRate>400</HourlyRate>
     <WorkStatus>Active</WorkStatus>
@@ -218,118 +9,121 @@
     <ImageRelativeName>/Employee/1.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>910337078</Id>
+    <Id>925587455</Id>
     <Name>Ahmed Al-Hamad</Name>
     <Email>AhmedAl-Hamad@example.com</Email>
-    <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Active</WorkStatus>
-    <Type>Expert</Type>
+    <HourlyRate>700</HourlyRate>
+    <WorkStatus>Passive</WorkStatus>
+    <Type>Advanced</Type>
     <ImageRelativeName>/Employee/2.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>877106411</Id>
+    <Id>647393011</Id>
     <Name>Mohammed Al-Hussein</Name>
-    <Email>MohammedAl-Hussein@example.com</Email>
     <HourlyRate>400</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
+    <WorkStatus>Terminated</WorkStatus>
     <Type>Beginner</Type>
     <ImageRelativeName>/Employee/3.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>505220952</Id>
+    <Id>883990926</Id>
     <Name>Hassan Al-Jawad</Name>
-    <HourlyRate>700</HourlyRate>
+    <Email>HassanAl-Jawad@example.com</Email>
+    <HourlyRate>500</HourlyRate>
     <WorkStatus>Terminated</WorkStatus>
-    <Type>Advanced</Type>
+    <Type>AdvancedBeginner</Type>
     <ImageRelativeName>/Employee/4.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>660286033</Id>
+    <Id>561903794</Id>
     <Name>Omar Al-Mukhtar</Name>
-    <HourlyRate>400</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Beginner</Type>
+    <Email>OmarAl-Mukhtar@example.com</Email>
+    <HourlyRate>700</HourlyRate>
+    <WorkStatus>Active</WorkStatus>
+    <Type>Advanced</Type>
     <ImageRelativeName>/Employee/5.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>956318244</Id>
+    <Id>135462555</Id>
     <Name>Mahmoud Al-Sharif</Name>
-    <HourlyRate>500</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>AdvancedBeginner</Type>
-    <ImageRelativeName>/Employee/6.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>861831840</Id>
-    <Name>Khaled Al-Wazir</Name>
-    <HourlyRate>600</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Intermediate</Type>
-    <ImageRelativeName>/Employee/7.jpg</ImageRelativeName>
-  </Employee>
-  <Employee>
-    <Id>162916638</Id>
-    <Name>Yousef Al-Zahrani</Name>
-    <Email>YousefAl-Zahrani@example.com</Email>
+    <Email>MahmoudAl-Sharif@example.com</Email>
     <HourlyRate>400</HourlyRate>
     <WorkStatus>Passive</WorkStatus>
     <Type>Beginner</Type>
+    <ImageRelativeName>/Employee/6.jpg</ImageRelativeName>
+  </Employee>
+  <Employee>
+    <Id>450307114</Id>
+    <Name>Khaled Al-Wazir</Name>
+    <Email>KhaledAl-Wazir@example.com</Email>
+    <HourlyRate>400</HourlyRate>
+    <WorkStatus>Active</WorkStatus>
+    <Type>Beginner</Type>
+    <ImageRelativeName>/Employee/7.jpg</ImageRelativeName>
+  </Employee>
+  <Employee>
+    <Id>811084955</Id>
+    <Name>Yousef Al-Zahrani</Name>
+    <Email>YousefAl-Zahrani@example.com</Email>
+    <HourlyRate>700</HourlyRate>
+    <WorkStatus>Active</WorkStatus>
+    <Type>Advanced</Type>
     <ImageRelativeName>/Employee/8.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>413712413</Id>
+    <Id>852288097</Id>
     <Name>Ibrahim Al-Qadi</Name>
-    <Email>IbrahimAl-Qadi@example.com</Email>
-    <HourlyRate>600</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Intermediate</Type>
+    <HourlyRate>400</HourlyRate>
+    <WorkStatus>Active</WorkStatus>
+    <Type>Beginner</Type>
     <ImageRelativeName>/Employee/9.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>998172558</Id>
+    <Id>126085046</Id>
     <Name>Li Jian</Name>
     <Email>LiJian@example.com</Email>
     <HourlyRate>400</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
+    <WorkStatus>Active</WorkStatus>
     <Type>Beginner</Type>
     <ImageRelativeName>/Employee/10.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>250246862</Id>
+    <Id>821713174</Id>
     <Name>Wang Wei</Name>
     <Email>WangWei@example.com</Email>
-    <HourlyRate>400</HourlyRate>
+    <HourlyRate>600</HourlyRate>
     <WorkStatus>Active</WorkStatus>
-    <Type>Beginner</Type>
+    <Type>Intermediate</Type>
     <ImageRelativeName>/Employee/11.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>748948995</Id>
+    <Id>929972652</Id>
     <Name>Zhang Xiao</Name>
-    <HourlyRate>500</HourlyRate>
+    <HourlyRate>700</HourlyRate>
     <WorkStatus>Active</WorkStatus>
-    <Type>AdvancedBeginner</Type>
+    <Type>Advanced</Type>
     <ImageRelativeName>/Employee/12.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>314475865</Id>
+    <Id>304826717</Id>
     <Name>Zhao Hua</Name>
     <Email>ZhaoHua@example.com</Email>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Advanced</Type>
+    <HourlyRate>500</HourlyRate>
+    <WorkStatus>Terminated</WorkStatus>
+    <Type>AdvancedBeginner</Type>
     <ImageRelativeName>/Employee/13.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>941719111</Id>
+    <Id>257727051</Id>
     <Name>Wu Li</Name>
-    <HourlyRate>400</HourlyRate>
+    <Email>WuLi@example.com</Email>
+    <HourlyRate>600</HourlyRate>
     <WorkStatus>Terminated</WorkStatus>
-    <Type>Beginner</Type>
+    <Type>Intermediate</Type>
     <ImageRelativeName>/Employee/14.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>396838767</Id>
+    <Id>626635437</Id>
     <Name>Liu Yan</Name>
     <Email>LiuYan@example.com</Email>
     <HourlyRate>600</HourlyRate>
@@ -338,89 +132,86 @@
     <ImageRelativeName>/Employee/15.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>947687684</Id>
+    <Id>336447458</Id>
     <Name>Yang Jie</Name>
-    <Email>YangJie@example.com</Email>
-    <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Expert</Type>
+    <HourlyRate>500</HourlyRate>
+    <WorkStatus>Active</WorkStatus>
+    <Type>AdvancedBeginner</Type>
     <ImageRelativeName>/Employee/16.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>715117944</Id>
+    <Id>694111191</Id>
     <Name>Huang Yu</Name>
-    <Email>HuangYu@example.com</Email>
-    <HourlyRate>500</HourlyRate>
+    <HourlyRate>600</HourlyRate>
     <WorkStatus>Passive</WorkStatus>
-    <Type>AdvancedBeginner</Type>
+    <Type>Intermediate</Type>
     <ImageRelativeName>/Employee/17.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>425893358</Id>
+    <Id>458971599</Id>
     <Name>Ram Kumar</Name>
-    <HourlyRate>400</HourlyRate>
-    <WorkStatus>Passive</WorkStatus>
-    <Type>Beginner</Type>
+    <Email>RamKumar@example.com</Email>
+    <HourlyRate>1200</HourlyRate>
+    <WorkStatus>Terminated</WorkStatus>
+    <Type>Expert</Type>
     <ImageRelativeName>/Employee/18.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>882986571</Id>
+    <Id>983159792</Id>
     <Name>Krishna Sharma</Name>
     <Email>KrishnaSharma@example.com</Email>
-    <HourlyRate>700</HourlyRate>
+    <HourlyRate>400</HourlyRate>
     <WorkStatus>Passive</WorkStatus>
-    <Type>Advanced</Type>
+    <Type>Beginner</Type>
     <ImageRelativeName>/Employee/19.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>959574637</Id>
+    <Id>678650280</Id>
     <Name>Rahul Gupta</Name>
-    <Email>RahulGupta@example.com</Email>
-    <HourlyRate>1200</HourlyRate>
-    <WorkStatus>Active</WorkStatus>
-    <Type>Expert</Type>
+    <HourlyRate>700</HourlyRate>
+    <WorkStatus>Terminated</WorkStatus>
+    <Type>Advanced</Type>
     <ImageRelativeName>/Employee/20.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>496701324</Id>
+    <Id>513854193</Id>
     <Name>Amit Singh</Name>
-    <HourlyRate>700</HourlyRate>
+    <HourlyRate>600</HourlyRate>
     <WorkStatus>Passive</WorkStatus>
-    <Type>Advanced</Type>
+    <Type>Intermediate</Type>
     <ImageRelativeName>/Employee/21.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>374031314</Id>
+    <Id>267043815</Id>
     <Name>Arjun Sharma</Name>
-    <HourlyRate>400</HourlyRate>
-    <WorkStatus>Terminated</WorkStatus>
-    <Type>Beginner</Type>
+    <Email>ArjunSharma@example.com</Email>
+    <HourlyRate>1200</HourlyRate>
+    <WorkStatus>Passive</WorkStatus>
+    <Type>Expert</Type>
     <ImageRelativeName>/Employee/22.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>867385443</Id>
+    <Id>611115435</Id>
     <Name>Ravi Kumar</Name>
-    <HourlyRate>400</HourlyRate>
+    <HourlyRate>700</HourlyRate>
     <WorkStatus>Active</WorkStatus>
-    <Type>Beginner</Type>
+    <Type>Advanced</Type>
     <ImageRelativeName>/Employee/23.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>321009230</Id>
+    <Id>893963122</Id>
     <Name>David Levi</Name>
-    <Email>DavidLevi@example.com</Email>
     <HourlyRate>400</HourlyRate>
     <WorkStatus>Terminated</WorkStatus>
     <Type>Beginner</Type>
     <ImageRelativeName>/Employee/24.jpg</ImageRelativeName>
   </Employee>
   <Employee>
-    <Id>873562942</Id>
+    <Id>777508254</Id>
     <Name>Moshe Baruch</Name>
-    <Email>MosheBaruch@example.com</Email>
-    <HourlyRate>700</HourlyRate>
-    <WorkStatus>Active</WorkStatus>
-    <Type>Advanced</Type>
+    <HourlyRate>600</HourlyRate>
+    <WorkStatus>Passive</WorkStatus>
+    <Type>Intermediate</Type>
     <ImageRelativeName>/Employee/25.jpg</ImageRelativeName>
   </Employee>
 </Employees>

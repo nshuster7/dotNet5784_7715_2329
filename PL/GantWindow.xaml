@@ -16,6 +16,25 @@
         </Grid.Resources>
         <DataGrid Initialized="GantGrid_Initialized" GridLinesVisibility="None" IsReadOnly="True" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible" ScrollViewer.CanContentScroll="True">
         </DataGrid>
-
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Color guide:" Grid.Column="0" Background="White" Foreground="Black" VerticalAlignment="Top" Grid.Row="1"/>
+            <Label Content="Unscheduled" Grid.Column="1" Background="Gray" Foreground="Black" VerticalAlignment="Top" Grid.Row="1"/>
+            <Label Content="Scheduled" Grid.Column="2" Background="PowderBlue" Foreground="Black" VerticalAlignment="Top" Grid.Row="1"/>
+            <Label Content="On track" Grid.Column="3" Background="CornflowerBlue" Foreground="Black" VerticalAlignment="Top" Grid.Row="1"/>
+            <Label Content="Done" Grid.Column="4" Background="Blue" Foreground="Black" VerticalAlignment="Top" Grid.Row="1"/>
+            <Label Content="In jeopardy" Grid.Column="5" Background="MediumVioletRed" Foreground="Black" VerticalAlignment="Top" Grid.Row="1"/>
+        </Grid>
     </Grid>
 </Window>

@@ -141,7 +141,7 @@ class ConvertStatusToForeground : IValueConverter
             case "None":
                 return Brushes.White;
             default:
-                return Brushes.Black;
+                return Brushes.White;
         }
     }
 
