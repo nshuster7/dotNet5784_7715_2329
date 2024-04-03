@@ -90,7 +90,6 @@
   <Employee>
     <Id>821713174</Id>
     <Name>Wang Wei</Name>
-    <Email>WangWei@example.com</Email>
     <HourlyRate>600</HourlyRate>
     <WorkStatus>Active</WorkStatus>
     <Type>Intermediate</Type>
@@ -110,7 +109,7 @@
     <Email>ZhaoHua@example.com</Email>
     <HourlyRate>500</HourlyRate>
     <WorkStatus>Terminated</WorkStatus>
-    <Type>AdvancedBeginner</Type>
+    <Type>Expert</Type>
     <ImageRelativeName>/Employee/13.jpg</ImageRelativeName>
   </Employee>
   <Employee>

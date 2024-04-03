@@ -127,7 +127,6 @@ public interface IBl
     }
     public void InitializeDB();
     public void ResetDB();
-
     public DateTime Clock { get; }
     public void AdvanceTimeByYear();
     public void AdvanceTimeByDay();
@@ -135,6 +134,4 @@ public interface IBl
     public void AdvanceTimeByHour();
     public void ResetTime();
     public IEnumerable<Gant>? CreateGantList();
-  
-
 }

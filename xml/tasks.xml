@@ -440,4 +440,15 @@
     <Complexity>Intermediate</Complexity>
     <ScheduledDate>2026-11-29T00:00:00</ScheduledDate>
   </Task>
+  <Task>
+    <Id>1</Id>
+    <EmployeeId>0</EmployeeId>
+    <Alias>COSAS</Alias>
+    <Description>Conduct survey and analysis of sites</Description>
+    <CreatedAtDate>2024-04-02T12:54:11.5145615+03:00</CreatedAtDate>
+    <RequiredEffortTime>P42D</RequiredEffortTime>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Advanced</Complexity>
+    <ScheduledDate>2024-04-04T00:00:00</ScheduledDate>
+  </Task>
 </ArrayOfTask>

@@ -22,4 +22,5 @@ public interface ITask
     public void Rec(List<BO.Task> tasks);
     public void AutomaticSchedule();
     public IEnumerable<IGrouping<BO.TaskStatus, DO.Task?>> GroupTasksByStatus();
+    public bool InJeopardyCheck(int id);
 }

@@ -602,6 +602,35 @@ internal class TaskImplementation : BlApi.ITask
         }
     }
 
+    public bool InJeopardyCheck(int id)
+    {
+        BO.Task? task = Read(id);
+        if (task != null && task.ScheduledDate != null && task.StartDate == null)
+        {
+            if (_bl.Clock.Date > task.ScheduledDate)
+                return true;
+            else if (task.Dependencies == null || task.Dependencies.Count == 0)
+                return false;
+            else
+            {
+                foreach (BO.TaskInList dep in task.Dependencies)
+                {
+                    BO.Task? tsk = Read(dep.Id);
+                    if (tsk != null && tsk.StartDate == null && _bl.Clock.Date > tsk.ScheduledDate)
+                        return true;
+                    else if (tsk != null && tsk.CompleteDate == null && _bl.Clock.Date > task.ForecastDate)
+                        return true;
+                    if (InJeopardyCheck(dep.Id))
+                        return true;
+                }
+            }
+        }
+        else if (task != null && task.StartDate != null && task.CompleteDate == null)
+            if (_bl.Clock.Date > task.ForecastDate)
+                return true;
+        return false;
+    }
+
     private readonly IBl _bl;
     internal TaskImplementation(IBl bl) => _bl = bl;
 

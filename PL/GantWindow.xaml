@@ -5,17 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Gant" Height="450" Width="800"
+        Title="GantWindow" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="390"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         <Grid.Resources>
             <Style TargetType="DataGridCell">
-                <Setter Property="Background" Value="{Binding Content.Text, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource ConvertStatusToBackground}}" />
-                <Setter Property="Foreground" Value="{Binding Content.Text, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource ConvertStatusToForeground}}"/>
+                <Setter Property="Background"
+              Value="{Binding Content.Text, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource ConvertStatusToBackground}}"/>
+                <Setter Property="Foreground" 
+              Value="{Binding Content.Text, RelativeSource={RelativeSource Mode=Self},Converter={StaticResource ConvertStatusToForeground}}"/>
             </Style>
         </Grid.Resources>
-        <DataGrid Initialized="GantGrid_Initialized" GridLinesVisibility="None" IsReadOnly="True" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible" ScrollViewer.CanContentScroll="True">
-        </DataGrid>
+        <DataGrid Initialized="GantGrid_Initialized" GridLinesVisibility="None" IsReadOnly="True" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible" ScrollViewer.CanContentScroll="True"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
