@@ -42,9 +42,18 @@
                Width="131" Foreground="#FF7D73B3" Height="20" VerticalAlignment="Top"/>
         <TextBox Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
        HorizontalAlignment="Left" Margin="481,151,0,0" VerticalAlignment="Top" Width="164" IsEnabled="False" Height="24"/>
-
         <Button Style="{StaticResource myButtonStyle}" Content="To Update" Click="UpdateClick"
-                       Height="56" Width="172" FontFamily="Arial" FontSize="16" Padding="5" Background="#FF7D73B3"  FontWeight="Normal" Margin="578,268,0,0">
+                 Height="56" Width="172" FontFamily="Arial" FontSize="16" Padding="5" Background="#FF7D73B3"  FontWeight="Normal" Margin="578,268,0,0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="7" Background="{TemplateBinding Background}" Margin="78,18,0,4">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Style="{StaticResource myButtonStyle}" Content="Start" Click="StartTask"
+                       Height="56" Width="172" FontFamily="Arial" FontSize="16" Padding="5" Background="#FF7D73B3"  FontWeight="Normal" Margin="578,229,0,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="7" Background="{TemplateBinding Background}" Margin="78,18,0,4">

@@ -231,8 +231,8 @@ internal class TaskImplementation : BlApi.ITask
                 // Checks if time and date fields can be updated in the intermediate or execution stages.
                 // In ExecutionStage you cant update the times or dates
                 if (checkingTask != null && (task.CreatedAtDate != checkingTask.CreatedAtDate || (int?)task.Complexity != (int?)checkingTask.Complexity ||
-                    task.RequiredEffortTime != checkingTask.RequiredEffortTime || task.StartDate != checkingTask.StartDate || task.ScheduledDate != checkingTask.ScheduledDate
-                    || task.CompleteDate != checkingTask.CompleteDate))
+                    task.RequiredEffortTime != checkingTask.RequiredEffortTime || task.ScheduledDate != checkingTask.ScheduledDate
+                    ))
                     throw new BlNotAppropriateTheProjectStageException("You cannot update the task in this stage at the project");
                     if (checkingTask != null)  // Checks if the task exists.
                 {
@@ -247,7 +247,7 @@ internal class TaskImplementation : BlApi.ITask
                             throw new BlDataException($"You cannot associate the employee with ID  {workerId} number because his level does not match the level of the task");
                     }
                     // Updates the task in the DAL.
-                    checkingTask = checkingTask with { Alias = task.Alias, Description = task.Description, Deliverables = task.Deliverables, Remarks = task.Remarks, EmployeeId = workerId };
+                    checkingTask = checkingTask with { Alias = task.Alias, Description = task.Description, Deliverables = task.Deliverables, Remarks = task.Remarks, EmployeeId = workerId ,StartDate=task.StartDate,CompleteDate=task.CompleteDate};
                     _dal.Task.Update(checkingTask);
                     }
             }
@@ -261,6 +261,7 @@ internal class TaskImplementation : BlApi.ITask
         {
             if (task.Dependencies != null)  // Checks if the updated task has dependencies.
             {
+
                 DO.Task? unupdatedT = _dal.Task.Read(task.Id);
                 //IEnumerable<Dependency> t = from TaskInList item in task.Dependencies
                 //        where _dal.Dependency.Check(task.Id, item.Id) == null
@@ -303,7 +304,7 @@ internal class TaskImplementation : BlApi.ITask
     /// </exception>
     private DO.Task DataChecking(BO.Task task)
     {
-        
+        BO.ProjectStatus projectStatus = IBl.GetProjectStatus();
         if (int.IsNegative(task.Id))//Checking if the ID is negative
             throw new BlWrongValueException("The task has WORNG VALUE!");
         if (string.IsNullOrEmpty(task.Alias))//Checking if the task has a name
@@ -319,7 +320,7 @@ internal class TaskImplementation : BlApi.ITask
         {
                 Tools.UpdateScheduledStartDate(task.Id, (DateTime)task.ScheduledDate);
         }
-        if (task.Employee != null && task.Employee.Id != 0)
+        if (task.Employee != null && task.Employee.Id != 0 && projectStatus!= BO.ProjectStatus.IntermediateStage)
             throw new BlNotAppropriateTheProjectStageException("You can not update the id of the employee in the planning stage");
 
         DO.Task doTask = new DO.Task(task.Id, 0, task.Alias, task.Description, task.CreatedAtDate, task.RequiredEffortTime, false, complexity, task.StartDate, task.ScheduledDate, null, task.CompleteDate, task.Deliverables, task.Remarks);
@@ -428,14 +429,13 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BlDoesNotExistException($"Task with ID {idT} does not exist.");
         }
-        if(task.EmployeeId != idEmp)// Checks if the task is already assigned to another employee.
-            throw new BlDataException($"Task with ID {idT} has done by someone else.");
-
+  
         if (task.StartDate.HasValue && task.StartDate!= _bl.Clock)// Checks if the task has already started.
         {
             throw new BlDataException($"Task with ID {idT} has already started.");
         }
-        var newT=task with { CreatedAtDate = _bl.Clock };
+
+        var newT=task with { StartDate = _bl.Clock, EmployeeId= idEmp };
 
         _dal.Task.Update(newT);
     }
@@ -456,6 +456,10 @@ internal class TaskImplementation : BlApi.ITask
         if (task.CompleteDate.HasValue)// Checks if the task has already been completed.
         {
             throw new BlDataException($"Task with ID {idT} has already been completed.");
+        }
+        if (task.StartDate==null)// Checks if the task has already been completed.
+        {
+            throw new BlDataException($"You can not end task that you dont start!");
         }
         var newT = task with { CompleteDate = _bl.Clock };// Updates the completion date and time of the task.
 

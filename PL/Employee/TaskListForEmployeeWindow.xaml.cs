@@ -23,9 +23,10 @@ namespace PL.Employee
     {
         public TaskListForEmployeeWindow(int id)
         {
-            InitializeComponent();
             TaskList = s_bl.Task.TasksForWorker(id);
             ID = id;
+            InitializeComponent();
+           
         }
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
@@ -59,6 +60,8 @@ namespace PL.Employee
             {
                 if (taskInList != null)
                     s_bl.Task.StartTask(taskInList.Id, ID);
+                this.Close();
+                new EmployeeUserWindow(ID).Show();
             }
             catch (Exception exp)
             {

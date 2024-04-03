@@ -12,13 +12,17 @@ namespace PL.Employee
         int ID;
         public EmployeeUserWindow(int EmployeeUserId)
         {
-            InitializeComponent();
+            
             try
             {
                  UserID = EmployeeUserId;
                  ID = BO.Tools.GetCurrentTaskId(UserID) ??0;
-                if(ID == 0)
+                if (ID == 0)
+                {
                     MessageBox.Show($"Employee with ID {UserID} does not work on a task", "message", MessageBoxButton.OK);
+                    new TaskListForEmployeeWindow(UserID).Show();
+                   
+                }
                 else
                     CurrentTask = s_bl.Task.Read(ID)!;
             }
@@ -30,6 +34,7 @@ namespace PL.Employee
                     new MainWindow().Show();
                 }
             }
+            InitializeComponent();
         }
         public BO.Task CurrentTask
         {
@@ -74,7 +79,25 @@ namespace PL.Employee
                 MessageBox.Show(except.Message, "Eror", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        private void StartTask(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (CurrentTask is not null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Do you want to start the task?", "message", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+                    s_bl.Task.StartTask(CurrentTask.Id, UserID);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private void EndTask(object sender, RoutedEventArgs e)
         {
             try
@@ -99,11 +122,12 @@ namespace PL.Employee
             if (CurrentTask is not null) 
             {
                 MessageBoxResult result = MessageBox.Show("Do you want to choose a new task?", "message", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.No) 
+                if (result == MessageBoxResult.No)
                 {
                     return;
                 }
-                s_bl.Task.EndTask(CurrentTask.Id, UserID);
+                if(CurrentTask.CompleteDate ==null)
+                    s_bl.Task.EndTask(CurrentTask.Id, UserID);
                 new TaskListForEmployeeWindow(UserID).Show();
             }
         }
