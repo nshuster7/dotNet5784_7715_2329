@@ -118,7 +118,8 @@ namespace PL
 
         private void textChanged(object sender, RoutedEventArgs e)
         {
-            if (tbPasscode.BorderBrush == Brushes.Red)
+            var tbPasscode = (sender as TextBox);
+            if (tbPasscode!.BorderBrush == Brushes.Red)
             {
                 tbPasscode.BorderBrush = Brushes.DimGray;
             }
