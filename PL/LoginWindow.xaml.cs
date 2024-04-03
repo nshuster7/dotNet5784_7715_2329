@@ -85,24 +85,27 @@ namespace PL
             try
             {
                 DO.User? user = bl.User.GetByUserName(userName);
-                if(user != null)
-                   if (user.Password != password)
-                      MessageBox.Show("Passcode is wrong", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                else
-                {
-                    if (user.IsManeger)//if it's an admin
+                if (user != null)
+                    if (user.Password != password)
                     {
-                        ManagerWindow aw = new ManagerWindow();//create new ManagerWindow
-                        Close();
-                        aw.ShowDialog();
+                        MessageBox.Show("Passcode is wrong", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                        passwordTextBox.BorderBrush = Brushes.Red;
                     }
-                    else //if it isn't an admin
+                    else
                     {
-                        EmployeeUserWindow cw = new EmployeeUserWindow(user.ID);//create new ManagerWindow
-                        Close();
-                        cw.ShowDialog();
+                        if (user.IsManeger)//if it's an admin
+                        {
+                            ManagerWindow aw = new ManagerWindow();//create new ManagerWindow
+                            Close();
+                            aw.ShowDialog();
+                        }
+                        else //if it isn't an admin
+                        {
+                            EmployeeUserWindow cw = new EmployeeUserWindow(user.ID);//create new ManagerWindow
+                            Close();
+                            cw.ShowDialog();
+                        }
                     }
-                }
             }
             catch (BO.BlDoesNotExistException)
             {

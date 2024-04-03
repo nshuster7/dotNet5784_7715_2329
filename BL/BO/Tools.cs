@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using BlApi;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,6 +9,10 @@ namespace BO;
 public static class Tools
 {
     private static DalApi.IDal _dal = DalApi.Factory.Get;
+
+    private static readonly IBl? _bl;
+    
+
     public static string ToStringProperty<T>(this T obj)
     {
         StringBuilder sb = new StringBuilder();
@@ -80,7 +85,7 @@ public static class Tools
     /// <returns>The ID of the current task for the employee, or null if there is no current task.</returns>
     public static int? GetCurrentTaskId(this int? idEmp)
     {
-        DO.Task? t = _dal.Task.Read(task => task.EmployeeId == idEmp);
+        DO.Task? t = _dal.Task.Read(task => task.EmployeeId == idEmp && task.CompleteDate==null);
         if (t != null)
             return t.Id;
         return null;
@@ -104,9 +109,9 @@ public static class Tools
             if (task.EmployeeId == empId) // Task already assigned to the same employee
                 return true;
             s = GetStatus(task);
-            if (s == BO.TaskStatus.Unscheduled)
-                return true;
-            return false;// Task is scheduled for a different employee
+            if (s == BO.TaskStatus.OnTrack || s == BO.TaskStatus.Done|| s == BO.TaskStatus.Unscheduled)
+                return false;// Task is scheduled for a different employee
+            return true;
         }
         throw new BO.BlTaskCantBeAssignedException($"task with ID={id} cant be assigned for employee with ID={empId} ");
     }
@@ -132,7 +137,7 @@ public static class Tools
         }
         else if (doTask.ScheduledDate.HasValue)
         {
-            if (DateTime.Now >= doTask.ScheduledDate)
+            if ( DateTime.Now >= doTask.ScheduledDate)
             {
                 return BO.TaskStatus.OnTrack;
             }

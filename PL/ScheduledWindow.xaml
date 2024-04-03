@@ -9,9 +9,7 @@
          WindowStartupLocation="CenterScreen"
         DataContext="{Binding StartProjectDate, RelativeSource={RelativeSource Mode=Self}}" Icon="/schedule.png">
     <Border CornerRadius="12">
-        <Border.Background>
-            <ImageBrush ImageSource="/blueprint.jpg"/>
-        </Border.Background>
+     
         <Border CornerRadius="10"                    
      BorderThickness="2"
      Opacity="0.75">
@@ -41,7 +39,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Enter the start project date:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="215" Grid.Column="1" 
-                       Foreground="Black" Grid.ColumnSpan="2" Margin="23,66,0,0" Grid.RowSpan="2"/>
+                       Foreground="White" Grid.ColumnSpan="2" Margin="23,66,0,0" Grid.RowSpan="2"/>
                 <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="104" SelectedDate="{Binding StartProjectDate, Mode=TwoWay}"
                             Grid.Row="1" Grid.Column="1" BorderBrush="#FF7EB871" Margin="0,33,0,0"/>
                 <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Height="57" Width="152" Click="SetStartProjectDate" Grid.Row="2" Grid.Column="1"
