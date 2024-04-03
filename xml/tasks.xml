@@ -408,18 +408,6 @@
     <ScheduledDate>2027-02-12T00:00:00</ScheduledDate>
   </Task>
   <Task>
-    <Id>1</Id>
-    <EmployeeId>0</EmployeeId>
-    <Alias>COSAS</Alias>
-    <Description>Conduct survey and analysis of sites</Description>
-    <CreatedAtDate>2024-04-02T12:54:11.5145615+03:00</CreatedAtDate>
-    <RequiredEffortTime>P42D</RequiredEffortTime>
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Advanced</Complexity>
-    <StartDate>2024-04-06T00:00:00</StartDate>
-    <ScheduledDate>2024-04-05T00:00:00</ScheduledDate>
-  </Task>
-  <Task>
     <Id>13</Id>
     <EmployeeId>571114571</EmployeeId>
     <Alias>IWAI</Alias>
@@ -440,5 +428,16 @@
     <IsMilestone>false</IsMilestone>
     <Complexity>Beginner</Complexity>
     <ScheduledDate>2024-08-09T00:00:00</ScheduledDate>
+  </Task>
+  <Task>
+    <Id>1</Id>
+    <EmployeeId>0</EmployeeId>
+    <Alias>COSAS</Alias>
+    <Description>Conduct survey and analysis of sites</Description>
+    <CreatedAtDate>2024-04-02T12:54:11.5145615+03:00</CreatedAtDate>
+    <RequiredEffortTime>P42D</RequiredEffortTime>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Advanced</Complexity>
+    <ScheduledDate>2024-04-04T00:00:00</ScheduledDate>
   </Task>
 </ArrayOfTask>
