@@ -17,7 +17,7 @@ public static class Initialization
         IEnumerable<Employee> allEmployees = s_dal!.Employee.ReadAll()!;
 
         // Choose randomly 15 employees
-        IEnumerable<Employee> selectedEmployees = allEmployees.Take(15);
+        IEnumerable<Employee> selectedEmployees = allEmployees.Take(15).Distinct();
 
         // Iterate over selected employees to create users
         foreach (var employee in selectedEmployees)
@@ -30,26 +30,27 @@ public static class Initialization
 
             // Generate a random password for the user
             string password = GenerateRandomPassword();
-
-            // Create the user object
-            User user = new User(
-                userId,
-                username,
-                password,
-                false
-            );
-
-            // Add the user to the data source
-            s_dal.User.Create(user);
+            User user;
+            if (username != "Moshe Baruch" && username != "David Levi" && username != "Amit Singh" && username != "Ravi Kumar")
+            {
+                user = new User(
+                   userId,
+                   username,
+                   password,
+                   false
+               );
+                // Add the user to the data source
+                s_dal.User.Create(user);
+            }
         }
         var emp1 = s_dal.Employee.Read(e => e.Name == "Moshe Baruch");
         User manager1 = new User(emp1!.Id, "Moshe Baruch","12345678",true);
         var emp2 = s_dal.Employee.Read(e => e.Name == "David Levi");
         User manager2 = new User(emp2!.Id, "David Levi", "87654321", true);
-        var emp3 = s_dal.Employee.Read(e => e.Name == "Moshe Baruch");
-        User empUser1 = new User(emp1!.Id, "Amit Singh", "11223344", false);
-        var emp4 = s_dal.Employee.Read(e => e.Name == "David Levi");
-        User empUser2 = new User(emp2!.Id, "Ravi Kumar", "44332211", false);
+        var emp3 = s_dal.Employee.Read(e => e.Name == "Amit Singh");
+        User empUser1 = new User(emp3!.Id, "Amit Singh", "11223344", false);
+        var emp4 = s_dal.Employee.Read(e => e.Name == "Ravi Kumar");
+        User empUser2 = new User(emp4!.Id, "Ravi Kumar", "44332211", false);
         s_dal.User.Create(manager1!);
         s_dal.User.Create(manager2!);
         s_dal.User.Create(empUser1!);
@@ -59,7 +60,6 @@ public static class Initialization
     
     private static void createDependency()
     {
-        s_dal!.Dependency.Create(new Dependency(0, 2, 1));
         s_dal!.Dependency.Create(new Dependency(0, 2, 1));
         s_dal!.Dependency.Create(new Dependency(0, 3, 2));
         s_dal!.Dependency.Create(new Dependency(0, 4, 3));

@@ -434,7 +434,9 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BlDataException($"Task with ID {idT} has already started.");
         }
-
+        var prevTasks = Tools.GetListOfPreviousTask(idT)?.Where(t => _dal.Task.Read(t.Id)!.CompleteDate == null);
+        if (prevTasks!.Any()) 
+            throw new BlDataException("You can not start a task that its preceding tasks have not be completed yet");
         var newT=task with { StartDate = _bl.Clock, EmployeeId= idEmp };
 
         _dal.Task.Update(newT);

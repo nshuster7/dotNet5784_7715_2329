@@ -116,14 +116,14 @@ namespace PL
 
         }
 
-        private void textChanged(object sender, RoutedEventArgs e)
-        {
-            var tbPasscode = (sender as TextBox);
-            if (tbPasscode!.BorderBrush == Brushes.Red)
-            {
-                tbPasscode.BorderBrush = Brushes.DimGray;
-            }
-        }
+        //private void textChanged(object sender, RoutedEventArgs e)
+        //{
+        //    var tbPasscode = (sender as TextBox);
+        //    if (tbPasscode!.BorderBrush == Brushes.Red)
+        //    {
+        //        tbPasscode.BorderBrush = Brushes.DimGray;
+        //    }
+        //}
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

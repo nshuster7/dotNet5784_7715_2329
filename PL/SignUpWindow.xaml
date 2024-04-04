@@ -149,7 +149,7 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,0,0,0"
-                             Padding="20,0,0,0" TextChanged="textChanged">
+                             Padding="20,0,0,0" >
                         <TextBox.Background>
                             <ImageBrush ImageSource="/user-icon.png" Stretch="None" AlignmentX="Left"/>
                         </TextBox.Background>
@@ -172,7 +172,7 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,0,0,0"
-                             Padding="20,0,0,0" TextChanged="textChanged">
+                             Padding="20,0,0,0" >
                         <TextBox.Background>
                             <ImageBrush ImageSource="/user-icon.png" Stretch="None" AlignmentX="Left"/>
                         </TextBox.Background>
@@ -195,7 +195,6 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,0,0,0"
-                             PasswordChanged="textChanged"
                              Padding="20,0,0,0">
                         <PasswordBox.Background>
                             <ImageBrush ImageSource="/keyIcon.png" Stretch="None" AlignmentX="Left"/>

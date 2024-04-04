@@ -79,7 +79,7 @@ public partial class GantWindow : Window
             dt.Columns.Add("Task dependencies", typeof(string));
 
             int column = 5;
-            for (DateTime date = StartDateColumn.Date; date <= CompleteDateColumn; date = date.AddDays(1))
+            for (DateTime date = StartDateColumn.Date; date <= CompleteDateColumn; date = date.AddDays(7))
             {
                 string strDate = $"{date.Day}/{date.Month}/{date.Year}";
                 dg.Columns.Add(new DataGridTextColumn() { Header = strDate, Binding = new Binding($"[{column}]") });
@@ -101,7 +101,7 @@ public partial class GantWindow : Window
 
                     int rows = 5;
 
-                    for (DateTime date = StartDateColumn.Date; date <= CompleteDateColumn; date = date.AddDays(1))
+                    for (DateTime date = StartDateColumn.Date; date <= CompleteDateColumn; date = date.AddDays(7))
                     {
                         //// string strDate = $"{date.Day}/{date.Month}/{date.Year}";
                         //if (date.Date < g.StartDate.Date || date.Date > g.CompleteDate.Date)

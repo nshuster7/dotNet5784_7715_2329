@@ -119,16 +119,23 @@ namespace PL.Employee
         }
         private void ChooseNewTask(object sender, RoutedEventArgs e)
         {
-            if (CurrentTask is not null) 
+            try
             {
-                MessageBoxResult result = MessageBox.Show("Do you want to choose a new task?", "message", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.No)
+                if (CurrentTask is not null)
                 {
-                    return;
+                    MessageBoxResult result = MessageBox.Show("Do you want to choose a new task?", "message", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+                    if (CurrentTask.CompleteDate == null)
+                        s_bl.Task.EndTask(CurrentTask.Id, UserID);
+                    new TaskListForEmployeeWindow(UserID).Show();
                 }
-                if(CurrentTask.CompleteDate ==null)
-                    s_bl.Task.EndTask(CurrentTask.Id, UserID);
-                new TaskListForEmployeeWindow(UserID).Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

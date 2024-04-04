@@ -52,7 +52,7 @@ internal class Bl : IBl
                       StartDate = calculateStartDate(task.StartDate, task.ScheduledDate),
                       CompleteDate = calculateCompleteDate(task.ForecastDate, task.CompleteDate),
                       DependentTasks = lstDependentId(task.Dependencies),
-                      Status = task.Status
+                      Status = Tools.GetStatus(task)
                   };
         return lst.OrderBy(task => task.StartDate);
 

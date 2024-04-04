@@ -10,7 +10,7 @@ public static class Tools
 {
     private static DalApi.IDal _dal = DalApi.Factory.Get;
 
-    private static readonly IBl? _bl;
+   
     
 
     public static string ToStringProperty<T>(this T obj)
@@ -123,6 +123,35 @@ public static class Tools
     /// The current status of the task - Done, OnTrack, Scheduled, Unscheduled.
     /// Throws an ArgumentNullException if the doTask object is null.
     /// </returns>
+    /// 
+    public static BO.TaskStatus GetStatus(BO.Task boTask)
+    {
+        if (boTask == null)
+        {
+            throw new ArgumentNullException(nameof(boTask), "Task cannot be null");
+        }
+
+        // Determine the task status based on relevant properties
+        if (boTask.CompleteDate.HasValue)
+        {
+            return BO.TaskStatus.Done;
+        }
+        else if (boTask.ScheduledDate.HasValue)
+        {
+            if (DateTime.Now >= boTask.ScheduledDate)
+            {
+                return BO.TaskStatus.OnTrack;
+            }
+            else
+            {
+                return BO.TaskStatus.Scheduled;
+            }
+        }
+        else
+        {
+            return BO.TaskStatus.Unscheduled;
+        }
+    }
     public static BO.TaskStatus GetStatus(DO.Task doTask)
     {
         if (doTask == null)
@@ -137,7 +166,7 @@ public static class Tools
         }
         else if (doTask.ScheduledDate.HasValue)
         {
-            if ( DateTime.Now >= doTask.ScheduledDate)
+            if (doTask.StartDate!=null)
             {
                 return BO.TaskStatus.OnTrack;
             }

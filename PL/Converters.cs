@@ -94,35 +94,34 @@ class TaskStatusToBoolConverter : IValueConverter
     }
 }
 
-// class ConvertStatusToBackground : IValueConverter
-//{
-//    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
-//    {
-//        switch (value)
-//        {
-//            case 1:
-//                return Brushes.Black;
-//            case "Unscheduled":
-//                return Brushes.Gray;
-//            case "Done":
-//                return Brushes.LightGreen;
-//            case "Scheduled":
-//                return Brushes.Yellow;
-//            case "OnTrack":
-//                return Brushes.LightSkyBlue;
-//            case "InJeopredy":
-//                return Brushes.LightPink;
-//            default:
-//                return Brushes.White;
-//        }
-//    }
-//    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
-
 class ConvertStatusToBackground : IValueConverter
+{
+    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
+    {
+        switch (value)
+        {
+            case "Unscheduled":
+                return Brushes.Gray;
+            case "Scheduled":
+                return Brushes.PowderBlue;
+            case "OnTrack":
+                return Brushes.CornflowerBlue;
+            case "InJeopardy":
+                return Brushes.MediumVioletRed;
+            case "Done":
+                return Brushes.Blue;
+            default:
+                return Brushes.White;
+        }
+    }
+
+    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertStatusToForeground : IValueConverter
 {
     public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
     {
@@ -141,32 +140,7 @@ class ConvertStatusToBackground : IValueConverter
             case "All":
                 return Brushes.White;
             default:
-                return Brushes.LightGreen;
-        }
-    }
-
-    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-class ConvertStatusToForeground : IValueConverter
-{
-    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
-    {
-        switch (value)
-        {
-            case "Unscheduled":
-            case "Scheduled":
-            case "OnTrack":
-            case "InJeopardy":
-            case "Done":
                 return Brushes.Black;
-            case "All":
-                return Brushes.White;
-            default:
-                return Brushes.White;
         }
     }
 
@@ -176,43 +150,3 @@ class ConvertStatusToForeground : IValueConverter
     }
 }
 
-//class ConvertStatusToForeground : IValueConverter
-//{
-//    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
-//    {
-//        switch (value)
-//        {
-//            case "Unscheduled":
-//                return Brushes.Gray;
-//            case "Done":
-//                return Brushes.LightGreen;
-//            case "Scheduled":
-//                return Brushes.Yellow;
-//            case "OnTrack":
-//                return Brushes.LightSkyBlue;
-//            case "InJeopredy":
-//                return Brushes.LightPink;
-//            case "None":
-//                return Brushes.White;
-//            default:
-//                return Brushes.Black;
-//        }
-//    }
-
-//    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
-
-//public class TaskStatusToBoolConverter : IValueConverter
-//{
-//    public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
-//    {
-//        if ((BO.TaskStatus)value == BO.TaskStatus.OnTrack|| (BO.TaskStatus)value == BO.TaskStatus.Done) return false; return true;  
-//    }
-//    public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
