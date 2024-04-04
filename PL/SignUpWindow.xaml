@@ -232,8 +232,8 @@
                     </Button>
 
                 </StackPanel>
-                <CheckBox IsChecked="{Binding ChBox,Mode=TwoWay}" Content="CheckBox" Margin="88,280,283,206" Grid.Row="1" RenderTransformOrigin="-1.045,1"/>
-                <TextBlock HorizontalAlignment="Left" Height="30" Margin="113,279,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Is Manager?" VerticalAlignment="Top" Width="67" Foreground="DarkGray" FontSize="12" FontWeight="Medium"/>
+                <!--<CheckBox IsChecked="{Binding ChBox,Mode=TwoWay}" Content="CheckBox" Margin="88,280,283,206" Grid.Row="1" RenderTransformOrigin="-1.045,1"/>
+                <TextBlock HorizontalAlignment="Left" Height="30" Margin="113,279,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Is Manager?" VerticalAlignment="Top" Width="67" Foreground="DarkGray" FontSize="12" FontWeight="Medium"/>-->
             </Grid>
         </Border>
 
