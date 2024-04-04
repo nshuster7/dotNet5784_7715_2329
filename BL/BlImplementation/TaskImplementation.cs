@@ -463,6 +463,8 @@ internal class TaskImplementation : BlApi.ITask
         {
             throw new BlDataException($"You can not end task that you dont start!");
         }
+        if(_bl.Clock<task.StartDate)
+            throw new BlDataException($"You can not end task that you dont start!");
         var newT = task with { CompleteDate = _bl.Clock };// Updates the completion date and time of the task.
 
         _dal.Task.Update(newT);
