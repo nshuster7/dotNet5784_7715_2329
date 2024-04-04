@@ -19,7 +19,7 @@ internal class UserImplementation : BlApi.IUser
     public void Create(BO.User user)
     {
         if (int.IsNegative(user.ID))//Checking if the ID is negative
-            throw new BlWrongValueException("The task has WORNG VALUE!");
+            throw new BlWrongValueException("The user has WORNG VALUE!");
 
         // creates new DO user and copy into it the BO user's details
         DO.User dalUser = new DO.User(user.ID, user.Name, user.Password, user.IsManeger);
@@ -31,7 +31,7 @@ internal class UserImplementation : BlApi.IUser
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"Task with ID={dalUser.ID} already exists", ex);
+            throw new BO.BlAlreadyExistsException($"User with ID={dalUser.ID} already exists", ex);
         }
     }
 
@@ -86,7 +86,7 @@ internal class UserImplementation : BlApi.IUser
     public void ResetPassword(int ID, string password)
     {
         if (int.IsNegative(ID))//Checking if the ID is negative
-            throw new BlWrongValueException("The task has WORNG VALUE!");
+            throw new BlWrongValueException("The user has WORNG VALUE!");
         dal.User.ResetPassword(ID, password);
     }
     private readonly IBl _bl;
