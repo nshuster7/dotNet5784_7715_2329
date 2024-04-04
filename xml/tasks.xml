@@ -419,17 +419,6 @@
     <ScheduledDate>2024-04-27T00:00:00</ScheduledDate>
   </Task>
   <Task>
-    <Id>3</Id>
-    <EmployeeId>225614059</EmployeeId>
-    <Alias>OTNPAP</Alias>
-    <Description>Obtain necessary permits and permissions</Description>
-    <CreatedAtDate>2024-04-04T02:25:44.883519+03:00</CreatedAtDate>
-    <RequiredEffortTime>P56D</RequiredEffortTime>
-    <IsMilestone>false</IsMilestone>
-    <Complexity>Beginner</Complexity>
-    <ScheduledDate>2024-05-11T00:00:00</ScheduledDate>
-  </Task>
-  <Task>
     <Id>1</Id>
     <EmployeeId>162261745</EmployeeId>
     <Alias>COSAS</Alias>
@@ -441,5 +430,13 @@
     <StartDate>2024-04-07T00:00:00</StartDate>
     <ScheduledDate>2024-04-06T00:00:00</ScheduledDate>
     <CompleteDate>2024-06-01T00:00:00</CompleteDate>
+  </Task>
+  <Task>
+    <Id>3</Id>
+    <EmployeeId>0</EmployeeId>
+    <Alias>OTNPAP</Alias>
+    <Description>Obtain necessary permits and permissions</Description>
+    <IsMilestone>false</IsMilestone>
+    <Complexity>Beginner</Complexity>
   </Task>
 </ArrayOfTask>
