@@ -1,2 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <ID>423532855</ID>
+    <Name>Ali Al-Aziz</Name>
+    <Password>Jbu48Ls7</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>466553366</ID>
+    <Name>Ahmed Al-Hamad</Name>
+    <Password>Vd4LcYBB</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>187190968</ID>
+    <Name>Mohammed Al-Hussein</Name>
+    <Password>73y9XppJ</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>111028137</ID>
+    <Name>Hassan Al-Jawad</Name>
+    <Password>6hrJgU8i</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>363101503</ID>
+    <Name>Omar Al-Mukhtar</Name>
+    <Password>SiJIAdO8</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>425683513</ID>
+    <Name>Mahmoud Al-Sharif</Name>
+    <Password>wzbQHxNu</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>966384380</ID>
+    <Name>Khaled Al-Wazir</Name>
+    <Password>xg5kAG07</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>430579560</ID>
+    <Name>Yousef Al-Zahrani</Name>
+    <Password>Wqr8oMga</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>679954472</ID>
+    <Name>Ibrahim Al-Qadi</Name>
+    <Password>3Zd1XlGG</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>448229342</ID>
+    <Name>Li Jian</Name>
+    <Password>OkCROwK4</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>178215134</ID>
+    <Name>Wang Wei</Name>
+    <Password>GlwPsiJr</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>797181466</ID>
+    <Name>Zhang Xiao</Name>
+    <Password>dpaq6Mh5</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>395045757</ID>
+    <Name>Zhao Hua</Name>
+    <Password>TXiaOdmT</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>365717089</ID>
+    <Name>Wu Li</Name>
+    <Password>dn7fe4vB</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>753749475</ID>
+    <Name>Liu Yan</Name>
+    <Password>FRd5lN2H</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>220244635</ID>
+    <Name>Moshe Baruch</Name>
+    <Password>12345678</Password>
+    <IsManeger>true</IsManeger>
+  </User>
+  <User>
+    <ID>528978783</ID>
+    <Name>David Levi</Name>
+    <Password>87654321</Password>
+    <IsManeger>true</IsManeger>
+  </User>
+  <User>
+    <ID>599975767</ID>
+    <Name>Amit Singh</Name>
+    <Password>11223344</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+  <User>
+    <ID>934271519</ID>
+    <Name>Ravi Kumar</Name>
+    <Password>44332211</Password>
+    <IsManeger>false</IsManeger>
+  </User>
+</ArrayOfUser>
